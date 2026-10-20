@@ -1,0 +1,315 @@
+/* CÀI ĐẶT GỐC CHUẨN */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, "Segoe UI", sans-serif;
+    background-color: #f4f5f7; /* Màu nền xám nhạt theo chuẩn nhóm */
+    color: #333;
+}
+/* Khung giới hạn chiều rộng 1200px nằm giữa màn hình */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+/* --- THIẾT KẾ HEADER (THANH MENU) --- */
+.header {
+    background-color: #0f5132; /* Xanh lá đậm (theo quy chuẩn nhóm) */
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+/* Dùng Flexbox để chia Logo bên trái, Menu ở giữa, Đăng nhập bên phải */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav-menu {
+    display: flex;
+    list-style: none; /* Xóa dấu chấm của thẻ li */
+    gap: 30px; /* Khoảng cách giữa các mục menu */
+}
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+/* Hiệu ứng khi rê chuột vào menu sẽ đổi màu Cam */
+.nav-menu a:hover {
+    color: #ff5722; 
+}
+/* Nút Đăng nhập / Đăng ký */
+.auth-buttons a {
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.btn-login {
+    color: white;
+    border: 1px solid white; /* Nút trong suốt viền trắng */
+}
+.btn-register {
+    background-color: #ff5722; /* Màu Cam nhấn */
+    color: white;
+    border: 1px solid #ff5722;
+}
+.btn-login:hover {
+    background-color: white;
+    color: #0f5132;
+}
+.btn-register:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+}
+/* =========================================
+   CÁC KHU VỰC NỘI DUNG TRANG CHỦ
+========================================= */
+/* Khu vực Banner quảng cáo */
+.banner {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.banner img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover; /* Cắt ảnh lấp đầy khung mà không bị méo */
+    border-radius: 8px;
+}
+/* Tiêu đề của các mục sách */
+.book-section {
+    margin-bottom: 50px;
+}
+.section-title {
+    color: #0f5132;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+/* Lưới chứa sách - Dùng Flexbox chia 4 cột ngang */
+.book-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+/* Thiết kế thẻ hiển thị 1 cuốn sách */
+.book-card {
+    background-color: white;
+    width: 23%; /* Chiếm chưa tới 25% để chừa khoảng trống (gap) */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.book-card:hover {
+    transform: translateY(-5px); /* Hiệu ứng nảy lên 5px khi hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.book-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+.book-title {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    height: 40px; /* Giữ cố định độ cao để các sách không bị so le khi tên dài/ngắn */
+    overflow: hidden;
+}
+/* Hiển thị giá tiền - Màu cam */
+.book-price {
+    font-size: 18px;
+    color: #ff5722; 
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+/* Nút Xem chi tiết */
+.btn-detail {
+    display: inline-block;
+    background-color: white;
+    color: #0f5132;
+    border: 1px solid #0f5132;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.btn-detail:hover {
+    background-color: #0f5132;
+    color: white;
+}
+/* =========================================
+   CHÂN TRANG (FOOTER) - Dùng chung mọi trang
+========================================= */
+.footer {
+    background-color: #0f5132;
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+    text-align: center;
+    line-height: 1.6;
+}
+.footer p {
+    font-size: 14px;
+}
+/* --- BỔ SUNG CSS CHO THANH TÌM KIẾM TRÊN HEADER --- */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-search {
+    flex: 1; /* Cho thanh tìm kiếm giãn ra chiếm khoảng trống */
+    max-width: 400px;
+    margin: 0 20px;
+}
+.header-search form {
+    display: flex;
+    width: 100%;
+}
+.header-search input {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+.header-search button {
+    padding: 8px 15px;
+    background-color: #ff5722; /* Màu cam */
+    color: white;
+    border: 1px solid #ff5722;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+.header-search button:hover {
+    background-color: #e64a19;
+}
+
+/* --- CSS CHO THANH TÌM KIẾM TRÊN HEADER --- */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-search {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+.header-search form {
+    display: flex;
+    width: 100%;
+}
+.header-search input {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+.header-search button {
+    padding: 8px 15px;
+    background-color: #ff5722; 
+    color: white;
+    border: 1px solid #ff5722;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+.header-search button:hover {
+    background-color: #e64a19;
+}
+
+/* =========================================
+   CSS KHUNG LƯỚT ẢNH
+========================================= */
+.banner {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 400px; /* Chiều cao ảnh bìa dài */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+/* Khung chứa 3 ảnh tự động trượt */
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    /* Tự động lướt 1 vòng 12 giây */
+    animation: autoSlide 12s infinite; 
+}
+.slide {
+    width: 33.3333%;
+    height: 100%;
+}
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* Hiệu ứng tự động lướt qua trái */
+@keyframes autoSlide {
+    0%, 25% { transform: translateX(0%); }
+    33%, 58% { transform: translateX(-33.3333%); }
+    66%, 91% { transform: translateX(-66.6666%); }
+    100% { transform: translateX(0%); }
+}
+
+/* --- 3 CHẤM TRÒN BÊN DƯỚI (CHỈ ĐỂ XEM, KHÓA CLICK) --- */
+.slider-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none; /* Lệnh này khóa mọi tương tác chuột */
+}
+.slider-nav span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Làm dấu chấm màu cam nhảy tự động khớp với ảnh */
+.nav-dot1 { animation: dotAuto1 12s infinite; }
+.nav-dot2 { animation: dotAuto2 12s infinite; }
+.nav-dot3 { animation: dotAuto3 12s infinite; }
+@keyframes dotAuto1 { 0%, 25% { background: #ff5722; } 33%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto2 { 0%, 25% { background: rgba(255,255,255,0.5); } 33%, 58% { background: #ff5722; } 66%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto3 { 0%, 58% { background: rgba(255,255,255,0.5); } 66%, 91% { background: #ff5722; } 100% { background: rgba(255,255,255,0.5); } }
