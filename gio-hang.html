@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Nhà Sách Online</title>
+    <!-- Bước quan trọng: Gắn file CSS vào HTML -->
+    <link rel="stylesheet" href="style-chung.css">
+</head>
+<body>
+
+    <!-- CÁC NEO BẮT TÍN HIỆU TỪ URL -->
+    <span id="login-success" style="position: absolute; top: 0;"></span>
+    <span id="logged-in" style="position: absolute; top: 0;"></span>
+    <span id="logout-success" style="position: absolute; top: 0;"></span>
+    <span id="search-result" style="position: absolute; top: 0;"></span>
+    <span id="search-user" style="position: absolute; top: 0;"></span>
+
+    <!-- HỆ THỐNG POP-UP THÔNG BÁO -->
+    <div class="toast-msg toast-success toast-login">
+        <div class="toast-icon">✔</div>
+        Đăng nhập thành công!
+    </div>
+    <div class="toast-msg toast-danger toast-logout">
+        <div class="toast-icon">✖</div>
+        Bạn đã đăng xuất tài khoản!
+    </div>
+
+    <!-- THANH HEADER CHÍNH -->
+    <header class="header">
+        <div class="container">
+            
+            <!-- LOGO -->
+            <div class="logo logo-guest"><a href="index.html">NHÀ SÁCH ONLINE</a></div>
+            <div class="logo logo-user"><a href="index.html#logged-in">NHÀ SÁCH ONLINE</a></div>
+
+            <!-- THANH TÌM KIẾM -->
+            <div class="header-search search-guest">
+                <form action="san-pham.html#search-result">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <!-- Thêm name="q" để ép trình duyệt load lại trang khi bấm tìm -->
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="header-search search-user">
+                <form action="san-pham.html#search-user" onsubmit="location.href='san-pham.html?q=' + encodeURIComponent(this.q.value) + '#search-user'; return false;">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <!-- Thêm name="q" để ép trình duyệt load lại trang khi bấm tìm -->
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- BỘ MENU KHÁCH -->
+            <ul class="nav-menu menu-guest">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="san-pham.html">Sản phẩm</a></li>
+                <li><a href="gio-hang.html">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- BỘ MENU USER -->
+            <ul class="nav-menu menu-user">
+                <li><a href="index.html#logged-in">Trang chủ</a></li>
+                <li><a href="san-pham.html#logged-in">Sản phẩm</a></li>
+                <li><a href="gio-hang.html#logged-in">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- NÚT ĐĂNG NHẬP/ĐĂNG KÝ -->
+            <div class="auth-buttons">
+                <a href="dang-nhap.html" class="btn-login">Đăng nhập</a>
+                <a href="dang-nhap.html#dang-ky-form" class="btn-register">Đăng ký</a>
+            </div>
+
+            <!-- MENU TÀI KHOẢN TÈO -->
+            <div class="user-dropdown">
+                <input type="checkbox" id="user-menu-toggle" hidden>
+                <label for="user-menu-toggle" class="user-name">Chào, Nguyễn Văn Tèo <span>▼</span></label>
+                <ul class="dropdown-content">
+                    <li><a href="ho-so.html">Thông tin tài khoản</a></li>
+                    <li><a href="lich-su.html">Lịch sử đơn hàng</a></li>
+                    <li><a href="index.html#logout-success" class="text-danger">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+    <!-- KẾT THÚC HEADER -->
+    <!-- VÙNG NỘI DUNG CHÍNH (Sẽ code riêng cho từng trang sau) -->
+    <main class="container">
+        <h1 style="margin-top: 50px; text-align: center; color: #333;">Khu vực này sẽ là Trang Chủ</h1>
+    </main>
+</body>
+</html>
