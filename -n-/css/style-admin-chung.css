@@ -53,6 +53,7 @@ body {
     position: sticky;
     top: 0;
     height: 100vh;
+    overflow-y: auto; /* QUAN TRỌNG: Giúp sidebar có thể cuộn nếu nội dung dài, không bị tràn ra ngoài */
 }
 
 .sidebar-brand {
@@ -154,6 +155,7 @@ body {
 }
 
 /* Sidebar User Profile Footer */
+
 .sidebar-user {
     padding-top: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -163,28 +165,129 @@ body {
     padding: 12px;
     background-color: rgba(255, 255, 255, 0.03);
     border-radius: var(--radius-md);
+    margin-top: 20px; /* Tạo khoảng cách thoáng phía trên nếu menu dài */
 }
 
 .user-avatar {
     width: 38px;
     height: 38px;
-    border-radius: 50%;
-    background-color: #38bdf8;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     color: #0f172a;
     font-size: 14px;
+    overflow: hidden; /* Ẩn phần thừa để ôm trọn hình tròn */
+    flex-shrink: 0;   /* Giữ nguyên kích thước 38px, không bị bóp méo */
+}
+
+/* Thêm đoạn này để ảnh bên trong tự động vừa khít */
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+.user-info {
+    overflow: hidden; /* Tránh việc tên dài làm vỡ khung */
 }
 
 .user-info h4 {
     font-size: 13px;
     font-weight: 600;
     color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-info p {
     font-size: 11px;
     color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 20px;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #f1f5f9;
+    cursor: pointer;
+}
+
+.user-button img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 210px;
+    padding: 8px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+}
+
+.user-menu.show {
+    display: block;
+}
+
+.user-menu a,
+.user-menu button {
+    display: block;
+    width: 100%;
+    padding: 11px 12px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-primary);
+    text-align: left;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-menu a:hover,
+.user-menu button:hover {
+    background: #f1f5f9;
+}
+
+.user-menu hr {
+    margin: 6px 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.user-menu #logoutButton {
+    color: #dc2626;
 }
