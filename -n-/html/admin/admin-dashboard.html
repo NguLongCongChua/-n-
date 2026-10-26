@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Hệ Thống Quản Lý Sách</title>
+    <!-- Gọi file CSS khung chung của Admin -->
+    <link rel="stylesheet" href="../../css/style-admin-chung.css">
+    <!-- Gọi file CSS riêng cho trang Dashboard -->
+    <link rel="stylesheet" href="../../css/admin/admin-dash.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- ================= CỘT TRÁI: SIDEBAR ĐIỀU HƯỚNG ================= -->
+        <aside class="admin-sidebar">
+            <h2>Quản Trị Viên</h2>
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html" class="active">Tổng quan</a></li>
+                <li><a href="admin-sach.html">Quản lý Sách</a></li>
+                <li><a href="admin-don-hang.html">Quản lý Đơn hàng</a></li>
+                <hr>
+                <!-- Liên kết đặc biệt quay về trang khách hàng theo đúng quy chuẩn đồ án -->
+                <li><a href="../user/index.html" class="back-web">Quay về trang Khách hàng</a></li>
+            </ul>
+        </aside>
+
+        <!-- ================= CỘT PHẢI: VÙNG NỘI DUNG CHÍNH ================= -->
+        <main class="admin-main-content">
+            <header class="admin-header">
+                <h1>Trang Tổng Quan Hệ Thống</h1>
+                <p>Chào mừng bạn quay trở lại bảng điều khiển quản trị nhà sách!</p>
+            </header>
+
+            <!-- PHẦN 1: 4 HỘP THỐNG KÊ NHANH -->
+            <section class="stats-box-container">
+                <div class="stat-box">
+                    <h3>Tổng đầu sách</h3>
+                    <p class="stat-number">150</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Đơn hàng mới</h3>
+                    <p class="stat-number">18</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Tổng khách hàng</h3>
+                    <p class="stat-number">95</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Doanh thu tháng</h3>
+                    <p class="stat-number">25.000.000đ</p>
+                </div>
+            </section>
+
+            <!-- PHẦN 2: BẢNG TỔNG HỢP & THÔNG BÁO -->
+            <section class="dashboard-sections">
+                <!-- Bảng Top 5 sách bán chạy -->
+                <div class="dashboard-card left-card">
+                    <h2>Top 5 sách bán chạy nhất tháng</h2>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tên sách</th>
+                                <th>Thể loại</th>
+                                <th>Đã bán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>S001</td>
+                                <td>Đắc Nhân Tâm</td>
+                                <td>Kỹ năng</td>
+                                <td>45</td>
+                            </tr>
+                            <tr>
+                                <td>S002</td>
+                                <td>Nhà Giả Kim</td>
+                                <td>Văn học</td>
+                                <td>38</td>
+                            </tr>
+                            <tr>
+                                <td>S003</td>
+                                <td>Sức mạnh của thói quen</td>
+                                <td>Kỹ năng</td>
+                                <td>30</td>
+                            </tr>
+                            <tr>
+                                <td>S004</td>
+                                <td>Tuổi trẻ đáng giá bao nhiêu</td>
+                                <td>Kỹ năng</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>S005</td>
+                                <td>Kinh tế học hài hước</td>
+                                <td>Kinh tế</td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Khung thông báo hệ thống -->
+                <div class="dashboard-card right-card">
+                    <h2>Thông báo hệ thống</h2>
+                    <div class="notification-box">
+                        <p><strong>[Hôm nay]:</strong> Đã cập nhật thành công danh mục sách mới lên kho.</p>
+                        <p><strong>[Hôm qua]:</strong> Có 18 đơn hàng mới chờ duyệt từ khách hàng.</p>
+                        <p><strong>[Thông báo]:</strong> Lịch bảo trì hệ thống định kỳ vào cuối tuần.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>
