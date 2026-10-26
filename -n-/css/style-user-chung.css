@@ -1,28 +1,31 @@
-/* CÀI ĐẶT GỐC CHUẨN */
+/* --- RESET CƠ BẢN --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: Arial, "Segoe UI", sans-serif;
-    background-color: #f4f5f7; /* Màu nền xám nhạt theo chuẩn nhóm */
+    background-color: #f4f5f7;
     color: #333;
 }
-/* Khung giới hạn chiều rộng 1200px nằm giữa màn hình */
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
-/* --- THIẾT KẾ HEADER (THANH MENU) --- */
+
+/* =========================================
+   THIẾT KẾ HEADER (THANH MENU CHUNG)
+========================================= */
 .header {
-    background-color: #0f5132; /* Xanh lá đậm (theo quy chuẩn nhóm) */
+    background-color: #0f5132;
     color: white;
     padding: 15px 0;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-/* Dùng Flexbox để chia Logo bên trái, Menu ở giữa, Đăng nhập bên phải */
 .header .container {
     display: flex;
     justify-content: space-between;
@@ -37,8 +40,8 @@ body {
 }
 .nav-menu {
     display: flex;
-    list-style: none; /* Xóa dấu chấm của thẻ li */
-    gap: 30px; /* Khoảng cách giữa các mục menu */
+    list-style: none;
+    gap: 30px;
 }
 .nav-menu a {
     color: white;
@@ -48,11 +51,12 @@ body {
     padding: 5px 0;
     transition: color 0.3s ease;
 }
-/* Hiệu ứng khi rê chuột vào menu sẽ đổi màu Cam */
 .nav-menu a:hover {
     color: #ff5722; 
 }
-/* Nút Đăng nhập / Đăng ký */
+.auth-buttons {
+    margin-left: 45px; 
+}
 .auth-buttons a {
     text-decoration: none;
     padding: 8px 20px;
@@ -64,10 +68,10 @@ body {
 }
 .btn-login {
     color: white;
-    border: 1px solid white; /* Nút trong suốt viền trắng */
+    border: 1px solid white;
 }
 .btn-register {
-    background-color: #ff5722; /* Màu Cam nhấn */
+    background-color: #ff5722;
     color: white;
     border: 1px solid #ff5722;
 }
@@ -79,24 +83,110 @@ body {
     background-color: #e64a19;
     border-color: #e64a19;
 }
+
+/* --- THANH TÌM KIẾM TRÊN HEADER --- */
+.header-search {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 20px;
+}
+.search-wrapper {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+}
+.search-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+.search-wrapper input {
+    width: 100%;
+    padding: 9px 15px 9px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-family: inherit;
+}
+.search-wrapper button {
+    padding: 9px 20px;
+    background-color: #ff5722; 
+    color: white;
+    border: 1px solid #ff5722;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.search-wrapper button:hover {
+    background-color: #e64a19;
+}
+
 /* =========================================
-   CÁC KHU VỰC NỘI DUNG TRANG CHỦ
+   CSS KHUNG LƯỚT ẢNH TỰ ĐỘNG (BANNER)
 ========================================= */
-/* Khu vực Banner quảng cáo */
 .banner {
+    position: relative;
     margin-top: 20px;
     margin-bottom: 40px;
-}
-.banner img {
     width: 100%;
-    height: 350px;
-    object-fit: cover; /* Cắt ảnh lấp đầy khung mà không bị méo */
+    height: 400px;
     border-radius: 8px;
+    overflow: hidden;
+    background-color: #eee;
 }
-/* Tiêu đề của các mục sách */
-.book-section {
-    margin-bottom: 50px;
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    animation: autoSlide 12s infinite; 
 }
+.slide {
+    width: 33.3333%;
+    height: 100%;
+}
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+@keyframes autoSlide {
+    0%, 25% { transform: translateX(0%); }
+    33%, 58% { transform: translateX(-33.3333%); }
+    66%, 91% { transform: translateX(-66.6666%); }
+    100% { transform: translateX(0%); }
+}
+.slider-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none; 
+}
+.slider-nav span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.nav-dot1 { animation: dotAuto1 12s infinite; }
+.nav-dot2 { animation: dotAuto2 12s infinite; }
+.nav-dot3 { animation: dotAuto3 12s infinite; }
+@keyframes dotAuto1 { 0%, 25% { background: #ff5722; } 33%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto2 { 0%, 25% { background: rgba(255,255,255,0.5); } 33%, 58% { background: #ff5722; } 66%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto3 { 0%, 58% { background: rgba(255,255,255,0.5); } 66%, 91% { background: #ff5722; } 100% { background: rgba(255,255,255,0.5); } }
+
+/* =========================================
+   CÁC KHU VỰC SÁCH TRANG CHỦ
+========================================= */
+.book-section { margin-bottom: 50px; }
 .section-title {
     color: #0f5132;
     border-bottom: 2px solid #0f5132;
@@ -105,16 +195,14 @@ body {
     font-size: 24px;
     text-transform: uppercase;
 }
-/* Lưới chứa sách - Dùng Flexbox chia 4 cột ngang */
 .book-grid {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
-/* Thiết kế thẻ hiển thị 1 cuốn sách */
 .book-card {
     background-color: white;
-    width: 23%; /* Chiếm chưa tới 25% để chừa khoảng trống (gap) */
+    width: 23%; 
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -122,7 +210,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .book-card:hover {
-    transform: translateY(-5px); /* Hiệu ứng nảy lên 5px khi hover */
+    transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 .book-img {
@@ -136,17 +224,15 @@ body {
     font-size: 16px;
     color: #333;
     margin-bottom: 10px;
-    height: 40px; /* Giữ cố định độ cao để các sách không bị so le khi tên dài/ngắn */
+    height: 40px; 
     overflow: hidden;
 }
-/* Hiển thị giá tiền - Màu cam */
 .book-price {
     font-size: 18px;
     color: #ff5722; 
     font-weight: bold;
     margin-bottom: 15px;
 }
-/* Nút Xem chi tiết */
 .btn-detail {
     display: inline-block;
     background-color: white;
@@ -163,8 +249,9 @@ body {
     background-color: #0f5132;
     color: white;
 }
+
 /* =========================================
-   CHÂN TRANG (FOOTER) - Dùng chung mọi trang
+   CHÂN TRANG (FOOTER)
 ========================================= */
 .footer {
     background-color: #0f5132;
@@ -174,142 +261,486 @@ body {
     text-align: center;
     line-height: 1.6;
 }
-.footer p {
+.footer p { font-size: 14px; }
+
+/* =========================================
+   POPUP THÔNG BÁO (TOAST CHUNG)
+========================================= */
+.toast-msg {
+    position: fixed;
+    top: 80px; 
+    right: 25px;
+    background-color: white;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-left: 5px solid #0f5132;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+}
+.toast-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #0f5132;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 14px;
 }
-/* --- BỔ SUNG CSS CHO THANH TÌM KIẾM TRÊN HEADER --- */
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@keyframes showToast {
+    0% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+    10% { opacity: 1; visibility: visible; transform: translateX(0); }
+    90% { opacity: 1; visibility: visible; transform: translateX(0); }
+    100% { opacity: 0; visibility: hidden; transform: translateX(120%); }
 }
-.header-search {
-    flex: 1; /* Cho thanh tìm kiếm giãn ra chiếm khoảng trống */
-    max-width: 400px;
-    margin: 0 20px;
+#reg-success:target ~ .toast-reg,
+#login-success:target ~ .toast-login {
+    animation: showToast 4s ease forwards;
 }
-.header-search form {
-    display: flex;
-    width: 100%;
-}
-.header-search input {
-    width: 100%;
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
-    outline: none;
-}
-.header-search button {
-    padding: 8px 15px;
-    background-color: #ff5722; /* Màu cam */
-    color: white;
-    border: 1px solid #ff5722;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    font-weight: bold;
-}
-.header-search button:hover {
-    background-color: #e64a19;
+/* =========================================
+   MENU NGƯỜI DÙNG SAU KHI ĐĂNG NHẬP
+========================================= */
+.user-dropdown {
+    position: relative;
+    margin-left: 45px;
+    display: none; /* Mặc định ẩn */
 }
 
-/* --- CSS CHO THANH TÌM KIẾM TRÊN HEADER --- */
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Ẩn checkbox điều khiển menu */
+#user-menu-toggle {
+    display: none;
 }
-.header-search {
-    flex: 1;
-    max-width: 400px;
-    margin: 0 20px;
-}
-.header-search form {
-    display: flex;
-    width: 100%;
-}
-.header-search input {
-    width: 100%;
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
-    outline: none;
-}
-.header-search button {
-    padding: 8px 15px;
-    background-color: #ff5722; 
+
+/* Nút hiển thị tên (Đổi thành thẻ label để click được) */
+.user-name {
     color: white;
-    border: 1px solid #ff5722;
-    border-radius: 0 4px 4px 0;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+.user-name span {
+    font-size: 10px; 
+    transition: transform 0.3s;
+}
+
+/* Khung danh sách xổ xuống */
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    min-width: 190px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    list-style: none;
+    overflow: hidden;
+    
+    /* Mặc định ẩn */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+.dropdown-content li {
+    border-bottom: 1px solid #eee;
+}
+.dropdown-content li:last-child {
+    border-bottom: none;
+}
+.dropdown-content a {
+    color: #333;
+    padding: 12px 18px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+.dropdown-content a:hover {
+    background-color: #e8f5e9;
+    color: #0f5132;
     font-weight: bold;
 }
-.header-search button:hover {
-    background-color: #e64a19;
+
+/* Format riêng cho nút Đăng xuất màu đỏ */
+.dropdown-content a.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+.dropdown-content a.text-danger:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* KÍCH HOẠT MENU KHI CLICK VÀO TÊN TÈO */
+#user-menu-toggle:checked ~ .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#user-menu-toggle:checked ~ .user-name span {
+    transform: rotate(180deg);
 }
 
 /* =========================================
-   CSS KHUNG LƯỚT ẢNH
+   CÔNG TẮC ĐỔI GIAO DIỆN THÔNG MINH BẰNG URL (:target)
 ========================================= */
-.banner {
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    width: 100%;
-    height: 400px; /* Chiều cao ảnh bìa dài */
+/* Mặc định ẨN các thành phần của User */
+.menu-user, .search-user, .logo-user {
+    display: none; 
+}
+
+/* KHI ĐĂNG NHẬP HOẶC TÌM KIẾM TRONG LÚC ĐĂNG NHẬP -> ẨN GIAO DIỆN KHÁCH */
+#login-success:target ~ .header .auth-buttons,
+#logged-in:target ~ .header .auth-buttons,
+#search-user:target ~ .header .auth-buttons,
+#login-success:target ~ .header .menu-guest,
+#logged-in:target ~ .header .menu-guest,
+#search-user:target ~ .header .menu-guest,
+#login-success:target ~ .header .search-guest,
+#logged-in:target ~ .header .search-guest,
+#search-user:target ~ .header .search-guest,
+#login-success:target ~ .header .logo-guest,
+#logged-in:target ~ .header .logo-guest,
+#search-user:target ~ .header .logo-guest {
+    display: none; 
+}
+
+/* BẬT HIỂN THỊ GIAO DIỆN USER */
+#login-success:target ~ .header .user-dropdown,
+#logged-in:target ~ .header .user-dropdown,
+#search-user:target ~ .header .user-dropdown,
+#login-success:target ~ .header .search-user,
+#logged-in:target ~ .header .search-user,
+#search-user:target ~ .header .search-user,
+#login-success:target ~ .header .logo-user,
+#logged-in:target ~ .header .logo-user,
+#search-user:target ~ .header .logo-user {
+    display: block; 
+}
+#login-success:target ~ .header .menu-user,
+#logged-in:target ~ .header .menu-user,
+#search-user:target ~ .header .menu-user {
+    display: flex; 
+}
+
+/* =========================================
+   TIÊU ĐỀ TRANG SẢN PHẨM ĐỘNG
+========================================= */
+.dynamic-heading {
+    font-size: 22px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+/* Ẩn chữ Kết quả tìm kiếm mặc định */
+.hd-search { display: none; } 
+
+/* KHI BẤM TÌM KIẾM (URL có đuôi search) -> Đổi tiêu đề thành KẾT QUẢ TÌM KIẾM */
+#search-result:target ~ .product-page .hd-all,
+#search-user:target ~ .product-page .hd-all { display: none; }
+
+#search-result:target ~ .product-page .hd-search,
+#search-user:target ~ .product-page .hd-search { display: block; }
+
+/* =========================================
+   POPUP THÔNG BÁO (TOAST CHUNG)
+========================================= */
+.toast-msg {
+    position: fixed;
+    top: 80px; 
+    right: 25px;
+    background-color: white;
+    color: #333;
+    padding: 15px 25px;
     border-radius: 8px;
-    overflow: hidden;
-    background-color: #eee;
-}
-
-/* Khung chứa 3 ảnh tự động trượt */
-.slides {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    font-weight: bold;
+    font-size: 15px;
     display: flex;
-    width: 300%;
-    height: 100%;
-    /* Tự động lướt 1 vòng 12 giây */
-    animation: autoSlide 12s infinite; 
-}
-.slide {
-    width: 33.3333%;
-    height: 100%;
-}
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-}
-
-/* Hiệu ứng tự động lướt qua trái */
-@keyframes autoSlide {
-    0%, 25% { transform: translateX(0%); }
-    33%, 58% { transform: translateX(-33.3333%); }
-    66%, 91% { transform: translateX(-66.6666%); }
-    100% { transform: translateX(0%); }
-}
-
-/* --- 3 CHẤM TRÒN BÊN DƯỚI (CHỈ ĐỂ XEM, KHÓA CLICK) --- */
-.slider-nav {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
+    align-items: center;
     gap: 12px;
-    z-index: 10;
-    pointer-events: none; /* Lệnh này khóa mọi tương tác chuột */
-}
-.slider-nav span {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.5);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
 }
 
-/* Làm dấu chấm màu cam nhảy tự động khớp với ảnh */
-.nav-dot1 { animation: dotAuto1 12s infinite; }
-.nav-dot2 { animation: dotAuto2 12s infinite; }
-.nav-dot3 { animation: dotAuto3 12s infinite; }
-@keyframes dotAuto1 { 0%, 25% { background: #ff5722; } 33%, 100% { background: rgba(255,255,255,0.5); } }
-@keyframes dotAuto2 { 0%, 25% { background: rgba(255,255,255,0.5); } 33%, 58% { background: #ff5722; } 66%, 100% { background: rgba(255,255,255,0.5); } }
-@keyframes dotAuto3 { 0%, 58% { background: rgba(255,255,255,0.5); } 66%, 91% { background: #ff5722; } 100% { background: rgba(255,255,255,0.5); } }
+.toast-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+}
+
+/* Popup Xanh lá (Đăng nhập / Đăng ký) */
+.toast-success { border-left: 5px solid #0f5132; }
+.toast-success .toast-icon { background-color: #0f5132; }
+
+/* Popup Đỏ (Đăng xuất) */
+.toast-danger { border-left: 5px solid #dc3545; }
+.toast-danger .toast-icon { background-color: #dc3545; }
+
+@keyframes showToast {
+    0% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+    10% { opacity: 1; visibility: visible; transform: translateX(0); }
+    90% { opacity: 1; visibility: visible; transform: translateX(0); }
+    100% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+}
+
+/* Kích hoạt popup tương ứng với từng URL */
+#reg-success:target ~ .toast-reg,
+#login-success:target ~ .toast-login,
+#logout-success:target ~ .toast-logout {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   GIAO DIỆN TRANG SẢN PHẨM (CHIA 2 CỘT)
+========================================= */
+.product-page {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* CỘT TRÁI: BỘ LỌC TÌM KIẾM */
+.sidebar-filter {
+    width: 25%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    align-self: flex-start; 
+}
+.filter-group {
+    margin-bottom: 25px;
+}
+.filter-title {
+    font-size: 16px;
+    color: #0f5132;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.filter-list {
+    list-style: none;
+}
+/* Style biến chữ thành nút bấm cực xịn */
+.filter-list label {
+    display: block;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    color: #444;
+    border: 1px solid transparent;
+}
+.filter-list label:hover {
+    background-color: #e8f5e9;
+    color: #0f5132;
+    border-color: #0f5132;
+}
+
+/* CỘT PHẢI: LƯỚI SẢN PHẨM */
+.product-list {
+    width: 75%;
+}
+
+/* --- ĐIỀU KHIỂN TIÊU ĐỀ ĐỘNG --- */
+.dynamic-heading {
+    font-size: 22px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+/* Ẩn chữ Kết quả tìm kiếm mặc định */
+.hd-search { display: none; } 
+
+/* KHI URL CÓ ĐUÔI TÌM KIẾM -> Đổi tiêu đề thành KẾT QUẢ TÌM KIẾM */
+#search-result:target ~ .product-page .hd-all,
+#search-user:target ~ .product-page .hd-all { display: none; }
+
+#search-result:target ~ .product-page .hd-search,
+#search-user:target ~ .product-page .hd-search { display: block; }
+
+/* KHI TÈO TÌM KIẾM -> BẬT LẠI GIAO DIỆN TÈO (Giữ acc) */
+#search-user:target ~ .header .auth-buttons,
+#search-user:target ~ .header .menu-guest,
+#search-user:target ~ .header .search-guest,
+#search-user:target ~ .header .logo-guest { display: none; }
+
+#search-user:target ~ .header .user-dropdown,
+#search-user:target ~ .header .search-user,
+#search-user:target ~ .header .logo-user { display: block; }
+#search-user:target ~ .header .menu-user { display: flex; }
+
+
+/* ĐỔI MÀU NÚT LỌC KHI CLICK BẰNG RADIO ẨN (Không xài JS) */
+#cat-all:checked ~ .sidebar-filter .lbl-cat-all,
+#cat-vanhoc:checked ~ .sidebar-filter .lbl-cat-vanhoc,
+#cat-kinhte:checked ~ .sidebar-filter .lbl-cat-kinhte,
+#cat-kynang:checked ~ .sidebar-filter .lbl-cat-kynang,
+#cat-tamly:checked ~ .sidebar-filter .lbl-cat-tamly,
+#cat-thieunhi:checked ~ .sidebar-filter .lbl-cat-thieunhi,
+#price-all:checked ~ .sidebar-filter .lbl-price-all,
+#price-1:checked ~ .sidebar-filter .lbl-price-1,
+#price-2:checked ~ .sidebar-filter .lbl-price-2,
+#price-3:checked ~ .sidebar-filter .lbl-price-3,
+#price-4:checked ~ .sidebar-filter .lbl-price-4 {
+    background-color: #0f5132;
+    color: white;
+    font-weight: bold;
+    border-color: #0f5132;
+    box-shadow: 0 4px 10px rgba(15, 81, 50, 0.2);
+}
+
+.product-grid-multi {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+.product-grid-multi .book-card {
+    width: calc(33.333% - 14px); 
+    margin-bottom: 15px;
+}
+
+/* THANH PHÂN TRANG (1, 2, 3, Tiếp theo) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+.pagination a {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.pagination a:hover, .pagination a.active {
+    background-color: #0f5132;
+    color: white;
+    border-color: #0f5132;
+}
+/* =========================================
+   THANH TÌM KIẾM NÂNG CAO (TRANG SẢN PHẨM)
+========================================= */
+.adv-search-box {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    border-top: 4px solid #0f5132;
+}
+.adv-search-flex {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.adv-search-flex input,
+.adv-search-flex select {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+.adv-search-flex input:focus,
+.adv-search-flex select:focus {
+    border-color: #ff5722;
+}
+.btn-adv-search {
+    padding: 10px 25px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.btn-adv-search:hover {
+    background-color: #e64a19;
+}
+
+/* ĐIỀU KHIỂN TRẠNG THÁI KHÁCH VÀ USER (Giữ Acc) CHO THANH TÌM KIẾM NÂNG CAO */
+.adv-search-user {
+    display: none; /* Mặc định ẩn form của User */
+}
+
+/* Khi có acc -> Ẩn form Khách, Hiện form User */
+#login-success:target ~ .product-page .adv-search-guest,
+#logged-in:target ~ .product-page .adv-search-guest,
+#search-user:target ~ .product-page .adv-search-guest {
+    display: none;
+}
+#login-success:target ~ .product-page .adv-search-user,
+#logged-in:target ~ .product-page .adv-search-user,
+#search-user:target ~ .product-page .adv-search-user {
+    display: block;
+}
+/* =========================================
+   HỆ THỐNG ĐIỀU HƯỚNG NÚT BẤM (GIỮ ACC XUYÊN THẤU)
+========================================= */
+/* Mặc định nút "Xem chi tiết" của Khách hiện, nút của User ẩn */
+.btn-detail-user {
+    display: none;
+}
+.btn-detail-guest {
+    display: inline-block;
+}
+
+/* Áp dụng quét toàn bộ thẻ <main> trên tất cả các trang */
+#login-success:target ~ main .btn-detail-guest,
+#logged-in:target ~ main .btn-detail-guest,
+#search-user:target ~ main .btn-detail-guest {
+    display: none;
+}
+
+#login-success:target ~ main .btn-detail-user,
+#logged-in:target ~ main .btn-detail-user,
+#search-user:target ~ main .btn-detail-user {
+    display: inline-block;
+}

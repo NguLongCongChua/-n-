@@ -3,111 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Hệ Thống Quản Lý Sách</title>
-    <!-- Gọi file CSS khung chung của Admin -->
+    <title>Admin Dashboard - Hệ Thống Quản Lý Nhà Sách</title>
+    <!-- Phông chữ Google Font Inter & Icon FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="../../css/style-admin-chung.css">
-    <!-- Gọi file CSS riêng cho trang Dashboard -->
     <link rel="stylesheet" href="../../css/admin/admin-dash.css">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-active: #0284c7;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            
+            --primary: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+
+    </style>
 </head>
 <body>
 
     <div class="admin-container">
-        <!-- ================= CỘT TRÁI: SIDEBAR ĐIỀU HƯỚNG ================= -->
+        <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar) -->
         <aside class="admin-sidebar">
-            <h2>Quản Trị Viên</h2>
-            <ul class="sidebar-menu">
-                <li><a href="admin-dashboard.html" class="active">Tổng quan</a></li>
-                <li><a href="admin-sach.html">Quản lý Sách</a></li>
-                <li><a href="admin-don-hang.html">Quản lý Đơn hàng</a></li>
-                <hr>
-                <!-- Liên kết đặc biệt quay về trang khách hàng theo đúng quy chuẩn đồ án -->
-                <li><a href="../user/index.html" class="back-web">Quay về trang Khách hàng</a></li>
-            </ul>
+            <div>
+                <!-- Logo nhà sách -->
+                <div class="sidebar-brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>BOOKSTORE</h2>
+                        <p>Hệ Thống Quản Lý</p>
+                    </div>
+                </div>
+
+                <!-- Danh mục Menu -->
+                <div class="menu-label">Menu Chính</div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="admin-dashboard.html" class="active">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Tổng quan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-sach.html">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                            <span>Quản lý Sách</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-don-hang.html">
+                            <i class="fa-solid fa-receipt"></i>
+                            <span>Quản lý Đơn hàng</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="../user/index.html" class="back-web">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                            <span>Về Trang Khách Hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile Admin ở góc dưới -->
+            <div class="sidebar-user">
+                <div class="user-avatar">AD</div>
+                <div class="user-info">
+                    <h4>Admin Nguyễn</h4>
+                    <p>Quản trị viên chính</p>
+                </div>
+            </div>
         </aside>
 
-        <!-- ================= CỘT PHẢI: VÙNG NỘI DUNG CHÍNH ================= -->
+        <!-- CỘT PHẢI: Vùng nội dung chính -->
         <main class="admin-main-content">
-            <header class="admin-header">
-                <h1>Trang Tổng Quan Hệ Thống</h1>
-                <p>Chào mừng bạn quay trở lại bảng điều khiển quản trị nhà sách!</p>
+            <!-- Header Thanh Công Cụ -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Tổng Quan Hệ Thống</h1>
+                    <p>Cập nhật số liệu và hoạt động nhà sách theo thời gian thực.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm nhanh...">
+                    </div>
+                    <button class="icon-btn" title="Thông báo">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="dot"></span>
+                    </button>
+                </div>
             </header>
 
-            <!-- PHẦN 1: 4 HỘP THỐNG KÊ NHANH -->
+            <!-- PHẦN 1: 4 Thẻ Thống Kê Nhanh (Stat Cards) -->
             <section class="stats-box-container">
                 <div class="stat-box">
-                    <h3>Tổng đầu sách</h3>
-                    <p class="stat-number">150</p>
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Đầu Sách</span>
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">150</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +12%</span>
+                        <span class="text-muted">so với tháng trước</span>
+                    </div>
                 </div>
+
                 <div class="stat-box">
-                    <h3>Đơn hàng mới</h3>
-                    <p class="stat-number">18</p>
+                    <div class="stat-header">
+                        <span class="stat-title">Đơn Hàng Mới</span>
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +5%</span>
+                        <span class="text-muted">Cần xử lý ngay</span>
+                    </div>
                 </div>
+
                 <div class="stat-box">
-                    <h3>Tổng khách hàng</h3>
-                    <p class="stat-number">95</p>
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Khách Hàng</span>
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">95</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +8%</span>
+                        <span class="text-muted">Người dùng mới</span>
+                    </div>
                 </div>
+
                 <div class="stat-box">
-                    <h3>Doanh thu tháng</h3>
-                    <p class="stat-number">25.000.000đ</p>
+                    <div class="stat-header">
+                        <span class="stat-title">Doanh Thu Tháng</span>
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">25.000.000đ</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +15%</span>
+                        <span class="text-muted">Đạt chỉ tiêu</span>
+                    </div>
                 </div>
             </section>
 
-            <!-- PHẦN 2: BẢNG TỔNG HỢP & THÔNG BÁO -->
+            <!-- PHẦN 2: Bảng Top Bán Chạy & Timeline Thông Báo -->
             <section class="dashboard-sections">
-                <!-- Bảng Top 5 sách bán chạy -->
-                <div class="dashboard-card left-card">
-                    <h2>Top 5 sách bán chạy nhất tháng</h2>
+                <!-- Cột lớn: Top 5 Sách Bán Chạy -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Top 5 Sách Bán Chạy Nhất</h2>
+                        <a href="admin-sach.html" class="btn-link">Xem tất cả kho sách</a>
+                    </div>
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>Mã sách</th>
-                                <th>Tên sách</th>
-                                <th>Thể loại</th>
-                                <th>Đã bán</th>
+                                <th>Mã Sách</th>
+                                <th>Thông Tin Sách</th>
+                                <th>Thể Loại</th>
+                                <th>Đã Bán</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>S001</td>
-                                <td>Đắc Nhân Tâm</td>
-                                <td>Kỹ năng</td>
-                                <td>45</td>
+                                <td><strong>#S001</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover" style="background: linear-gradient(135deg, #0284c7, #0369a1);">DNT</div>
+                                        <div class="book-info">
+                                            <h4>Đắc Nhân Tâm</h4>
+                                            <p>Dale Carnegie</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>45</strong> cuốn</td>
                             </tr>
                             <tr>
-                                <td>S002</td>
-                                <td>Nhà Giả Kim</td>
-                                <td>Văn học</td>
-                                <td>38</td>
+                                <td><strong>#S002</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover" style="background: linear-gradient(135deg, #d97706, #b45309);">NGK</div>
+                                        <div class="book-info">
+                                            <h4>Nhà Giả Kim</h4>
+                                            <p>Paulo Coelho</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-lit">Văn học</span></td>
+                                <td><strong>38</strong> cuốn</td>
                             </tr>
                             <tr>
-                                <td>S003</td>
-                                <td>Sức mạnh của thói quen</td>
-                                <td>Kỹ năng</td>
-                                <td>30</td>
+                                <td><strong>#S003</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">SMTQ</div>
+                                        <div class="book-info">
+                                            <h4>Sức Mạnh Của Thói Quen</h4>
+                                            <p>Charles Duhigg</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>30</strong> cuốn</td>
                             </tr>
                             <tr>
-                                <td>S004</td>
-                                <td>Tuổi trẻ đáng giá bao nhiêu</td>
-                                <td>Kỹ năng</td>
-                                <td>25</td>
+                                <td><strong>#S004</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover" style="background: linear-gradient(135deg, #ec4899, #be185d);">TTDG</div>
+                                        <div class="book-info">
+                                            <h4>Tuổi Trẻ Đáng Giá Bao Nhiêu</h4>
+                                            <p>Rosie Nguyễn</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>25</strong> cuốn</td>
                             </tr>
                             <tr>
-                                <td>S005</td>
-                                <td>Kinh tế học hài hước</td>
-                                <td>Kinh tế</td>
-                                <td>20</td>
+                                <td><strong>#S005</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover" style="background: linear-gradient(135deg, #10b981, #047857);">KTH</div>
+                                        <div class="book-info">
+                                            <h4>Kinh Tế Học Hài Hước</h4>
+                                            <p>Steven D. Levitt</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-eco">Kinh tế</span></td>
+                                <td><strong>20</strong> cuốn</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Khung thông báo hệ thống -->
-                <div class="dashboard-card right-card">
-                    <h2>Thông báo hệ thống</h2>
-                    <div class="notification-box">
-                        <p><strong>[Hôm nay]:</strong> Đã cập nhật thành công danh mục sách mới lên kho.</p>
-                        <p><strong>[Hôm qua]:</strong> Có 18 đơn hàng mới chờ duyệt từ khách hàng.</p>
-                        <p><strong>[Thông báo]:</strong> Lịch bảo trì hệ thống định kỳ vào cuối tuần.</p>
+                <!-- Cột nhỏ: Timeline Thông Báo -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-regular fa-clock" style="color: #2563eb;"></i> Hoạt Động Gần Đây</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot success">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cập nhật kho hàng</h4>
+                                <p>Đã hoàn tất kiểm kê kho hàng sách tháng 10.</p>
+                                <span class="time">09:30 AM - Hôm nay</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot warning">
+                                <i class="fa-solid fa-box"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Đơn hàng mới chờ duyệt</h4>
+                                <p>Có 5 đơn hàng mới vừa được đặt bởi khách hàng.</p>
+                                <span class="time">15:45 PM - Hôm qua</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot primary">
+                                <i class="fa-solid fa-rotate"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Sao lưu dữ liệu</h4>
+                                <p>Hệ thống tự động sao lưu dữ liệu thành công.</p>
+                                <span class="time">00:00 AM - Hôm qua</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cảnh báo tồn kho</h4>
+                                <p>Sách "Nhà Giả Kim" chỉ còn dưới 5 cuốn trong kho.</p>
+                                <span class="time">11:15 AM - 2 ngày trước</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
