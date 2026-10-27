@@ -12,36 +12,6 @@
 
     <link rel="stylesheet" href="../../css/style-admin-chung.css">
     <link rel="stylesheet" href="../../css/admin/admin-dash.css">
-    
-    <style>
-        /* --- RESET & VARIABLES --- */
-        :root {
-            --bg-body: #f8fafc;
-            --bg-surface: #ffffff;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-active: #0284c7;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            
-            --primary: #2563eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --purple: #8b5cf6;
-            
-            --radius-lg: 16px;
-            --radius-md: 10px;
-            --radius-sm: 6px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.05);
-            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.05);
-        }
-
-
-    </style>
 </head>
 <body>
 
@@ -70,6 +40,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="admin-QLTK.html">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>Quản lý người dùng</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="admin-sach.html">
                             <i class="fa-solid fa-boxes-stacked"></i>
                             <span>Quản lý Sách</span>
@@ -91,18 +67,25 @@
                 </ul>
             </div>
 
-            <!-- Profile Admin ở góc dưới -->
-            <div class="sidebar-user">
-                <div class="user-avatar">
-                        <img src="../../images/avatars/Admin.png" alt="Admin" >  
+            <!-- Profile Admin ở góc dưới có Dropdown Menu -->
+            <div class="sidebar-user admin-user-dropdown">
+                <div class="user-avatar" id="adminUserToggle" title="Tùy chọn tài khoản">
+                    <img src="../../images/avatars/Admin.png" alt="Admin">  
                 </div>
-                <div class="user-info">
+                <div class="user-info" id="adminUserInfoToggle">
                     <h4>Admin</h4>
                     <p>Quản trị viên chính</p>
                 </div>
+                
+                <!-- Menu thả xuống khi bấm vào Avatar hoặc tên -->
+                <div class="admin-dropdown-menu" id="adminDropdownMenu">
+                    <a href="#" id="infoModalBtn"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+                    <a href="#" id="changePasswordBtn"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+                    <hr>
+                    <a href="../admin/index.html" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                </div>
             </div>
         </aside>
-        
 
         <!-- CỘT PHẢI: Vùng nội dung chính -->
         <main class="admin-main-content">
@@ -198,6 +181,7 @@
                                 <th>Thông Tin Sách</th>
                                 <th>Thể Loại</th>
                                 <th>Đã Bán</th>
+                                <th>Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,7 +190,7 @@
                                 <td>
                                     <div class="book-cell">
                                         <div class="book-cover">
-                                            <image src="../../images/books/Fear.png" alt="Fear"></image>
+                                            <img src="../../images/books/Fear.png" alt="Fear">
                                         </div>
                                         <div class="book-info">
                                             <h4>Fear</h4>
@@ -216,13 +200,16 @@
                                 </td>
                                 <td><span class="badge badge-skill">Kỹ năng</span></td>
                                 <td><strong>45</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td><strong>#S002</strong></td>
                                 <td>
                                     <div class="book-cell">
-                                        <div class="book-cover" >
-                                            <image src="../../images/books/Ngày Nắng.png" alt="Tuổi trẻ vừa đi vừa học"></image>
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Ngày Nắng.png" alt="Ngày Nắng">
                                         </div>
                                         <div class="book-info">
                                             <h4>Ngày Nắng</h4>
@@ -232,13 +219,16 @@
                                 </td>
                                 <td><span class="badge badge-lit">Văn học</span></td>
                                 <td><strong>38</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td><strong>#S003</strong></td>
                                 <td>
                                     <div class="book-cell">
-                                        <div class="book-cover" >
-                                            <image src="../../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi trẻ vừa đi vừa học"></image>
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi trẻ vừa đi vừa học">
                                         </div>
                                         <div class="book-info">
                                             <h4>Tuổi Trẻ Vừa Đi Vừa Học</h4>
@@ -248,13 +238,16 @@
                                 </td>
                                 <td><span class="badge badge-skill">Kỹ năng</span></td>
                                 <td><strong>30</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td><strong>#S004</strong></td>
                                 <td>
                                     <div class="book-cell">
-                                        <div class="book-cover" >
-                                            <image src="../../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi trẻ đáng giá bao nhiêu"></image>
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi trẻ đáng giá bao nhiêu">
                                         </div>
                                         <div class="book-info">
                                             <h4>Tuổi Trẻ Đáng Giá Bao Nhiêu</h4>
@@ -264,13 +257,16 @@
                                 </td>
                                 <td><span class="badge badge-skill">Kỹ năng</span></td>
                                 <td><strong>25</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td><strong>#S005</strong></td>
                                 <td>
                                     <div class="book-cell">
-                                        <div class="book-cover" >
-                                            <image src="../../images/books/Cuộc đời khi bị chó đen cắn.webp" alt="Tuổi trẻ đáng giá bao nhiêu"></image>
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Cuộc đời khi bị chó đen cắn.webp" alt="Cuộc Đời Khi Bị Chó Đen Cắn">
                                         </div>
                                         <div class="book-info">
                                             <h4>Cuộc Đời Khi Bị Chó Đen Cắn</h4>
@@ -280,6 +276,9 @@
                                 </td>
                                 <td><span class="badge badge-eco">Đời sống</span></td>
                                 <td><strong>20</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -340,5 +339,52 @@
         </main>
     </div>
 
+    <!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
+    <div class="admin-modal-overlay" id="adminInfoModal">
+        <div class="admin-modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
+                <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-profile-header">
+                    <img src="../../images/avatars/Admin.png" alt="Admin Avatar" class="profile-avatar-large">
+                    <div>
+                        <h4>ADMIN</h4>
+                        <p class="role-tag">ADMIN 1</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-id-badge"></i> ID:</span>
+                        <span class="value">AD1</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-user"></i> Name:</span>
+                        <span class="value">ADMIN</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-cake-candles"></i> Tuổi:</span>
+                        <span class="value">19</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-shield-halved"></i> Vai trò:</span>
+                        <span class="value text-success">ADMIN 1</span>
+                    </div>
+                    <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <span class="label"><i class="fa-solid fa-circle-info"></i> Mô tả:</span>
+                        <span class="value" style="font-weight: normal; color: var(--text-secondary); text-align: left;">Admin của Shop BookStore tạo ra bởi Team Ngũ Long Công Chúa</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-edit-modal" id="editModalFooterBtn">Chỉnh sửa</button>
+                <button class="btn-close-modal" id="closeModalFooterBtn">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gọi file JavaScript -->
+    <script src="../../JS/admin-dashboard.js"></script>
 </body>
 </html>

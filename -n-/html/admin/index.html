@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Quản Trị - Hệ Thống Quản Lý Sách</title>
+    <!-- Gọi file CSS riêng cho trang đăng nhập -->
+    <link rel="stylesheet" href="../../css/admin/admin-login.css">
+    
+</head>
+<body class="login-body">
+
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Quản Trị Viên</h2>
+            <p>Đăng nhập vào hệ thống quản lý nhà sách</p>
+
+            <!-- Form đăng nhập (Không bắt buộc nhập, bấm nút là vào luôn) -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" placeholder="Nhập tài khoản (có thể bỏ trống)...">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu (có thể bỏ trống)...">
+                </div>
+
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gọi file JavaScript tách riêng bên dưới -->
+    <script src="../../js/admin-login.js"></script>
+    
+</body>
+</html>

@@ -18,8 +18,10 @@
     --radius-lg: 16px;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
+/* Đã sửa lỗi cú pháp dấu - thành dấu * */
 * {
     margin: 0;
     padding: 0;
@@ -53,7 +55,7 @@ body {
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto; /* QUAN TRỌNG: Giúp sidebar có thể cuộn nếu nội dung dài, không bị tràn ra ngoài */
+    overflow-y: auto;
 }
 
 .sidebar-brand {
@@ -154,44 +156,37 @@ body {
     color: #ffffff;
 }
 
-/* Sidebar User Profile Footer */
-
+/* Sidebar User Profile Footer & Dropdown */
 .sidebar-user {
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    position: relative;
     padding: 12px;
     background-color: rgba(255, 255, 255, 0.03);
     border-radius: var(--radius-md);
-    margin-top: 20px; /* Tạo khoảng cách thoáng phía trên nếu menu dài */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 .user-avatar {
     width: 38px;
     height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: #0f172a;
-    font-size: 14px;
-    overflow: hidden; /* Ẩn phần thừa để ôm trọn hình tròn */
-    flex-shrink: 0;   /* Giữ nguyên kích thước 38px, không bị bóp méo */
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-/* Thêm đoạn này để ảnh bên trong tự động vừa khít */
 .user-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    cursor: pointer;
 }
 
 .user-info {
-    overflow: hidden; /* Tránh việc tên dài làm vỡ khung */
+    overflow: hidden;
 }
 
 .user-info h4 {
@@ -211,83 +206,223 @@ body {
     text-overflow: ellipsis;
 }
 
-.nav-bar{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 12px 20px;
-    background: white;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.user-dropdown {
-    position: relative;
-}
-
-.user-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: #f1f5f9;
-    cursor: pointer;
-}
-
-.user-button img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-menu {
+/* --- CSS CHO DROPDOWN MENU ADMIN --- */
+.admin-dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    width: 210px;
+    bottom: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+    min-width: 210px;
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
     padding: 8px;
-    background: white;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: var(--shadow-md);
     z-index: 1000;
 }
 
-.user-menu.show {
-    display: block;
+.admin-dropdown-menu.show {
+    display: block !important;
 }
 
-.user-menu a,
-.user-menu button {
-    display: block;
-    width: 100%;
-    padding: 11px 12px;
-    border: none;
-    border-radius: 6px;
-    background: transparent;
-    color: var(--text-primary);
-    text-align: left;
+.admin-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: #cbd5e1;
     text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.2s;
 }
 
-.user-menu a:hover,
-.user-menu button:hover {
-    background: #f1f5f9;
+.admin-dropdown-menu a:hover {
+    background-color: #334155;
+    color: #ffffff;
 }
 
-.user-menu hr {
-    margin: 6px 0;
+.admin-dropdown-menu hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 4px 0;
+}
+
+.admin-dropdown-menu a.logout-link {
+    color: #f87171;
+}
+
+.admin-dropdown-menu a.logout-link:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+/* --- TÙY CHỈNH HIỂN THỊ THÔNG TIN CHI TIẾT (MODAL) --- */
+.admin-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-modal-overlay.show {
+    display: flex !important;
+}
+
+.admin-modal-card {
+    background-color: var(--bg-surface);
+    width: 100%;
+    max-width: 440px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    animation: modalScaleUp 0.25s ease forwards;
+}
+
+@keyframes modalScaleUp {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f8fafc;
+}
+
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-close-btn {
+    background: transparent;
     border: none;
-    border-top: 1px solid var(--border-color);
+    font-size: 22px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-.user-menu #logoutButton {
-    color: #dc2626;
+.modal-close-btn:hover { color: var(--danger); }
+
+.modal-body { padding: 24px; }
+
+.admin-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
 }
+
+.profile-avatar-large {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+
+.admin-profile-header h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.role-tag {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    background-color: #eff6ff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 10px 12px;
+    background-color: #f8fafc;
+    border-radius: var(--radius-sm);
+    align-items: center;
+}
+
+.detail-item .label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.detail-item .value {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+}
+
+.text-success { color: var(--success) !important; }
+
+.modal-footer {
+    padding: 12px 24px;
+    background-color: #f8fafc;
+    border-top: 1px solid var(--border-color);
+    text-align: right;
+}
+
+.btn-close-modal {
+    padding: 8px 16px;
+    background-color: var(--danger);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-edit-modal {
+    padding: 8px 16px;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-close-modal:hover { background-color: #B22222; }
+.btn-edit-modal:hover { background-color: var(--primary-dark); }
+
