@@ -16,9 +16,6 @@
 </head>
 <body>
 
-    <!-- Container Toast Notification (Thông báo góc phải màn hình) -->
-    <div id="toastContainer" class="toast-container"></div>
-
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar giữ nguyên cấu trúc) -->
         <aside class="admin-sidebar">
@@ -108,6 +105,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="searchIdInput" placeholder="Tìm kiếm theo ID (ví dụ: US001)...">
                 </div>
+                
                 <div class="action-buttons">
                     <button class="btn-primary" id="btnOpenAddManual">
                         <i class="fa-solid fa-user-plus"></i> Thêm thủ công
@@ -135,6 +133,7 @@
                                 <th>Số Điện Thoại</th>
                                 <th>Email</th>
                                 <th>Địa Chỉ</th>
+                                <th>Vai trò</th>
                                 <th>Ngày Tạo</th>
                                 <th>Trạng Thái</th>
                                 <th style="text-align: center;">Thao Tác</th>
@@ -143,7 +142,7 @@
                         <tbody id="userTableBody">
                             <!-- Dữ liệu 10 tài khoản mẫu tạo theo thời gian từ sớm nhất đến trễ nhất -->
                             <tr>
-                                <td><strong>#US001</strong></td>
+                                <td><strong>#QL003</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">NV</div>
@@ -154,6 +153,7 @@
                                 <td>0901234567</td>
                                 <td>nguyenvanan@gmail.com</td>
                                 <td>Quận 1, TP. Hồ Chí Minh</td>
+                                <td><span class="role-badge role-manager">Quản lý</span></td>
                                 <td>01/01/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -163,7 +163,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US002</strong></td>
+                                <td><strong>#NV011</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">TT</div>
@@ -174,6 +174,7 @@
                                 <td>0912345678</td>
                                 <td>tranbinh98@gmail.com</td>
                                 <td>Quận 3, TP. Hồ Chí Minh</td>
+                                 <td><span class="role-badge role-employee">Nhân viên</span></td>
                                 <td>15/02/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -183,7 +184,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US003</strong></td>
+                                <td><strong>#NV010</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">LH</div>
@@ -194,6 +195,7 @@
                                 <td>0923456789</td>
                                 <td>cuongle92@gmail.com</td>
                                 <td>Cầu Giấy, Hà Nội</td>
+                                <td><span class="role-badge role-employee">Nhân viên</span></td>
                                 <td>10/04/2023</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
@@ -203,7 +205,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US004</strong></td>
+                                <td><strong>#US315</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">PM</div>
@@ -214,6 +216,7 @@
                                 <td>0934567890</td>
                                 <td>dungpham2000@gmail.com</td>
                                 <td>Hải Châu, Đà Nẵng</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>02/06/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -223,7 +226,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US005</strong></td>
+                                <td><strong>#NV009</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">VH</div>
@@ -234,6 +237,7 @@
                                 <td>0945678901</td>
                                 <td>vuhoangem@gmail.com</td>
                                 <td>Ninh Kiều, Cần Thơ</td>
+                                <td><span class="role-badge role-employee">Nhân viên</span></td>
                                 <td>18/08/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -243,7 +247,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US006</strong></td>
+                                <td><strong>#US316</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">ĐT</div>
@@ -254,6 +258,7 @@
                                 <td>0956789012</td>
                                 <td>giangdang@gmail.com</td>
                                 <td>Quận 7, TP. Hồ Chí Minh</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>05/11/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -263,7 +268,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US007</strong></td>
+                                <td><strong>#US317</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">BVT</div>
@@ -274,6 +279,7 @@
                                 <td>0967890123</td>
                                 <td>hai.bui@gmail.com</td>
                                 <td>Hồng Bàng, Hải Phòng</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>20/01/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -283,7 +289,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US008</strong></td>
+                                <td><strong>#US318</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">ĐO</div>
@@ -294,6 +300,7 @@
                                 <td>0978901234</td>
                                 <td>khanhbang02@gmail.com</td>
                                 <td>Thủ Đức, TP. Hồ Chí Minh</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>14/04/2024</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
@@ -303,7 +310,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US009</strong></td>
+                                <td><strong>#US319</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">HL</div>
@@ -314,6 +321,7 @@
                                 <td>0989012345</td>
                                 <td>nhukhanh2001@gmail.com</td>
                                 <td>TP. Biên Hòa, Đồng Nai</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>01/08/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -323,7 +331,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>#US010</strong></td>
+                                <td><strong>#US320</strong></td>
                                 <td>
                                     <div class="user-name-cell">
                                         <div class="user-avatar-sm">NGL</div>
@@ -334,6 +342,7 @@
                                 <td>0990123456</td>
                                 <td>gialong.ngo@gmail.com</td>
                                 <td>Thanh Xuân, Hà Nội</td>
+                                <td><span class="role-badge role-customer">Khách hàng</span></td>
                                 <td>15/10/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
@@ -372,27 +381,27 @@
                 <div class="modal-body form-grid">
                     <div class="form-group">
                         <label for="userId">Mã ID Khách Hàng <span class="required">*</span></label>
-                        <input type="text" id="userId" placeholder="Ví dụ: US011" required>
+                        <input type="text" id="userId" placeholder="Ví dụ: US011" >
                     </div>
                     <div class="form-group">
                         <label for="userName">Họ và Tên <span class="required">*</span></label>
-                        <input type="text" id="userName" placeholder="Nhập họ và tên..." required>
+                        <input type="text" id="userName" placeholder="Nhập họ và tên..." >
                     </div>
                     <div class="form-group">
                         <label for="userDob">Ngày Tháng Năm Sinh <span class="required">*</span></label>
-                        <input type="date" id="userDob" required>
+                        <input type="date" id="userDob" >
                     </div>
                     <div class="form-group">
                         <label for="userPhone">Số Điện Thoại <span class="required">*</span></label>
-                        <input type="tel" id="userPhone" placeholder="Ví dụ: 0901234567" required>
+                        <input type="tel" id="userPhone" placeholder="Ví dụ: 0901234567" >
                     </div>
                     <div class="form-group full-width">
                         <label for="userEmail">Địa Chỉ Email <span class="required">*</span></label>
-                        <input type="email" id="userEmail" placeholder="nguyenvana@gmail.com" required>
+                        <input type="email" id="userEmail" placeholder="nguyenvana@gmail.com" >
                     </div>
                     <div class="form-group full-width">
                         <label for="userAddress">Địa Chỉ Liên Lạc <span class="required">*</span></label>
-                        <input type="text" id="userAddress" placeholder="Nhập địa chỉ nhà, số đường, quận/huyện, tỉnh/TP..." required>
+                        <input type="text" id="userAddress" placeholder="Nhập địa chỉ nhà, số đường, quận/huyện, tỉnh/TP..." >
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -447,8 +456,39 @@
         </div>
     </div>
 
+    <!-- MODAL ĐỔI MẬT KHẨU -->
+    <div class="admin-modal-overlay" id="changePasswordModal">
+        <div class="admin-modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-plus" style="color: #2563eb;"></i> Đổi Tài Khoản</h3>
+                <button class="modal-close-btn" id="closeAddModalBtn">&times;</button>
+            </div>
+            <form id="addManualForm">
+                <div class="modal-body form-grid">
+                    <div class="form-group">
+                        <label for="userId">Tài Khoản <span class="required">*</span></label>
+                        <input type="text" id="userAccount" placeholder="Ví dụ: admin123" >
+                    </div>
+                    <div class="form-group">
+                        <label for="user">Mật Khẩu <span class="required">*</span></label>
+                        <input type="text" id="userPassword" placeholder="VD: 123456" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="loseModalBtn">Đóng</button>
+                    <button type="submit" class="btn-submit"><i class="fa-solid fa-check"></i> Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+     <!-- Container Toast Notification (Thông báo góc phải màn hình) -->
+    <div id="toastContainer" class="toast-container"></div>
+
     <!-- Script Javascript -->
-    <script src="../../JS/admin-users.js"></script>
+    <script src="../../JS/admin-QLTK.js"></script>
     <script src="../../JS/admin-dashboard.js"></script>
+    
 </body>
 </html>

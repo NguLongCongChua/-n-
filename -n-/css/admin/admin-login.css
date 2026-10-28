@@ -84,3 +84,48 @@ body.login-body {
 .btn-login:hover {
     background-color: #0f766e;
 }
+
+/* Hộp thông báo nổi */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px 20px;
+    background-color: white;
+    border-left: 4px solid #22c55e;
+    border-radius: 8px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    font-family: Arial, sans-serif;
+}
+
+/* Biểu tượng dấu tích */
+.toast-icon {
+    color: #22c55e;
+    font-size: 24px;
+}
+
+/* Phần nội dung thông báo */
+.toast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.toast-text .title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+}
+
+.toast-text .desc {
+    font-size: 13px;
+    color: #666;
+}

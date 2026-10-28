@@ -1,11 +1,24 @@
-/* --- JAVASCRIPT QUẢN LÝ TÀI KHOẢN & HIỆU ỨNG THÔNG BÁO --- */
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Admin Users JS đã sẵn sàng!");
 
-    // 1. Hàm hiển thị cửa sổ nổi thông báo (Toast) lướt từ trái qua phải
+    // =========================================
+    // 1. LẤY CÁC PHẦN TỬ HTML
+    // =========================================
+    const openModalBtn = document.getElementById("btnOpenAddManual");
+    const addModal = document.getElementById("addManualModal");
+    const addForm = document.getElementById("addManualForm");
+    const closeModalBtn = document.getElementById("closeAddModalBtn");
+    const cancelModalBtn = document.getElementById("cancelAddModalBtn");
+    const autoAddBtn = document.getElementById("btnAddAuto");
+    // const searchBtn = document.getElementById("btnSearch");
+
+    // =========================================
+    // 2. HIỂN THỊ TOAST
+    // =========================================
     function showFloatingToast(title, description) {
+        
         let container = document.getElementById("toastContainer");
+
         if (!container) {
             container = document.createElement("div");
             container.id = "toastContainer";
@@ -15,118 +28,184 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const toast = document.createElement("div");
         toast.className = "toast-notification";
-        toast.innerHTML = `
-            <div class="toast-icon">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <div class="toast-text">
-                <span class="title">${title}</span>
-                <span class="desc">${description}</span>
-            </div>
-        `;
 
+        const icon = document.createElement("div");
+        icon.className = "toast-icon";
+
+        const checkIcon = document.createElement("i");
+        checkIcon.className = "fa-solid fa-check";
+        icon.appendChild(checkIcon);
+
+        const textBox = document.createElement("div");
+        textBox.className = "toast-text";
+
+        const titleElement = document.createElement("span");
+        titleElement.className = "title";
+        titleElement.textContent = title;
+
+        const descriptionElement = document.createElement("span");
+        descriptionElement.className = "desc";
+        descriptionElement.textContent = description;
+
+        textBox.append(titleElement, descriptionElement);
+        toast.append(icon, textBox);
         container.appendChild(toast);
 
-        // Sau 3 giây tự động trượt ẩn đi và xóa khỏi giao diện
-        setTimeout(() => {
+        // Tự động ẩn Toast sau 3 giây
+        setTimeout(function () {
             toast.classList.add("hide");
-            setTimeout(() => toast.remove(), 300);
+
+            setTimeout(function () {
+                toast.remove();
+            }, 300);
         }, 3000);
     }
 
-    // 2. Xử lý Thêm thủ công (Modal form)
-    const addManualForm = document.getElementById("addManualForm");
-    const addManualModal = document.getElementById("addManualModal");
-    const userTableBody = document.getElementById("userTableBody");
-
-    if (addManualForm) {
-        addManualForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const userId = document.getElementById("userId").value.trim();
-            const userName = document.getElementById("userName").value.trim();
-            const userDob = document.getElementById("userDob").value;
-            const userPhone = document.getElementById("userPhone").value.trim();
-            const userEmail = document.getElementById("userEmail").value.trim();
-            const userAddress = document.getElementById("userAddress").value.trim();
-
-            const dobFormatted = userDob ? userDob.split("-").reverse().join("/") : "";
-            const todayFormatted = new Date().toLocaleDateString("vi-VN");
-
-            // Thêm dòng mới vào bảng
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><strong>#${userId}</strong></td>
-                <td>
-                    <div class="user-name-cell">
-                        <div class="user-avatar-sm">${userName.substring(0, 2).toUpperCase()}</div>
-                        <span>${userName}</span>
-                    </div>
-                </td>
-                <td>${dobFormatted}</td>
-                <td>${userPhone}</td>
-                <td>${userEmail}</td>
-                <td>${userAddress}</td>
-                <td>${todayFormatted}</td>
-                <td><span class="badge-status status-active">Hoạt động</span></td>
-                <td class="action-cell">
-                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa"><i class="fa-solid fa-lock"></i></button>
-                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            `;
-
-            if (userTableBody) {
-                userTableBody.appendChild(newRow);
-            }
-
-            // Đóng Modal và gọi cửa sổ nổi thông báo
-            if (addManualModal) {
-                addManualModal.classList.remove("show");
-            }
-            addManualForm.reset();
-
-            // KÍCH HOẠT THÔNG BÁO THÊM THÀNH CÔNG
-            showFloatingToast("Thêm thành công!", "Đã thêm thủ công tài khoản mới vào hệ thống.");
+    // Hiệu ứng làm mờ rồi reload trang
+    function reloadPageWithEffect() {
+            window.location.reload();
+    }
+    // =========================================
+    // 3. MỞ MODAL THÊM THỦ CÔNG
+    // =========================================
+    if (openModalBtn && addModal) {
+        openModalBtn.addEventListener("click", function () {
+            addModal.classList.add("show");
         });
     }
 
-    // 3. Xử lý Thêm tự động (Auto Add)
-    const btnAddAuto = document.getElementById("btnAddAuto");
-    if (btnAddAuto) {
-        btnAddAuto.addEventListener("click", function () {
-            const randomNum = Math.floor(100 + Math.random() * 900);
-            const autoId = `US${randomNum}`;
-            const todayFormatted = new Date().toLocaleDateString("vi-VN");
 
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><strong>#${autoId}</strong></td>
-                <td>
-                    <div class="user-name-cell">
-                        <div class="user-avatar-sm">KH</div>
-                        <span>Khách Hàng ${randomNum}</span>
-                    </div>
-                </td>
-                <td>01/01/2000</td>
-                <td>090${randomNum}888</td>
-                <td>user${randomNum}@gmail.com</td>
-                <td>Thành phố Hồ Chí Minh</td>
-                <td>${todayFormatted}</td>
-                <td><span class="badge-status status-active">Hoạt động</span></td>
-                <td class="action-cell">
-                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa"><i class="fa-solid fa-lock"></i></button>
-                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            `;
+    // =========================================
+    // 4. ĐÓNG MODAL
+    // =========================================
+    function closeAddModal() {
+        if (addModal) {
+            addModal.classList.remove("show");
+        }
+    }
 
-            if (userTableBody) {
-                userTableBody.appendChild(newRow);
+    // Nút đóng
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener("click", closeAddModal);
+    }
+
+    // Nút hủy
+    if (cancelModalBtn) {
+        cancelModalBtn.addEventListener("click", closeAddModal);
+    }
+
+    // Nhấn vùng tối bên ngoài modal
+    if (addModal) {
+        addModal.addEventListener("click", function (event) {
+            if (event.target === addModal) {
+                closeAddModal();
             }
-
-            // KÍCH HOẠT THÔNG BÁO THÊM TỰ ĐỘNG THÀNH CÔNG
-            showFloatingToast("Thêm thành công!", `Đã thêm tự động tài khoản #${autoId}.`);
         });
     }
-});
+
+    // Nhấn phím Escape
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeAddModal();
+        }
+    });
+
+
+    // =========================================
+    // 5. THÊM THỦ CÔNG
+    // CHỈ HIỂN THỊ GIAO DIỆN, KHÔNG THÊM DÒNG
+    // =========================================
+    if (addForm) {
+        addForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Không kiểm tra dữ liệu bắt buộc.
+            // Không tạo dòng mới trong bảng.
+
+            closeAddModal();
+            addForm.reset();
+
+            showFloatingToast(
+                "Thao tác thành công!",
+                "Đã mô phỏng chức năng thêm tài khoản thủ công."
+            );
+            setTimeout(function () {
+                reloadPageWithEffect();
+            }, 400);
+        });
+    }
+
+
+    // =========================================
+    // 6. THÊM TỰ ĐỘNG
+    // CHỈ HIỂN THỊ TOAST, KHÔNG THÊM DÒNG
+    // =========================================
+    if (autoAddBtn) {
+        autoAddBtn.addEventListener("click", function () {
+            showFloatingToast(
+                "Thao tác thành công!",
+                "Đã mô phỏng chức năng thêm tài khoản tự động."
+            );
+            setTimeout(function () {
+                reloadPageWithEffect();
+            }, 400);
+        });
+    }
+
+
+    // =========================================
+    // 7. GÁN VAI TRÒ CỐ ĐỊNH CHO NGƯỜI DÙNG
+    // DỰA TRÊN THỨ TỰ CÁC HÀNG TRONG HTML
+    // =========================================
+    const userRoles = [
+        { name: "Quản lý", className: "role-manager" },
+        { name: "Nhân viên", className: "role-employee" },
+        { name: "Khách hàng", className: "role-customer" },
+        { name: "Nhân viên", className: "role-employee" },
+        { name: "Khách hàng", className: "role-customer" },
+        { name: "Khách hàng", className: "role-customer" },
+        { name: "Nhân viên", className: "role-employee" },
+        { name: "Khách hàng", className: "role-customer" },
+        { name: "Khách hàng", className: "role-customer" },
+        { name: "Quản lý", className: "role-manager" }
+    ];
+
+    const userRows = document.querySelectorAll("#userTableBody tr");
+
+    userRows.forEach(function (row, index) {
+        const roleCell = row.querySelector(".role-cell");
+
+        if (!roleCell || !userRoles[index]) {
+            return;
+        }
+
+        const role = userRoles[index];
+
+        const badge = document.createElement("span");
+        badge.className = "role-badge " + role.className;
+        badge.textContent = role.name;
+
+        roleCell.replaceChildren(badge);
+    });
+
+
+    // =========================================
+    // 8. KIỂM TRA KHỞI TẠO
+    // =========================================
+    console.log("Admin Users JS đã sẵn sàng!");
+
+    // 9. MODAL CHO THANH TÌM KIẾM
+    if (searchIdInput) {
+        searchIdInput.addEventListener("keydown", function () {
+            if (event.key === "Enter") {
+                showFloatingToast(
+                    "Đang tìm kiếm..."
+                );
+                setTimeout(function () {
+                    reloadPageWithEffect();
+                }, 600);
+            }
+        });
+    }
+    
+    });

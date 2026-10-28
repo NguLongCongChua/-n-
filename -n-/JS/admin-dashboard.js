@@ -70,13 +70,128 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const changePasswordBtn = document.getElementById("changePasswordBtn");
-    if (changePasswordBtn) {
-        changePasswordBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            
-        });
+
+/* ===== XỬ LÝ MODAL ĐỔI MẬT KHẨU ===== */
+
+const changePasswordBtn = document.getElementById("changePasswordBtn");
+const changePasswordModal = document.getElementById("changePasswordModal");
+const changePasswordForm = document.getElementById("changePasswordForm");
+
+const closeAddModalBtn = document.getElementById("closeAddModalBtn");
+const loseModalBtn = document.getElementById("loseModalBtn");
+
+// Mở modal đổi mật khẩu
+if (changePasswordBtn && changePasswordModal) {
+    changePasswordBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Đóng dropdown tài khoản
+        if (dropdownMenu) {
+            dropdownMenu.classList.remove("show");
+        }
+
+        changePasswordModal.classList.add("show");
+    });
+}
+
+// Đóng modal
+function closeChangePasswordModal() {
+    if (changePasswordModal) {
+        changePasswordModal.classList.remove("show");
     }
+}
+
+if (closeAddModalBtn) {
+    closeAddModalBtn.addEventListener(
+        "click",
+        closeChangePasswordModal
+    );
+}
+
+if (loseModalBtn) {
+    loseModalBtn.addEventListener(
+        "click",
+        closeChangePasswordModal
+    );
+}
+
+// Bấm ra ngoài nền mờ để đóng modal
+if (changePasswordModal) {
+    changePasswordModal.addEventListener("click", function (e) {
+        if (e.target === changePasswordModal) {
+            closeChangePasswordModal();
+        }
+    });
+}
+
+// Hàm hiển thị thông báo nổi
+function showPasswordToast(title, description, isError = false) {
+    // Xóa thông báo cũ nếu có
+    const oldToast = document.querySelector(".toast-notification");
+
+    if (oldToast) {
+        oldToast.remove();
+    }
+
+    const toast = document.createElement("div");
+    toast.className = "toast-notification";
+
+    if (isError) {
+        toast.classList.add("error");
+    }
+
+    const iconClass = isError
+        ? "fa-solid fa-circle-exclamation"
+        : "fa-solid fa-check";
+
+    toast.innerHTML = `
+        <div class="toast-icon">
+            <i class="${iconClass}"></i>
+        </div>
+
+        <div class="toast-text">
+            <span class="title"></span>
+            <span class="desc"></span>
+        </div>
+    `;
+
+    // Gán nội dung bằng textContent để tránh chèn HTML ngoài ý muốn
+    toast.querySelector(".title").textContent = title;
+    toast.querySelector(".desc").textContent = description;
+
+    document.body.appendChild(toast);
+
+    // Hiển thị hiệu ứng
+    requestAnimationFrame(function () {
+        toast.classList.add("show");
+    });
+
+    // Tự ẩn sau 3 giây
+    setTimeout(function () {
+        toast.classList.remove("show");
+
+        setTimeout(function () {
+            toast.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Xử lý khi nhấn Xác nhận
+if (changePasswordForm) {
+    changePasswordForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // THÀNH CÔNG: Hiện thông báo
+        closeChangePasswordModal();
+
+        changePasswordForm.reset();
+
+        showPasswordToast(
+            "Đổi mật khẩu thành công!",
+        );
+    });
+}
+
 
     // --- 3. Chức năng tìm kiếm nhanh (Live Search) trên Header không lệch layout ---
     const searchInput = document.querySelector(".search-box input");

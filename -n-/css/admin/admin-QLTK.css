@@ -68,7 +68,7 @@
     margin-bottom: 20px;
 }
 
-.search-id-box {
+.search-id-box {         
     position: relative;
     width: 320px;
 }
@@ -399,8 +399,15 @@
 }
 
 @keyframes slideOutToRight {
-    0% { transform: translateX(0); opacity: 1; }
-    100% { transform: translateX(120%); opacity: 0; }
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
 }
 
 .toast-icon {
@@ -432,4 +439,24 @@
     font-size: 12px;
     font-weight: 400;
     color: #64748b;
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
