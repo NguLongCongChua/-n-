@@ -25,6 +25,9 @@ body {
     color: white;
     padding: 15px 0;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
 }
 .header .container {
     display: flex;
@@ -466,6 +469,40 @@ body {
 }
 /* Ẩn chữ Kết quả tìm kiếm mặc định */
 .hd-search { display: none; } 
+/* =========================================
+   HIỆU ỨNG GIẢ LẬP LỌC KẾT QUẢ TÌM KIẾM
+========================================= */
+/* Dòng chữ báo số lượng kết quả (Mặc định ẩn) */
+.search-meta {
+    display: none;
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: HIỆN Dòng thông báo số lượng */
+#search-result:target ~ .product-page .search-meta,
+#search-user:target ~ .product-page .search-meta { 
+    display: block; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: ẨN bớt các sách có gắn class "search-hide" */
+#search-result:target ~ .product-page .search-hide,
+#search-user:target ~ .product-page .search-hide { 
+    display: none; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Làm mờ và khóa click các nút phân trang (trừ trang 1 đang active) */
+#search-result:target ~ .product-page .pagination a:not(.active),
+#search-user:target ~ .product-page .pagination a:not(.active) { 
+    opacity: 0.4;
+    pointer-events: none; /* Khóa hoàn toàn, không cho click */
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+    color: #999;
+    border-color: #ddd;
+}
 
 /* KHI BẤM TÌM KIẾM (URL có đuôi search) -> Đổi tiêu đề thành KẾT QUẢ TÌM KIẾM */
 #search-result:target ~ .product-page .hd-all,
@@ -474,6 +511,33 @@ body {
 #search-result:target ~ .product-page .hd-search,
 #search-user:target ~ .product-page .hd-search { display: block; }
 
+/* KHI CÓ ĐUÔI TÌM KIẾM: Ẩn cột chọn thể loại bên trái */
+#search-result:target ~ .product-page .sidebar-filter,
+#search-user:target ~ .product-page .sidebar-filter { 
+    display: none; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Kéo giãn cột kết quả sản phẩm bên phải ra 100% */
+#search-result:target ~ .product-page .product-list,
+#search-user:target ~ .product-page .product-list { 
+    width: 100%; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Ép lưới sản phẩm thành 1 hàng 4 ô (giống trang chủ) */
+#search-result:target ~ .product-page .product-grid-multi,
+#search-user:target ~ .product-page .product-grid-multi { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Ép lại chiều rộng của từng quyển sách thành 25% (4 cột) để không bị phình to */
+#search-result:target ~ .product-page .product-grid-multi .book-card,
+#search-user:target ~ .product-page .product-grid-multi .book-card {
+    width: calc(25% - 15px); /* 100% chia 4 trừ đi khoảng cách gap */
+    margin-bottom: 20px;
+}
 /* =========================================
    POPUP THÔNG BÁO (TOAST CHUNG)
 ========================================= */
@@ -2001,11 +2065,107 @@ body {
 }
 .trust-item span { font-size: 18px; }
 
-/* POP-UP THÊM GIỎ HÀNG (Màu cam) */
-.toast-cart { border-left: 5px solid #ff5722; }
-.toast-cart .toast-icon { background-color: #ff5722; }
+/* POP-UP THÊM GIỎ HÀNG (Đổi sang xanh lá) */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
 
 /* Kích hoạt Pop-up bằng Checkbox Ẩn (Không làm đổi URL, không văng acc) */
+/* =========================================
+   PHÂN QUYỀN NÚT MUA & CẢNH BÁO ĐĂNG NHẬP
+========================================= */
+/* Mặc định hiện bộ nút của Khách, ẩn bộ nút của User */
+.btn-action-user { display: none; }
+.btn-action-guest { display: flex; }
+
+/* Khi có tài khoản -> Lật ngược: Ẩn Khách, Hiện User */
+#login-success:target ~ main .btn-action-guest,
+#logged-in:target ~ main .btn-action-guest,
+#search-user:target ~ main .btn-action-guest { display: none; }
+
+#login-success:target ~ main .btn-action-user,
+#logged-in:target ~ main .btn-action-user,
+#search-user:target ~ main .btn-action-user { display: flex; }
+
+/* Pop-up Đỏ và Xanh */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
+.toast-need-login { border-left: 5px solid #dc3545; }
+.toast-need-login .toast-icon { background-color: #dc3545; }
+
+/* Bật Pop-up Đỏ (cho Khách) qua URL */
+#need-login:target ~ .toast-need-login {
+    animation: showToast 4s ease forwards;
+}
+
+/* Bật Pop-up Xanh (cho User) qua Checkbox ẩn */
 #cart-toast-toggle:checked ~ .toast-cart {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   BẢO MẬT TRANG GIỎ HÀNG (CHẶN KHÁCH VÃNG LAI)
+========================================= */
+/* Mặc định: Ẩn nội dung giỏ hàng, Hiện thông báo yêu cầu đăng nhập */
+.cart-secure-content {
+    display: none;
+}
+.cart-secure-denied {
+    display: block;
+}
+
+/* Khi có "bùa" tài khoản trên URL -> Lật ngược trạng thái */
+#login-success:target ~ main .cart-secure-denied,
+#logged-in:target ~ main .cart-secure-denied,
+#search-user:target ~ main .cart-secure-denied {
+    display: none;
+}
+
+#login-success:target ~ main .cart-secure-content,
+#logged-in:target ~ main .cart-secure-content,
+#search-user:target ~ main .cart-secure-content {
+    display: block;
+}
+/* =========================================
+   PHÂN QUYỀN VÀ PING-PONG NÚT BẤM (BẤM VÔ HẠN)
+========================================= */
+/* 1. Bọc nhóm nút Khách/User (Dùng display: contents để giữ nguyên khung Flexbox) */
+.auth-wrapper { display: contents; }
+.btn-action-user { display: none; }
+.btn-action-guest { display: contents; }
+
+/* Lật trạng thái khi có tài khoản */
+#login-success:target ~ main .btn-action-guest,
+#logged-in:target ~ main .btn-action-guest,
+#search-user:target ~ main .btn-action-guest { display: none; }
+
+#login-success:target ~ main .btn-action-user,
+#logged-in:target ~ main .btn-action-user,
+#search-user:target ~ main .btn-action-user { display: contents; }
+
+/* 2. Thiết kế Pop-up Đỏ và Xanh */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
+.toast-need-login { border-left: 5px solid #dc3545; }
+.toast-need-login .toast-icon { background-color: #dc3545; }
+
+/* 3. Logic Ping-Pong (Lật công tắc luân phiên để click liên tục) */
+.lbl-pong { display: none !important; }
+
+/* -- Khi KHÁCH bấm: Tráo Ping/Pong để báo Đỏ liên tục -- */
+#err-ping:checked ~ main .btn-action-guest .lbl-ping { display: none !important; }
+#err-ping:checked ~ main .btn-action-guest .lbl-pong { display: flex !important; }
+#err-pong:checked ~ main .btn-action-guest .lbl-pong { display: none !important; }
+#err-pong:checked ~ main .btn-action-guest .lbl-ping { display: flex !important; }
+
+/* -- Khi TÈO bấm: Tráo Ping/Pong để báo Xanh liên tục -- */
+#cart-ping:checked ~ main .btn-action-user .lbl-ping { display: none !important; }
+#cart-ping:checked ~ main .btn-action-user .lbl-pong { display: flex !important; }
+#cart-pong:checked ~ main .btn-action-user .lbl-pong { display: none !important; }
+#cart-pong:checked ~ main .btn-action-user .lbl-ping { display: flex !important; }
+
+/* 4. Kích hoạt hiệu ứng Pop-up (Reset khi đổi trạng thái công tắc) */
+#err-ping:checked ~ .t-err-ping,
+#err-pong:checked ~ .t-err-pong,
+#cart-ping:checked ~ .t-cart-ping,
+#cart-pong:checked ~ .t-cart-pong {
     animation: showToast 4s ease forwards;
 }
