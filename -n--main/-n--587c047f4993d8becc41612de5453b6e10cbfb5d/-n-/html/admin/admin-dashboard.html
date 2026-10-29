@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Hệ Thống Quản Lý Nhà Sách</title>
+    <!-- Phông chữ Google Font Inter & Icon FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../../css/style-admin-chung.css">
+    <link rel="stylesheet" href="../../css/admin/admin-dash.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar) -->
+        <aside class="admin-sidebar">
+            <div>
+                <!-- Logo nhà sách -->
+                <div class="sidebar-brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>BOOKSTORE</h2>
+                        <p>Hệ Thống Quản Lý</p>
+                    </div>
+                </div>
+
+                <!-- Danh mục Menu -->
+                <div class="menu-label">Menu Chính</div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="admin-dashboard.html" class="active">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Tổng quan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-QLTK.html">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>Quản lý người dùng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-sach.html">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                            <span>Quản lý Sách</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-don-hang.html">
+                            <i class="fa-solid fa-receipt"></i>
+                            <span>Quản lý Đơn hàng</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="../user/index.html" class="back-web">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                            <span>Về Trang Khách Hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile Admin ở góc dưới có Dropdown Menu -->
+            <div class="sidebar-user admin-user-dropdown">
+                <div class="user-avatar" id="adminUserToggle" title="Tùy chọn tài khoản">
+                    <img src="../../images/avatars/Admin.png" alt="Admin">  
+                </div>
+                <div class="user-info" id="adminUserInfoToggle">
+                    <h4>Admin</h4>
+                    <p>Quản trị viên chính</p>
+                </div>
+                
+                <!-- Menu thả xuống khi bấm vào Avatar hoặc tên -->
+                <div class="admin-dropdown-menu" id="adminDropdownMenu">
+                    <a href="#" id="infoModalBtn"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
+                    <a href="#" id="changePasswordBtn"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+                    <hr>
+                    <a href="../admin/index.html" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CỘT PHẢI: Vùng nội dung chính -->
+        <main class="admin-main-content">
+            <!-- Header Thanh Công Cụ -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Tổng Quan Hệ Thống</h1>
+                    <p>Cập nhật số liệu và hoạt động nhà sách theo thời gian thực.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm nhanh...">
+                    </div>
+                    <button class="icon-btn" title="Thông báo">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- PHẦN 1: 4 Thẻ Thống Kê Nhanh (Stat Cards) -->
+            <section class="stats-box-container">
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Đầu Sách</span>
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">150</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +12%</span>
+                        <span class="text-muted">so với tháng trước</span>
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Đơn Hàng Mới</span>
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +5%</span>
+                        <span class="text-muted">Cần xử lý ngay</span>
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Khách Hàng</span>
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">95</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +8%</span>
+                        <span class="text-muted">Người dùng mới</span>
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Doanh Thu Tháng</span>
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">25.000.000đ</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +15%</span>
+                        <span class="text-muted">Đạt chỉ tiêu</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHẦN 2: Bảng Top Bán Chạy & Timeline Thông Báo -->
+            <section class="dashboard-sections">
+                <!-- Cột lớn: Top 5 Sách Bán Chạy -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Top 5 Sách Bán Chạy Nhất</h2>
+                        <a href="admin-sach.html" class="btn-link">Xem tất cả kho sách</a>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Mã Sách</th>
+                                <th>Thông Tin Sách</th>
+                                <th>Thể Loại</th>
+                                <th>Đã Bán</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#S001</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Fear.png" alt="Fear">
+                                        </div>
+                                        <div class="book-info">
+                                            <h4>Fear</h4>
+                                            <p>Thích Nhất Hạnh</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>45</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#S002</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Ngày Nắng.png" alt="Ngày Nắng">
+                                        </div>
+                                        <div class="book-info">
+                                            <h4>Ngày Nắng</h4>
+                                            <p>Yasushi Kitagawa</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-lit">Văn học</span></td>
+                                <td><strong>38</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#S003</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi trẻ vừa đi vừa học">
+                                        </div>
+                                        <div class="book-info">
+                                            <h4>Tuổi Trẻ Vừa Đi Vừa Học</h4>
+                                            <p>Nguyễn Nguyệt Anh</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>30</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#S004</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi trẻ đáng giá bao nhiêu">
+                                        </div>
+                                        <div class="book-info">
+                                            <h4>Tuổi Trẻ Đáng Giá Bao Nhiêu</h4>
+                                            <p>Rosie Nguyễn</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-skill">Kỹ năng</span></td>
+                                <td><strong>25</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#S005</strong></td>
+                                <td>
+                                    <div class="book-cell">
+                                        <div class="book-cover">
+                                            <img src="../../images/books/Cuộc đời khi bị chó đen cắn.webp" alt="Cuộc Đời Khi Bị Chó Đen Cắn">
+                                        </div>
+                                        <div class="book-info">
+                                            <h4>Cuộc Đời Khi Bị Chó Đen Cắn</h4>
+                                            <p>Từ Dũng</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-eco">Đời sống</span></td>
+                                <td><strong>20</strong> cuốn</td>
+                                <td>
+                                    <button class="btn-action-view"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Cột nhỏ: Timeline Thông Báo -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-regular fa-clock" style="color: #2563eb;"></i> Hoạt Động Gần Đây</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot success">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cập nhật kho hàng</h4>
+                                <p>Đã hoàn tất kiểm kê kho hàng sách tháng 10.</p>
+                                <span class="time">09:30 AM - Hôm nay</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot warning">
+                                <i class="fa-solid fa-box"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Đơn hàng mới chờ duyệt</h4>
+                                <p>Có 5 đơn hàng mới vừa được đặt bởi khách hàng.</p>
+                                <span class="time">15:45 PM - Hôm qua</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot primary">
+                                <i class="fa-solid fa-rotate"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Sao lưu dữ liệu</h4>
+                                <p>Hệ thống tự động sao lưu dữ liệu thành công.</p>
+                                <span class="time">00:00 AM - Hôm qua</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cảnh báo tồn kho</h4>
+                                <p>Sách "Nhà Giả Kim" chỉ còn dưới 5 cuốn trong kho.</p>
+                                <span class="time">11:15 AM - 2 ngày trước</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
+    <div class="admin-modal-overlay" id="adminInfoModal">
+        <div class="admin-modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
+                <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-profile-header">
+                    <img src="../../images/avatars/Admin.png" alt="Admin Avatar" class="profile-avatar-large">
+                    <div>
+                        <h4>ADMIN</h4>
+                        <p class="role-tag">ADMIN 1</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-id-badge"></i> ID:</span>
+                        <span class="value">AD1</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-user"></i> Name:</span>
+                        <span class="value">ADMIN</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-cake-candles"></i> Tuổi:</span>
+                        <span class="value">19</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-shield-halved"></i> Vai trò:</span>
+                        <span class="value text-success">ADMIN 1</span>
+                    </div>
+                    <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <span class="label"><i class="fa-solid fa-circle-info"></i> Mô tả:</span>
+                        <span class="value" style="font-weight: normal; color: var(--text-secondary); text-align: left;">Admin của Shop BookStore tạo ra bởi Team Ngũ Long Công Chúa</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-edit-modal" id="editModalFooterBtn">Chỉnh sửa</button>
+                <button class="btn-close-modal" id="closeModalFooterBtn">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gọi file JavaScript -->
+    <script src="../../JS/admin-dashboard.js"></script>
+</body>
+</html>

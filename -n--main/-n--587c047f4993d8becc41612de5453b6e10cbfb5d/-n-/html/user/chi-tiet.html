@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết: Đắc Nhân Tâm - Nhà Sách Online</title>
+    <link rel="stylesheet" href="../../css/style-user-chung.css">
+<body>
+
+    <!-- 1. CÁC NEO BẮT TÍN HIỆU TỪ URL -->
+    <span id="login-success" style="position: absolute; top: 0;"></span>
+    <span id="logged-in" style="position: absolute; top: 0;"></span>
+    <span id="logout-success" style="position: absolute; top: 0;"></span>
+    <span id="search-result" style="position: absolute; top: 0;"></span>
+    <span id="search-user" style="position: absolute; top: 0;"></span>
+    
+    <!-- CÔNG TẮC ẨN ĐIỀU KHIỂN POPUP GIỎ HÀNG -->
+    <input type="checkbox" id="cart-toast-toggle" hidden>
+
+    <!-- 2. HỆ THỐNG POP-UP THÔNG BÁO -->
+    <div class="toast-msg toast-success toast-login"><div class="toast-icon">✔</div>Đăng nhập thành công!</div>
+    <div class="toast-msg toast-danger toast-logout"><div class="toast-icon">✖</div>Bạn đã đăng xuất tài khoản!</div>
+    
+    <!-- Toast riêng cho Giỏ hàng -->
+    <div class="toast-msg toast-cart">
+        <div class="toast-icon">🛒</div>
+        Đã thêm sản phẩm vào giỏ hàng!
+    </div>
+
+    <!-- 3. THANH HEADER CHÍNH -->
+    <header class="header">
+        <div class="container">
+            
+            <div class="logo logo-guest"><a href="index.html">NHÀ SÁCH ONLINE</a></div>
+            <div class="logo logo-user"><a href="index.html#logged-in">NHÀ SÁCH ONLINE</a></div>
+
+            <!-- THANH TÌM KIẾM -->
+            <div class="header-search search-guest">
+                <form action="san-pham.html#search-result">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="header-search search-user">
+                <form action="san-pham.html#search-user">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MENU KHÁCH & USER -->
+            <ul class="nav-menu menu-guest">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="san-pham.html">Sản phẩm</a></li>
+                <li><a href="gio-hang.html">Giỏ hàng</a></li>
+            </ul>
+            <ul class="nav-menu menu-user">
+                <li><a href="index.html#logged-in">Trang chủ</a></li>
+                <li><a href="san-pham.html#logged-in">Sản phẩm</a></li>
+                <li><a href="gio-hang.html#logged-in">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- CỤM TÀI KHOẢN -->
+            <div class="auth-buttons">
+                <a href="dang-nhap.html" class="btn-login">Đăng nhập</a>
+                <a href="dang-nhap.html#dang-ky-form" class="btn-register">Đăng ký</a>
+            </div>
+            <div class="user-dropdown">
+                <input type="checkbox" id="user-menu-toggle" hidden>
+                <label for="user-menu-toggle" class="user-name">Chào, Nguyễn Văn Tèo <span>▼</span></label>
+                <ul class="dropdown-content">
+                    <li><a href="ho-so.html">Thông tin tài khoản</a></li>
+                    <li><a href="lich-su.html">Lịch sử mua hàng</a></li>
+                    <li><a href="index.html#logout-success" class="text-danger">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- VÙNG NỘI DUNG CHÍNH: CHI TIẾT SẢN PHẨM -->
+    <main class="container">
+        
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> &gt; 
+            <a href="san-pham.html">Kỹ năng sống</a> &gt; 
+            <span>Đắc Nhân Tâm</span>
+        </div>
+
+        <!-- SỬ DỤNG LAYOUT 3 CỘT CHUẨN E-COMMERCE -->
+        <div class="product-detail-container">
+            
+            <!-- CỘT 1: ẢNH BÌA LỚN, VUÔNG & HIỆU ỨNG ZOOM -->
+            <div class="product-detail-left">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&w=800" alt="Đắc Nhân Tâm" class="product-detail-img">
+                </div>
+            </div>
+
+            <!-- CỘT 2: THÔNG TIN CHI TIẾT SÁCH -->
+            <div class="product-detail-middle">
+                
+                <h1 class="product-detail-title">Đắc Nhân Tâm (Bản chuẩn)</h1>
+                
+                <div class="product-rating">
+                    <div class="stars">⭐⭐⭐⭐⭐ <span style="color:#888;">(4.9)</span></div>
+                    <div class="sold-count">Đã bán: <strong style="color: #222;">2.4k</strong></div>
+                </div>
+
+                <ul class="product-meta-list">
+                    <li><strong>Tác giả:</strong> Dale Carnegie</li>
+                    <li><strong>Nhà xuất bản:</strong> NXB Tổng hợp TP.HCM</li>
+                    <li><strong>Thể loại:</strong> Kỹ năng sống / Phát triển bản thân</li>
+                    <li><strong>Số trang:</strong> 320 trang</li>
+                    <li><strong>Hình thức:</strong> Bìa mềm</li>
+                </ul>
+
+                <div class="short-desc">
+                    <strong>Tóm tắt:</strong> Quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất do báo The New York Times bình chọn suốt 10 năm liền. Sách mang lại những bài học sâu sắc về sự thấu hiểu và nghệ thuật thu phục lòng người.
+                </div>
+
+            </div>
+
+            <!-- CỘT 3: KHUNG MUA HÀNG (BUY BOX) -->
+            <div class="product-detail-right buy-box">
+                
+                <div class="product-detail-price">86,000 đ</div>
+                <div class="stock-status">
+                    Tình trạng: <span style="color: #0f5132; font-weight: bold;">Còn hàng (Sẵn sàng giao)</span>
+                </div>
+
+                <!-- Khung số lượng -->
+                <div class="qty-selector-group">
+                    <span>Số lượng:</span>
+                    <div class="qty-wrapper">
+                        <button type="button" onclick="javascript:void(0)">-</button>
+                        <input type="text" value="1" readonly>
+                        <button type="button" onclick="javascript:void(0)">+</button>
+                    </div>
+                </div>
+
+                <!-- Nút Hành động đã được rút gọn để dùng chung -->
+                <div class="action-buttons vertical-buttons">
+                    
+                    <!-- Dùng <label> để làm nút bấm, kích hoạt cái checkbox id="cart-toast-toggle" ẩn ở đầu trang -->
+                    <label for="cart-toast-toggle" class="btn-add-cart">🛒 Thêm vào giỏ</label>
+
+                    <!-- Nút Mua ngay (Đã được khóa chết lâm sàng theo yêu cầu) -->
+                    <a href="javascript:void(0)" class="btn-buy-now">Mua ngay</a>
+                    
+                </div>
+
+                <!-- Dải Cam Kết Bán Hàng -->
+                <div class="trust-badges vertical-badges">
+                    <div class="trust-item"><span>🛡️</span> 100% Sách chính hãng</div>
+                    <div class="trust-item"><span>🔄</span> Đổi trả trong 7 ngày</div>
+                    <div class="trust-item"><span>🚚</span> Giao hàng hỏa tốc 2H</div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- CHÂN TRANG DÙNG CHUNG CẢ WEB -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>NHÀ SÁCH ONLINE - ĐỒ ÁN MÔN LẬP TRÌNH WEB 1</strong></p>
+            <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP.HCM</p>
+            <p>Số điện thoại: 0123 456 789 | Email: contact@nhasachonline.com</p>
+            <p>&copy; 2026 Bản quyền thuộc về Nhóm 9876.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
