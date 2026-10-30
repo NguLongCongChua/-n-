@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Nhà Sách Online</title>
+    <link rel="stylesheet" href="../../css/style-user-chung.css">
+</head>
+<body>
+    
+    <!-- CÁC NEO BẮT TÍN HIỆU TỪ URL -->
+    <span id="login-success" style="position: absolute; top: 0;"></span>
+    <span id="logged-in" style="position: absolute; top: 0;"></span>
+    <span id="logout-success" style="position: absolute; top: 0;"></span>
+    <span id="search-result" style="position: absolute; top: 0;"></span>
+    <span id="search-user" style="position: absolute; top: 0;"></span>
+
+    <!-- HỆ THỐNG POP-UP THÔNG BÁO -->
+    <div class="toast-msg toast-success toast-login">
+        <div class="toast-icon">✔</div>
+        Đăng nhập thành công!
+    </div>
+    <div class="toast-msg toast-danger toast-logout">
+        <div class="toast-icon">✖</div>
+        Bạn đã đăng xuất tài khoản!
+    </div>
+
+    <!-- THANH HEADER CHÍNH -->
+    <header class="header">
+        <div class="container">
+            
+            <!-- LOGO -->
+            <div class="logo logo-guest"><a href="index.html">NHÀ SÁCH ONLINE</a></div>
+            <div class="logo logo-user"><a href="index.html#logged-in">NHÀ SÁCH ONLINE</a></div>
+
+            <!-- THANH TÌM KIẾM -->
+            <div class="header-search search-guest">
+                <form action="san-pham.html#search-result">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <!-- Thêm name="q" để ép trình duyệt load lại trang khi bấm tìm -->
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="header-search search-user">
+                <form action="san-pham.html#search-user">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <!-- Thêm name="q" để ép trình duyệt load lại trang khi bấm tìm -->
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- BỘ MENU KHÁCH -->
+            <ul class="nav-menu menu-guest">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="san-pham.html">Sản phẩm</a></li>
+                <li><a href="gio-hang.html">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- BỘ MENU USER -->
+            <ul class="nav-menu menu-user">
+                <li><a href="index.html#logged-in">Trang chủ</a></li>
+                <li><a href="san-pham.html#logged-in">Sản phẩm</a></li>
+                <li><a href="gio-hang.html#logged-in">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- NÚT ĐĂNG NHẬP/ĐĂNG KÝ -->
+            <div class="auth-buttons">
+                <a href="dang-nhap.html" class="btn-login">Đăng nhập</a>
+                <a href="dang-nhap.html#dang-ky-form" class="btn-register">Đăng ký</a>
+            </div>
+
+            <!-- MENU TÀI KHOẢN TÈO -->
+            <div class="user-dropdown">
+                <input type="checkbox" id="user-menu-toggle" hidden>
+                <label for="user-menu-toggle" class="user-name">Chào, Nguyễn Văn Tèo <span>▼</span></label>
+                <ul class="dropdown-content">
+                    <li><a href="ho-so.html">Thông tin tài khoản</a></li>
+                    <li><a href="lich-su.html">Lịch sử mua hàng</a></li>
+                    <li><a href="index.html#logout-success" class="text-danger">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+    <!-- KẾT THÚC HEADER -->
+    <main class="container">
+        <!-- KHU VỰC LƯỚT ẢNH BÌA TỰ ĐỘNG -->
+        <section class="banner">
+            <!-- 3 Ảnh bìa ngang -->
+            <div class="slides">
+                <div class="slide"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1200&auto=format&fit=crop" alt="Banner Sách 1"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop" alt="Banner Sách 2"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop" alt="Banner Sách 3"></div>
+            </div>
+
+            <!-- 3 chấm tròn bên dưới (Đổi thành thẻ span vì không cần bấm nữa) -->
+            <div class="slider-nav">
+                <span class="nav-dot1"></span>
+                <span class="nav-dot2"></span>
+                <span class="nav-dot3"></span>
+            </div>
+        </section>
+        <section class="book-section">
+            <h2 class="section-title">Sách Nổi Bật</h2>
+            <div class="book-grid">
+                <div class="book-card">
+                    <img src="../../images/images/sach_1.avif" alt="Nhà Giả Kim" class="book-img">
+                    <h3 class="book-title">Nhà Giả Kim - Paulo Coelho</h3>
+                    <p class="book-price">79,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_2.avif" alt="Đắc Nhân Tâm" class="book-img">
+                    <h3 class="book-title">Đắc Nhân Tâm</h3>
+                    <p class="book-price">86,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_3.avif" alt="Tuổi Trẻ Đáng Giá" class="book-img">
+                    <h3 class="book-title">Tuổi Trẻ Đáng Giá Bao Nhiêu</h3>
+                    <p class="book-price">65,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_4.avif" alt="Muôn Kiếp" class="book-img">
+                    <h3 class="book-title">Muôn Kiếp Nhân Sinh</h3>
+                    <p class="book-price">128,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- KHU VỰC SÁCH MỚI PHÁT HÀNH -->
+        <section class="book-section">
+            <h2 class="section-title">Sách Mới Phát Hành</h2>
+            <div class="book-grid">
+                <div class="book-card">
+                    <img src="../../images/images/sach_5.avif" alt="Tâm Lý Học Tội Phạm" class="book-img">
+                    <h3 class="book-title">Tâm Lý Học Tội Phạm</h3>
+                    <p class="book-price">115,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_6.avif" alt="Cây Cam Ngọt" class="book-img">
+                    <h3 class="book-title">Cây Cam Ngọt Của Tôi</h3>
+                    <p class="book-price">75,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_7.avif" alt="Người Đua Diều" class="book-img">
+                    <h3 class="book-title">Người Đua Diều</h3>
+                    <p class="book-price">98,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+                <div class="book-card">
+                    <img src="../../images/images/sach_8.avif" alt="Sự Im Lặng" class="book-img">
+                    <h3 class="book-title">Sự Im Lặng Của Bầy Cừu</h3>
+                    <p class="book-price">82,000 đ</p>
+                    <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
+                    <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CHÂN TRANG DÙNG CHUNG CẢ WEB -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>NHÀ SÁCH ONLINE - ĐỒ ÁN MÔN LẬP TRÌNH WEB 1</strong></p>
+            <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP.HCM</p>
+            <p>Số điện thoại: 0123 456 789 | Email: contact@nhasachonline.com</p>
+            <p>&copy; 2026 Bản quyền thuộc về Nhóm 9876.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
