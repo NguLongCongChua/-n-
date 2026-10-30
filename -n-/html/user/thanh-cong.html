@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng Thành Công - Nhà Sách Online</title>
+    <!-- Gắn file CSS chung -->
+    <link rel="stylesheet" href="style-chung.css">
+</head>
+<body>
+
+    <!-- 1. CÁC NEO BẮT TÍN HIỆU TỪ URL -->
+    <span id="login-success" style="position: absolute; top: 0;"></span>
+    <span id="logged-in" style="position: absolute; top: 0;"></span>
+    <span id="logout-success" style="position: absolute; top: 0;"></span>
+    <span id="search-result" style="position: absolute; top: 0;"></span>
+    <span id="search-user" style="position: absolute; top: 0;"></span>
+
+    <!-- THANH HEADER CHÍNH -->
+    <header class="header">
+        <div class="container">
+            <div class="logo logo-guest"><a href="index.html">NHÀ SÁCH ONLINE</a></div>
+            <div class="logo logo-user"><a href="index.html#logged-in">NHÀ SÁCH ONLINE</a></div>
+
+            <!-- THANH TÌM KIẾM -->
+            <div class="header-search search-guest">
+                <form action="san-pham.html#search-result">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="header-search search-user">
+                <form action="san-pham.html#search-user">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MENU KHÁCH & USER -->
+            <ul class="nav-menu menu-guest">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="san-pham.html">Sản phẩm</a></li>
+                <li><a href="gio-hang.html">Giỏ hàng</a></li>
+            </ul>
+            <ul class="nav-menu menu-user">
+                <li><a href="index.html#logged-in">Trang chủ</a></li>
+                <li><a href="san-pham.html#logged-in">Sản phẩm</a></li>
+                <li><a href="gio-hang.html#logged-in">Giỏ hàng</a></li>
+            </ul>
+
+            <!-- CỤM TÀI KHOẢN -->
+            <div class="auth-buttons">
+                <a href="dang-nhap.html" class="btn-login">Đăng nhập</a>
+                <a href="dang-nhap.html#dang-ky-form" class="btn-register">Đăng ký</a>
+            </div>
+            <div class="user-dropdown">
+                <input type="checkbox" id="user-menu-toggle" hidden>
+                <label for="user-menu-toggle" class="user-name">Chào, Nguyễn Văn Tèo <span>▼</span></label>
+                <ul class="dropdown-content">
+                    <li><a href="ho-so.html">Thông tin tài khoản</a></li>
+                    <li><a href="lich-su.html">Lịch sử mua hàng</a></li>
+                    <li><a href="index.html#logout-success" class="text-danger">Đăng xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- VÙNG NỘI DUNG CHÍNH: THÀNH CÔNG -->
+    <main class="container">
+
+        <!-- THÊM CÁI POPUP TỰ ĐỘNG VÀO ĐÂY -->
+        <div class="toast-msg toast-success toast-auto">
+            <div class="toast-icon">✔</div>
+            Xác nhận đặt hàng thành công!
+        </div>
+        
+        <!-- MÀN HÌNH CHẶN KHÁCH VÃNG LAI (Tự ẩn khi có đuôi #logged-in) -->
+        <div class="cart-secure-denied profile-denied">
+            <div class="denied-icon-wrap">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2zm0-10h2v8h-2z"/></svg>
+            </div>
+            <h2>Không Tìm Thấy Đơn Hàng</h2>
+            <p>Bạn không có quyền truy cập trang này. Vui lòng đăng nhập để xem thông tin.</p>
+            <div class="denied-btns">
+                <a href="dang-nhap.html" class="btn-to-login">Đi đến Đăng nhập</a>
+                <a href="index.html" class="btn-to-home">Về Trang Chủ</a>
+            </div>
+        </div>
+
+        <!-- NỘI DUNG THÀNH CÔNG (Tự hiện khi có đuôi #logged-in) -->
+        <div class="cart-secure-content success-page" style="margin-top: 60px;">
+            <div class="success-icon">✔</div>
+            <h1>ĐẶT HÀNG THÀNH CÔNG!</h1>
+            <p>Cảm ơn <strong>Nguyễn Văn Tèo</strong> đã tin tưởng và mua sắm tại Nhà Sách Online.<br>
+            Đơn hàng của bạn đã được tiếp nhận và đang trong quá trình xử lý.</p>
+            
+            <div class="order-ref" style="margin-bottom: 20px;">
+                Mã đơn hàng của bạn: #DH-987654
+            </div>
+
+            <!-- BỔ SUNG THÔNG TIN GIỐNG MẪU -->
+            <div class="receipt-customer-box" style="text-align: left; padding: 0 10%; margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div>
+                        <span style="font-size: 13px; color: #777;">Khách hàng</span><br>
+                        <strong>Nguyễn Văn Tèo</strong>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 13px; color: #777;">Số điện thoại</span><br>
+                        <strong>0938 123 456</strong>
+                    </div>
+                </div>
+                <div>
+                    <span style="font-size: 13px; color: #777;">Địa chỉ nhận hàng</span><br>
+                    <strong>Số 45, Đường 3 Tháng 2, Phường 11, Quận 10, TP.HCM</strong>
+                </div>
+            </div>
+
+            <!-- DANH SÁCH SẢN PHẨM CÓ THÊM ẢNH -->
+            <div class="receipt-items-list" style="text-align: left; padding: 20px 10%; border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; margin-bottom: 20px;">
+                
+                <!-- Sách 1 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 14px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&w=150" alt="Sách 1" style="width: 45px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid #eaeaea;">
+                        <span>Muôn Kiếp Nhân Sinh x1</span>
+                    </div>
+                    <strong>128,000 đ</strong>
+                </div>
+
+                <!-- Sách 2 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&w=150" alt="Sách 2" style="width: 45px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid #eaeaea;">
+                        <span>Đắc Nhân Tâm x1</span>
+                    </div>
+                    <strong>86,000 đ</strong>
+                </div>
+            </div>
+
+            <!-- TỔNG KẾT VÀ PHÍ VẬN CHUYỂN -->
+            <div style="padding: 0 10%; margin-bottom: 30px;">
+                <!-- Dòng Phí vận chuyển mới thêm -->
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; color: #555;">
+                    <span>Phí vận chuyển:</span>
+                    <strong>0 đ</strong>
+                </div>
+                
+                <!-- Dòng Tổng thanh toán -->
+                <div class="receipt-total-row" style="display: flex; justify-content: space-between; font-size: 18px; color: #0f5132;">
+                    <strong>Tổng thanh toán:</strong>
+                    <strong>214,000 đ</strong>
+                </div>
+            </div>
+            <!-- KẾT THÚC BỔ SUNG -->
+
+            <p style="font-style: italic; font-size: 14px; margin-bottom: 30px;">
+                *Thời gian giao hàng dự kiến: 2 - 3 ngày làm việc tới địa chỉ của bạn.
+            </p>
+
+            <div class="success-btns">
+                <a href="index.html#logged-in" class="btn-to-home">Về Trang Chủ</a>
+                <a href="lich-su.html#logged-in" class="btn-to-login">Xem Đơn Hàng</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- CHÂN TRANG -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>NHÀ SÁCH ONLINE - ĐỒ ÁN MÔN LẬP TRÌNH WEB 1</strong></p>
+            <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP.HCM</p>
+            <p>Số điện thoại: 0123 456 789 | Email: contact@nhasachonline.com</p>
+            <p>&copy; 2026 Bản quyền thuộc về Nhóm 9876.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

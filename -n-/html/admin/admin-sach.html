@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Sách - Admin Bookstore</title>
+    <title>Quản Lý Kho Sách - Hệ Thống Quản Lý Nhà Sách</title>
     <!-- Phông chữ Google Font Inter & Icon FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS Dùng chung và CSS riêng trang Sách -->
+    <!-- Liên kết file CSS chung và CSS riêng (Hỗ trợ cả 2 cấu trúc đường dẫn trong thư mục nhóm) -->
     <link rel="stylesheet" href="../../css/style-admin-chung.css">
-    <link rel="stylesheet" href="admin-book.css">
+    <link rel="stylesheet" href="../../css/admin/admin-book.css">
+    <link rel="stylesheet" href="../../admin/admin-book.css">
 </head>
 <body>
-    <!-- Container Toast Notification -->
-    <div id="toastContainer" class="toast-container"></div>
 
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar đồng bộ) -->
@@ -24,7 +23,7 @@
             <div>
                 <div class="sidebar-brand">
                     <div class="brand-icon">
-                        <i class="fa-solid fa-book-open"></i>
+                        <img src="../../images/banners/Icon-main.png">
                     </div>
                     <div class="brand-text">
                         <h2>BOOKSTORE</h2>
@@ -58,7 +57,6 @@
                             <span>Quản lý Đơn hàng</span>
                         </a>
                     </li>
-                    
                     <hr>
                     <li>
                         <a href="../user/index.html" class="back-web">
@@ -69,32 +67,68 @@
                 </ul>
             </div>
 
-            <div class="sidebar-user admin-user-dropdown">
-                <div class="user-avatar" id="adminUserToggle" title="Tùy chọn tài khoản">
-                    <img src="../../images/avatars/Admin.png" alt="Admin">  
-                </div>
-                <div class="user-info" id="adminUserInfoToggle">
-                    <h4>Admin</h4>
-                    <p>Quản trị viên chính</p>
-                </div>
-                
-                <div class="admin-dropdown-menu" id="adminDropdownMenu">
-                    <a href="#" id="infoModalBtn"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
-                    <a href="#" id="changePasswordBtn"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
-                    <hr>
-                    <a href="../admin/index.html" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
-                </div>
-            </div>
+<!-- Profile Admin ở góc dưới có Dropdown Menu -->
+            
+<div class="sidebar-user admin-user-dropdown">
+
+    <!-- Checkbox điều khiển dropdown -->
+    <input type="checkbox" id="admin-menu-toggle" hidden>
+
+    <!-- Avatar và thông tin Admin -->
+    <label for="admin-menu-toggle" class="admin-user-trigger">
+
+        <div class="user-avatar">
+            <img src="../../images/avatars/Admin.png" alt="Admin">
+        </div>
+
+        <div class="user-info">
+            <h4>Admin</h4>
+            <p>Quản trị viên chính</p>
+        </div>
+
+        <i class="fa-solid fa-chevron-down admin-dropdown-arrow"></i>
+
+    </label>
+
+    <!-- Menu dropdown -->
+    <div class="admin-dropdown-menu">
+
+        <a href="#adminInfoModal">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Thông tin tài khoản</span>
+        </a>
+
+
+        <a href="#changePasswordModal">
+            <i class="fa-solid fa-key"></i>
+                Đổi mật khẩu
+
+        </a>
+
+        <hr>
+
+        <a href="../admin/index.html" class="logout-link">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+        </a>
+
+    </div>
+</div>
         </aside>
 
-        <!-- CỘT PHẢI: Nội dung Quản Lý Sách -->
+        <!-- CỘT PHẢI: Vùng nội dung chính -->
         <main class="admin-main-content">
+            <!-- Header Thanh Công Cụ -->
             <header class="top-header">
                 <div class="header-title">
                     <h1>Quản Lý Kho Sách</h1>
-                    <p>Thêm mới, cập nhật và quản lý danh mục sách trong kho</p>
+                    <p>Thêm mới, cập nhật thông tin và quản lý số lượng sách tồn kho.</p>
                 </div>
                 <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm nhanh...">
+                    </div>
                     <button class="icon-btn" title="Thông báo">
                         <i class="fa-regular fa-bell"></i>
                         <span class="dot"></span>
@@ -102,160 +136,290 @@
                 </div>
             </header>
 
-            <!-- Thanh Công Cụ / Form Thêm Sách (Ép giãn full 100% chiều rộng) -->
-            <section class="dashboard-card" style="margin-bottom: 24px; width: 100%; box-sizing: border-box;">
-                <div class="card-header">
-                    <h2><i class="fa-solid fa-pen-to-square" style="color: #2563eb;"></i> Thêm / Cập Nhật Thông Tin Sách</h2>
+            <!-- PHẦN 1: 4 Thẻ Thống Kê Kho Sách (Đồng bộ giao diện) -->
+            <section class="stats-box-container">
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Đầu Sách</span>
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">150</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-arrow-up"></i> +12%</span>
+                        <span class="text-muted">so với tháng trước</span>
+                    </div>
                 </div>
-                <div style="padding: 24px; width: 100%; box-sizing: border-box;">
-                    <form class="form-sach" style="width: 100%;">
-                        <!-- Hàng 1: Mã sách & Tên sách -->
-                        <div style="display: flex; gap: 24px; margin-bottom: 18px; width: 100%;">
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Mã sách <span style="color: red;">*</span></label>
-                                <input type="text" placeholder="Ví dụ: MS001" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; box-sizing: border-box;">
-                            </div>
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Tên sách <span style="color: red;">*</span></label>
-                                <input type="text" placeholder="Nhập tên sách..." style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; box-sizing: border-box;">
-                            </div>
-                        </div>
 
-                        <!-- Hàng 2: Tác giả & Thể loại -->
-                        <div style="display: flex; gap: 24px; margin-bottom: 18px; width: 100%;">
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Tác giả <span style="color: red;">*</span></label>
-                                <input type="text" placeholder="Nhập tên tác giả..." style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; box-sizing: border-box;">
-                            </div>
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Thể loại <span style="color: red;">*</span></label>
-                                <select style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; outline: none; box-sizing: border-box;">
-                                    <option>Văn học</option>
-                                    <option>Kinh tế</option>
-                                    <option>Kỹ năng</option>
-                                    <option>Thiếu nhi</option>
-                                </select>
-                            </div>
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Tổng Số Lượng Tồn</span>
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-boxes-stacked"></i>
                         </div>
+                    </div>
+                    <div class="stat-value text-success">1,420</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up"><i class="fa-solid fa-check"></i> Ổn định</span>
+                        <span class="text-muted">Đủ cung ứng</span>
+                    </div>
+                </div>
 
-                        <!-- Hàng 3: Giá bán & Số lượng tồn kho -->
-                        <div style="display: flex; gap: 24px; margin-bottom: 18px; width: 100%;">
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Giá bán (VND) <span style="color: red;">*</span></label>
-                                <input type="text" placeholder="Ví dụ: 85000" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; box-sizing: border-box;">
-                            </div>
-                            <div class="form-group" style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-                                <label style="font-weight: 500; font-size: 14px; color: #475569;">Số lượng nhập kho <span style="color: red;">*</span></label>
-                                <input type="text" placeholder="Ví dụ: 50" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; box-sizing: border-box;">
-                            </div>
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Sắp Hết Hàng</span>
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
                         </div>
+                    </div>
+                    <div class="stat-value text-warning">4</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag warning">Dưới 10 cuốn</span>
+                        <span class="text-muted">Cần nhập thêm</span>
+                    </div>
+                </div>
 
-                        <!-- Hàng 4: Tải ảnh bìa -->
-                        <div style="margin-bottom: 24px; display: flex; flex-direction: column; gap: 6px; width: 100%;">
-                            <label style="font-weight: 500; font-size: 14px; color: #475569;">Tải ảnh bìa (Chọn file từ thư mục images/):</label>
-                            <input type="file" style="font-size: 14px; padding: 6px 0;">
+                <div class="stat-box">
+                    <div class="stat-header">
+                        <span class="stat-title">Danh Mục Thể Loại</span>
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
-
-                        <!-- Nút lưu -->
-                        <button type="submit" class="btn-primary" style="padding: 10px 24px; font-size: 14px; font-weight: 600; cursor: pointer;">
-                            <i class="fa-solid fa-check"></i> Lưu thông tin sách
-                        </button>
-                    </form>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-footer">
+                        <span class="trend-tag up">Đa dạng</span>
+                        <span class="text-muted">Đang kinh doanh</span>
+                    </div>
                 </div>
             </section>
-            <!-- Bảng Danh Sách Sách (Đồng bộ chuẩn 5-6 cuốn & khung .dashboard-card) -->
-            <section class="dashboard-card">
-                <div class="card-header">
-                    <h2><i class="fa-solid fa-table-list" style="color: #2563eb;"></i> Danh Sách Sách Trong Kho</h2>
-                    <span class="badge-total">Tổng: 5 đầu sách</span>
-                </div>
-                
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Mã sách</th>
-                                <th>Ảnh bìa</th>
-                                <th>Tên sách</th>
-                                <th>Thể loại</th>
-                                <th>Giá bán</th>
-                                <th>Tồn kho</th>
-                                <th style="text-align: center;">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>#S001</strong></td>
-                                <td><img src="../../images/books/Fear.png" alt="Fear" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
-                                <td><strong>Fear</strong></td>
-                                <td><span class="badge-status status-active">Kỹ năng</span></td>
-                                <td>86,000đ</td>
-                                <td>25</td>
-                                <td class="action-cell" style="text-align: center;">
-                                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>#S002</strong></td>
-                                <td><img src="../../images/books/Ngày Nắng.png" alt="Ngày Nắng" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
-                                <td><strong>Ngày Nắng</strong></td>
-                                <td><span class="badge-status status-active">Văn học</span></td>
-                                <td>79,000đ</td>
-                                <td>12</td>
-                                <td class="action-cell" style="text-align: center;">
-                                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>#S003</strong></td>
-                                <td><img src="../../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi trẻ vừa đi vừa học" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
-                                <td><strong>Tuổi Trẻ Vừa Đi Vừa Học</strong></td>
-                                <td><span class="badge-status status-active">Kỹ năng</span></td>
-                                <td>92,000đ</td>
-                                <td>30</td>
-                                <td class="action-cell" style="text-align: center;">
-                                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>#S004</strong></td>
-                                <td><img src="../../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi trẻ đáng giá bao nhiêu" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
-                                <td><strong>Tuổi Trẻ Đáng Giá Bao Nhiêu</strong></td>
-                                <td><span class="badge-status status-active">Kỹ năng</span></td>
-                                <td>115,000đ</td>
-                                <td>8</td>
-                                <td class="action-cell" style="text-align: center;">
-                                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>#S005</strong></td>
-                                <td><img src="../../images/books/Cuộc đời khi bị chó đen cắn.webp" alt="Cuộc Đời Khi Bị Chó Đen Cắn" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
-                                <td><strong>Cuộc Đời Khi Bị Chó Đen Cắn</strong></td>
-                                <td><span class="badge-status status-locked">Đời sống</span></td>
-                                <td>98,000đ</td>
-                                <td>15</td>
-                                <td class="action-cell" style="text-align: center;">
-                                    <button class="btn-icon btn-edit" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn-icon btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="pagination-footer">
-                    <span class="pagination-info">Hiển thị 5 / 5 đầu sách</span>
+            <!-- PHẦN 2: Biểu Mẫu Thêm / Cập Nhật Thông Tin Sách -->
+            <section class="dashboard-sections">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-pen-to-square icon-primary"></i> Thêm / Cập Nhật Thông Tin Sách</h2>
+                    </div>
+                    <div class="form-container">
+                        <form class="form-sach" id="bookForm" onsubmit="event.preventDefault(); alert('Đã lưu thông tin sách thành công!');">
+                            <!-- Hàng 1: Mã sách & Tên sách -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Mã sách <span class="required">*</span></label>
+                                    <input type="text" id="bookIdInput" placeholder="Ví dụ: #S006" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tên sách <span class="required">*</span></label>
+                                    <input type="text" id="bookNameInput" placeholder="Nhập tên sách..." required>
+                                </div>
+                            </div>
+
+                            <!-- Hàng 2: Tác giả & Thể loại -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tác giả <span class="required">*</span></label>
+                                    <input type="text" id="bookAuthorInput" placeholder="Nhập tên tác giả..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Thể loại <span class="required">*</span></label>
+                                    <select id="bookCategoryInput">
+                                        <option value="Kỹ năng">Kỹ năng</option>
+                                        <option value="Văn học">Văn học</option>
+                                        <option value="Kinh tế">Kinh tế</option>
+                                        <option value="Đời sống">Đời sống</option>
+                                        <option value="Thiếu nhi">Thiếu nhi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Hàng 3: Giá bán & Số lượng tồn kho -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Giá bán (VNĐ) <span class="required">*</span></label>
+                                    <input type="number" id="bookPriceInput" placeholder="Ví dụ: 86000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số lượng nhập kho <span class="required">*</span></label>
+                                    <input type="number" id="bookStockInput" placeholder="Ví dụ: 50" required>
+                                </div>
+                            </div>
+
+                            <!-- Hàng 4: Tải ảnh bìa -->
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>Tải ảnh bìa (Chọn file từ thư mục images/books/):</label>
+                                    <input type="file" class="file-input" accept="image/*">
+                                </div>
+                            </div>
+
+                            <!-- Nút thao tác form -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fa-solid fa-check"></i> Lưu thông tin sách
+                                </button>
+                                <button type="reset" class="btn-reset">
+                                    <i class="fa-solid fa-rotate-left"></i> Làm mới
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHẦN 3: Bảng Danh Sách Sách Trong Kho (Kẻ ô chuẩn đồng bộ) -->
+            <section class="dashboard-sections section-spacing">
+                <div class="dashboard-card">
+                    <div class="card-header card-header-wrap">
+                        <h2><i class="fa-solid fa-table-list icon-primary"></i> Danh Sách Sách Trong Kho</h2>
+                        
+                        <div class="filter-group">
+                            <div class="input-icon-wrap">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="searchBookInput" placeholder="Tìm mã sách, tên sách..." class="input-search">
+                            </div>
+                            <select id="filterCategorySelect" class="select-filter">
+                                <option value="all">Tất cả thể loại</option>
+                                <option value="Kỹ năng">Kỹ năng</option>
+                                <option value="Văn học">Văn học</option>
+                                <option value="Đời sống">Đời sống</option>
+                                <option value="Kinh tế">Kinh tế</option>
+                            </select>
+                            <span class="badge-total">Tổng: 5 đầu sách</span>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="data-table-grid" id="bookTable">
+                            <thead>
+                                <tr>
+                                    <th>Mã sách</th>
+                                    <th>Thông tin sách</th>
+                                    <th>Thể loại</th>
+                                    <th>Giá bán</th>
+                                    <th>Tồn kho</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#S001</strong></td>
+                                    <td>
+                                        <div class="book-cell">
+                                            <img src="../../images/books/Fear.png" alt="Fear" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <div>
+                                                <div class="book-title">Fear</div>
+                                                <div class="book-author">Thích Nhất Hạnh</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-skill category-badge">Kỹ năng</span></td>
+                                    <td><strong class="price-text">86,000 đ</strong></td>
+                                    <td><strong>25</strong> cuốn</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S001', 'Fear', 'Thích Nhất Hạnh', 'Kỹ năng', 86000, 25)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#S002</strong></td>
+                                    <td>
+                                        <div class="book-cell">
+                                            <img src="../../images/books/Ngày Nắng.png" alt="Ngày Nắng" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <div>
+                                                <div class="book-title">Ngày Nắng</div>
+                                                <div class="book-author">Yasushi Kitagawa</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-lit category-badge">Văn học</span></td>
+                                    <td><strong class="price-text">79,000 đ</strong></td>
+                                    <td><strong>12</strong> cuốn</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S002', 'Ngày Nắng', 'Yasushi Kitagawa', 'Văn học', 79000, 12)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#S003</strong></td>
+                                    <td>
+                                        <div class="book-cell">
+                                            <img src="../../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi Trẻ Vừa Đi Vừa Học" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <div>
+                                                <div class="book-title">Tuổi Trẻ Vừa Đi Vừa Học</div>
+                                                <div class="book-author">Nguyễn Nguyệt Anh</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-skill category-badge">Kỹ năng</span></td>
+                                    <td><strong class="price-text">92,000 đ</strong></td>
+                                    <td><strong>30</strong> cuốn</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S003', 'Tuổi Trẻ Vừa Đi Vừa Học', 'Nguyễn Nguyệt Anh', 'Kỹ năng', 92000, 30)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#S004</strong></td>
+                                    <td>
+                                        <div class="book-cell">
+                                            <img src="../../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi Trẻ Đáng Giá Bao Nhiêu" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <div>
+                                                <div class="book-title">Tuổi Trẻ Đáng Giá Bao Nhiêu</div>
+                                                <div class="book-author">Rosie Nguyễn</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-skill category-badge">Kỹ năng</span></td>
+                                    <td><strong class="price-text">115,000 đ</strong></td>
+                                    <td><strong class="text-warning">8</strong> cuốn</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S004', 'Tuổi Trẻ Đáng Giá Bao Nhiêu', 'Rosie Nguyễn', 'Kỹ năng', 115000, 8)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#S005</strong></td>
+                                    <td>
+                                        <div class="book-cell">
+                                            <img src="../../images/books/Cuộc đời khi bị chó đen cắn.webp" alt="Cuộc Đời Khi Bị Chó Đen Cắn" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <div>
+                                                <div class="book-title">Cuộc Đời Khi Bị Chó Đen Cắn</div>
+                                                <div class="book-author">Từ Dũng</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-life category-badge">Đời sống</span></td>
+                                    <td><strong class="price-text">98,000 đ</strong></td>
+                                    <td><strong>15</strong> cuốn</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S005', 'Cuộc Đời Khi Bị Chó Đen Cắn', 'Từ Dũng', 'Đời sống', 98000, 15)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-footer">
+                        <span class="pagination-info">Hiển thị 5 / 5 đầu sách</span>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- MODAL XỬ LÝ THÔNG TIN ADMIN -->
+    <!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
     <div class="admin-modal-overlay" id="adminInfoModal">
         <div class="admin-modal-card">
             <div class="modal-header">
@@ -294,12 +458,97 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-close-modal" id="closeModalFooterBtn">Đóng</button>
-            </div>
+                <a href="#" class="btn-cancel">Đóng</a>
+                </div>
         </div>
     </div>
 
-    <!-- Script Javascript (nếu yêu cầu) -->
-    <!-- <script src="../../JS/admin-dashboard.js"></script> -->
+<!-- MODAL ĐỔI MẬT KHẨU -->
+<div class="admin-modal-overlay" id="changePasswordModal">
+
+    <div class="admin-modal-card modal-medium">
+
+        <div class="modal-header">
+            <h3>
+                <i class="fa-solid fa-key" style="color: #2563eb;"></i>
+                Đổi Mật Khẩu
+            </h3>
+
+            <a href="#" class="modal-close-btn">&times;</a>
+        </div>
+
+        <form action="#" method="get">
+
+            <div class="modal-body">
+
+                <div class="form-group full-width">
+                    <label for="oldPassword">Mật khẩu hiện tại</label>
+                    <input type="password" id="oldPassword"
+                           placeholder="Nhập mật khẩu hiện tại" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="newPassword">Mật khẩu mới</label>
+                    <input type="password" id="newPassword"
+                           placeholder="Nhập mật khẩu mới" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                    <input type="password" id="confirmPassword"
+                           placeholder="Nhập lại mật khẩu mới" required>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel">Hủy bỏ</a>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-check"></i>
+                    Xác nhận
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+    <!-- Script xử lý chung & lọc sách nhanh -->
+    <script src="../../JS/admin-dashboard.js"></script>
+    <script>
+        // Bấm nút Sửa trên bảng sẽ tự động điền thông tin sách lên Form để cập nhật
+        function fillBookForm(id, name, author, category, price, stock) {
+            document.getElementById('bookIdInput').value = id;
+            document.getElementById('bookNameInput').value = name;
+            document.getElementById('bookAuthorInput').value = author;
+            document.getElementById('bookCategoryInput').value = category;
+            document.getElementById('bookPriceInput').value = price;
+            document.getElementById('bookStockInput').value = stock;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lọc bảng sách theo từ khóa và thể loại
+        function filterBooks() {
+            const searchText = document.getElementById('searchBookInput').value.toLowerCase();
+            const selectedCat = document.getElementById('filterCategorySelect').value;
+            const rows = document.querySelectorAll('#bookTable tbody tr');
+
+            rows.forEach(row => {
+                const code = row.cells[0].innerText.toLowerCase();
+                const info = row.cells[1].innerText.toLowerCase();
+                const category = row.querySelector('.category-badge').innerText.trim();
+
+                const matchSearch = code.includes(searchText) || info.includes(searchText);
+                const matchCat = (selectedCat === 'all') || (category === selectedCat);
+
+                row.style.display = (matchSearch && matchCat) ? '' : 'none';
+            });
+        }
+
+        document.getElementById('searchBookInput').addEventListener('input', filterBooks);
+        document.getElementById('filterCategorySelect').addEventListener('change', filterBooks);
+    </script>
 </body>
 </html>
