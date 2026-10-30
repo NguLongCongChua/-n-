@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản Phẩm - Nhà Sách Online</title>
-    <link rel="stylesheet" href="../../css/style-user-chung.css">
+    <link rel="stylesheet" href="style-chung.css">
 </head>
 <body>
 
@@ -199,51 +199,59 @@
             <!-- TIÊU ĐỀ ĐỘNG SẼ TỰ LẬT KHI CÓ URL TÌM KIẾM -->
             <h2 class="dynamic-heading hd-all">TẤT CẢ THỂ LOẠI</h2>
             <h2 class="dynamic-heading hd-search">KẾT QUẢ TÌM KIẾM</h2>
+            
+            <!-- DÒNG THÔNG BÁO GIẢ LẬP KẾT QUẢ (Nằm ẩn, chờ lệnh) -->
+            <div class="search-meta">Hiển thị 2 kết quả phù hợp nhất với từ khóa của bạn.</div>
 
             <div class="product-grid-multi">
-                <!-- Sách 1 -->
+                <!-- Sách 1 (Để nguyên - Sẽ luôn hiện) -->
                 <div class="book-card">
-                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&w=300" alt="Nhà Giả Kim" class="book-img">
+                    <img src="images/sach_1.avif" alt="Nhà Giả Kim" class="book-img">
                     <h3 class="book-title">Nhà Giả Kim</h3>
                     <p class="book-price">79,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
                     <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
                 </div>
-                <!-- Sách 2 -->
+                
+                <!-- Sách 2 (Để nguyên - Sẽ luôn hiện) -->
                 <div class="book-card">
-                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&w=300" alt="Đắc Nhân Tâm" class="book-img">
+                    <img src="images/sach_2.avif" alt="Đắc Nhân Tâm" class="book-img">
                     <h3 class="book-title">Đắc Nhân Tâm</h3>
                     <p class="book-price">86,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
                     <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
                 </div>
-                <!-- Sách 3 -->
-                <div class="book-card">
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&w=300" alt="Tuổi Trẻ Đáng Giá" class="book-img">
+                
+                <!-- TỪ SÁCH THỨ 3 TRỞ ĐI: Đã gắn class "search-hide" để tự tàng hình khi tìm kiếm -->
+                <div class="book-card search-hide">
+                    <img src="images/sach_3.avif" alt="Tuổi Trẻ Đáng Giá" class="book-img">
                     <h3 class="book-title">Tuổi Trẻ Đáng Giá Bao Nhiêu</h3>
                     <p class="book-price">65,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
                     <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
                 </div>
-                <!-- Sách 4 -->
-                <div class="book-card">
-                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&w=300" alt="Muôn Kiếp" class="book-img">
+                
+                <!-- Sách 4 (Gắn search-hide) -->
+                <div class="book-card search-hide">
+                    <img src="images/sach_4.avif" alt="Muôn Kiếp" class="book-img">
                     <h3 class="book-title">Muôn Kiếp Nhân Sinh</h3>
                     <p class="book-price">128,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
                     <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
                 </div>
-                <!-- Sách 5 -->
-                <div class="book-card">
-                    <img src="https://images.pexels.com/photos/1765033/pexels-photo-1765033.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Tâm Lý Học" class="book-img">
+                
+                <!-- Sách 5 (Gắn search-hide) -->
+                <div class="book-card search-hide">
+                    <img src="images/sach_5.avif" alt="Tâm Lý Học" class="book-img">
                     <h3 class="book-title">Tâm Lý Học Tội Phạm</h3>
                     <p class="book-price">115,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
                     <a href="chi-tiet.html#logged-in" class="btn-detail btn-detail-user">Xem chi tiết</a>
                 </div>
-                <!-- Sách 6 -->
-                <div class="book-card">
-                    <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&w=300" alt="Cây Cam Ngọt" class="book-img">
+                
+                <!-- Sách 6 (Gắn search-hide) -->
+                <div class="book-card search-hide">
+                    <img src="images/sach_6.avif" alt="Cây Cam Ngọt" class="book-img">
                     <h3 class="book-title">Cây Cam Ngọt Của Tôi</h3>
                     <p class="book-price">75,000 đ</p>
                     <a href="chi-tiet.html" class="btn-detail btn-detail-guest">Xem chi tiết</a>
@@ -251,7 +259,7 @@
                 </div>
             </div>
 
-            <!-- DÃY SỐ PHÂN TRANG Ở ĐÁY -->
+            <!-- DÃY SỐ PHÂN TRANG -->
             <div class="pagination">
                 <a href="#" class="active">1</a>
                 <a href="#">2</a>
