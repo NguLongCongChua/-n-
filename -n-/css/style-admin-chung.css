@@ -960,3 +960,75 @@ body.page-reloading {
     height: 48px;
     flex-shrink: 0;
 }
+/* --- CỐ ĐỊNH KÍCH THƯỚC LOGO & BRAND ICON TRÊN MỌI TRANG --- */
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px 24px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 24px;
+}
+
+.brand-icon {
+    width: 42px !important;
+    height: 42px !important;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.brand-icon img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- ĐỒNG BỘ CÁC MỤC MENU (NAV) --- */
+.sidebar-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-menu a i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.sidebar-menu a:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.sidebar-menu a.active {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transform: none;
+}

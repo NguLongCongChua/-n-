@@ -207,11 +207,11 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Mã sách <span class="required">*</span></label>
-                                    <input type="text" id="bookIdInput" placeholder="Ví dụ: #S006" required>
+                                    <input type="text" id="bookIdInput" placeholder="Ví dụ: #S006" >
                                 </div>
                                 <div class="form-group">
                                     <label>Tên sách <span class="required">*</span></label>
-                                    <input type="text" id="bookNameInput" placeholder="Nhập tên sách..." required>
+                                    <input type="text" id="bookNameInput" placeholder="Nhập tên sách..." >
                                 </div>
                             </div>
 
@@ -219,7 +219,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Tác giả <span class="required">*</span></label>
-                                    <input type="text" id="bookAuthorInput" placeholder="Nhập tên tác giả..." required>
+                                    <input type="text" id="bookAuthorInput" placeholder="Nhập tên tác giả..." >
                                 </div>
                                 <div class="form-group">
                                     <label>Thể loại <span class="required">*</span></label>
@@ -237,11 +237,11 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Giá bán (VNĐ) <span class="required">*</span></label>
-                                    <input type="number" id="bookPriceInput" placeholder="Ví dụ: 86000" required>
+                                    <input type="number" id="bookPriceInput" placeholder="Ví dụ: 86000" >
                                 </div>
                                 <div class="form-group">
                                     <label>Số lượng nhập kho <span class="required">*</span></label>
-                                    <input type="number" id="bookStockInput" placeholder="Ví dụ: 50" required>
+                                    <input type="number" id="bookStockInput" placeholder="Ví dụ: 50" >
                                 </div>
                             </div>
 
@@ -255,12 +255,15 @@
 
                             <!-- Nút thao tác form -->
                             <div class="form-actions">
-                                <button type="submit" class="btn-submit">
-                                    <i class="fa-solid fa-check"></i> Lưu thông tin sách
-                                </button>
-                                <button type="reset" class="btn-reset">
-                                    <i class="fa-solid fa-rotate-left"></i> Làm mới
-                                </button>
+                                <a href="admin-sach.html" class="btn-submit">
+                                    <i class="fa-solid fa-check"></i>
+                                    Lưu thông tin sách
+                                </a>
+                                <a href="admin-sach.html" class="btn-reset">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                    Làm mới
+                                </a>
+                                
                             </div>
                         </form>
                     </div>
@@ -484,19 +487,19 @@
                 <div class="form-group full-width">
                     <label for="oldPassword">Mật khẩu hiện tại</label>
                     <input type="password" id="oldPassword"
-                           placeholder="Nhập mật khẩu hiện tại" required>
+                           placeholder="Nhập mật khẩu hiện tại" >
                 </div>
 
                 <div class="form-group full-width">
                     <label for="newPassword">Mật khẩu mới</label>
                     <input type="password" id="newPassword"
-                           placeholder="Nhập mật khẩu mới" required>
+                           placeholder="Nhập mật khẩu mới">
                 </div>
 
                 <div class="form-group full-width">
                     <label for="confirmPassword">Xác nhận mật khẩu mới</label>
                     <input type="password" id="confirmPassword"
-                           placeholder="Nhập lại mật khẩu mới" required>
+                           placeholder="Nhập lại mật khẩu mới" >
                 </div>
 
             </div>
@@ -516,7 +519,7 @@
 
 
     <!-- Script xử lý chung & lọc sách nhanh -->
-    <script src="../../JS/admin-dashboard.js"></script>
+    <!-- <script src="../../JS/admin-dashboard.js"></script>
     <script>
         // Bấm nút Sửa trên bảng sẽ tự động điền thông tin sách lên Form để cập nhật
         function fillBookForm(id, name, author, category, price, stock) {
@@ -549,6 +552,6 @@
 
         document.getElementById('searchBookInput').addEventListener('input', filterBooks);
         document.getElementById('filterCategorySelect').addEventListener('change', filterBooks);
-    </script>
+    </script> -->
 </body>
 </html>
