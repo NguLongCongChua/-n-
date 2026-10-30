@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ Hàng Của Bạn - Nhà Sách Online</title>
-    <link rel="stylesheet" href="../../css/style-user-chung.css">
+    <link rel="stylesheet" href="style-chung.css">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
             <ul class="nav-menu menu-guest">
                 <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="san-pham.html">Sản phẩm</a></li>
-                <li><a href="gio-hang.html">Giỏ hàng</a></li>
+                <li><a href="dang-nhap.html">Giỏ hàng</a></li>
             </ul>
 
             <!-- MENU USER -->
@@ -79,111 +79,127 @@
     </header>
 
     <!-- VÙNG NỘI DUNG CHÍNH: GIỎ HÀNG -->
+    <!-- VÙNG NỘI DUNG CHÍNH: GIỎ HÀNG -->
     <main class="container">
         
-        <div class="breadcrumb" style="padding-top: 15px;">
-            <a href="index.html">Trang chủ</a> &gt; <span>Giỏ hàng của bạn</span>
+        <!-- ==============================================
+             PHẦN 1: BẢNG BÁO LỖI (HIỆN RA NẾU CHƯA ĐĂNG NHẬP)
+             ============================================== -->
+        <div class="cart-secure-denied profile-denied">
+            <div class="denied-icon-wrap">
+                <span style="font-size: 35px;">🔒</span>
+            </div>
+            <h2 style="color: #dc3545; margin-bottom: 15px;">Vui lòng đăng nhập!</h2>
+            <p style="color: #555; margin-bottom: 25px;">Bạn cần đăng nhập tài khoản để xem giỏ hàng và tiến hành thanh toán.</p>
+            <div class="denied-btns">
+                <a href="dang-nhap.html" class="btn-to-login">Đăng nhập ngay</a>
+                <a href="index.html" class="btn-to-home">Quay lại trang chủ</a>
+            </div>
         </div>
 
-        <div class="cart-page">
-            
-            <!-- BÊN TRÁI: DANH SÁCH SẢN PHẨM -->
-            <div class="cart-list">
-                <div class="cart-title">Giỏ Hàng (2 Sản Phẩm)</div>
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <!-- Bổ sung ô Checkbox chọn tất cả ở Header -->
-                            <th width="5%"><input type="checkbox" class="cart-checkbox" checked></th>
-                            <th width="40%">Sản Phẩm</th>
-                            <th width="15%">Đơn Giá</th>
-                            <th width="20%">Số Lượng</th>
-                            <th width="15%">Thành Tiền</th>
-                            <th width="5%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Sách 1: Muôn Kiếp Nhân Sinh -->
-                        <tr>
-                            <td><input type="checkbox" class="cart-checkbox" checked></td>
-                            <td>
-                                <div class="cart-item-info">
-                                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Muôn Kiếp Nhân Sinh" class="cart-item-img">
-                                    <a href="chi-tiet.html" class="cart-item-name">Muôn Kiếp Nhân Sinh - Tập 1</a>
-                                </div>
-                            </td>
-                            <td class="cart-price">128,000 đ</td>
-                            <td>
-                                <!-- Khung số lượng kiểu mới -->
-                                <div class="qty-wrapper">
-                                    <button type="button">-</button>
-                                    <input type="text" value="1" readonly>
-                                    <button type="button">+</button>
-                                </div>
-                            </td>
-                            <td class="cart-subtotal">128,000 đ</td>
-                            <td><button class="btn-remove-cart" title="Xóa">🗑️</button></td>
-                        </tr>
-
-                        <!-- Sách 2: Đắc Nhân Tâm -->
-                        <tr>
-                            <td><input type="checkbox" class="cart-checkbox" checked></td>
-                            <td>
-                                <div class="cart-item-info">
-                                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&w=300" alt="Đắc Nhân Tâm" class="cart-item-img">
-                                    <a href="chi-tiet.html" class="cart-item-name">Đắc Nhân Tâm</a>
-                                </div>
-                            </td>
-                            <td class="cart-price">86,000 đ</td>
-                            <td>
-                                <!-- Khung số lượng kiểu mới -->
-                                <div class="qty-wrapper">
-                                    <button type="button">-</button>
-                                    <input type="text" value="1" readonly>
-                                    <button type="button">+</button>
-                                </div>
-                            </td>
-                            <td class="cart-subtotal">86,000 đ</td>
-                            <td><button class="btn-remove-cart" title="Xóa">🗑️</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- ==============================================
+             PHẦN 2: NỘI DUNG GIỎ HÀNG (CHỈ HIỆN KHI CÓ ACC)
+             ============================================== -->
+        <div class="cart-secure-content">
+            <div class="breadcrumb" style="padding-top: 15px;">
+                <a href="index.html">Trang chủ</a> &gt; <span>Giỏ hàng của bạn</span>
             </div>
 
-            <!-- BÊN PHẢI: TỔNG TIỀN VÀ THANH TOÁN -->
-            <div class="cart-summary">
-                <div class="summary-title">Tóm Tắt Đơn Hàng</div>
+            <div class="cart-page">
                 
-                <div class="summary-row">
-                    <!-- Tích chọn tất cả hiển thị ở bảng tóm tắt -->
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#333; font-weight:bold;">
-                        <input type="checkbox" class="cart-checkbox" checked> Chọn tất cả (2)
-                    </label>
+                <!-- BÊN TRÁI: DANH SÁCH SẢN PHẨM -->
+                <div class="cart-list">
+                    <div class="cart-title">Giỏ Hàng (2 Sản Phẩm)</div>
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th width="5%"><input type="checkbox" class="cart-checkbox" checked></th>
+                                <th width="40%">Sản Phẩm</th>
+                                <th width="15%">Đơn Giá</th>
+                                <th width="20%">Số Lượng</th>
+                                <th width="15%">Thành Tiền</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sách 1: Muôn Kiếp Nhân Sinh -->
+                            <tr>
+                                <td><input type="checkbox" class="cart-checkbox" checked></td>
+                                <td>
+                                    <div class="cart-item-info">
+                                        <img src="images/sach_4.avif" alt="Muôn Kiếp Nhân Sinh" class="cart-item-img">
+                                        <a href="chi-tiet.html#logged-in" class="cart-item-name">Muôn Kiếp Nhân Sinh - Tập 1</a>
+                                    </div>
+                                </td>
+                                <td class="cart-price">128,000 đ</td>
+                                <td>
+                                    <div class="qty-wrapper">
+                                        <button type="button">-</button>
+                                        <input type="text" value="1" readonly>
+                                        <button type="button">+</button>
+                                    </div>
+                                </td>
+                                <td class="cart-subtotal">128,000 đ</td>
+                                <td><button class="btn-remove-cart" title="Xóa">🗑️</button></td>
+                            </tr>
+
+                            <!-- Sách 2: Đắc Nhân Tâm -->
+                            <tr>
+                                <td><input type="checkbox" class="cart-checkbox" checked></td>
+                                <td>
+                                    <div class="cart-item-info">
+                                        <img src="images/sach_2.avif" alt="Đắc Nhân Tâm" class="cart-item-img">
+                                        <a href="chi-tiet.html#logged-in" class="cart-item-name">Đắc Nhân Tâm</a>
+                                    </div>
+                                </td>
+                                <td class="cart-price">86,000 đ</td>
+                                <td>
+                                    <div class="qty-wrapper">
+                                        <button type="button">-</button>
+                                        <input type="text" value="1" readonly>
+                                        <button type="button">+</button>
+                                    </div>
+                                </td>
+                                <td class="cart-subtotal">86,000 đ</td>
+                                <td><button class="btn-remove-cart" title="Xóa">🗑️</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="summary-row">
-                    <span>Tạm tính:</span>
-                    <span>214,000 đ</span>
-                </div>
-                <div class="summary-row">
-                    <span>Phí vận chuyển:</span>
-                    <span>25,000 đ</span>
-                </div>
-                
-                <!-- Khung nhập mã giảm giá được phép bấm nhập tự do -->
-                <form action="" onsubmit="return false;" class="coupon-box">
-                    <input type="text" placeholder="Nhập mã giảm giá...">
-                    <button type="submit">Áp dụng</button>
-                </form>
+                <!-- BÊN PHẢI: TỔNG TIỀN VÀ THANH TOÁN -->
+                <div class="cart-summary">
+                    <div class="summary-title">Tóm Tắt Đơn Hàng</div>
+                    
+                    <div class="summary-row">
+                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#333; font-weight:bold;">
+                            <input type="checkbox" class="cart-checkbox" checked> Chọn tất cả (2)
+                        </label>
+                    </div>
 
-                <div class="summary-total">
-                    <span>TỔNG CỘNG:</span>
-                    <span class="summary-total-price">239,000 đ</span>
+                    <div class="summary-row">
+                        <span>Tạm tính:</span>
+                        <span>214,000 đ</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển:</span>
+                        <span>25,000 đ</span>
+                    </div>
+                    
+                    <form action="" onsubmit="return false;" class="coupon-box">
+                        <input type="text" placeholder="Nhập mã giảm giá...">
+                        <button type="submit">Áp dụng</button>
+                    </form>
+
+                    <div class="summary-total">
+                        <span>TỔNG CỘNG:</span>
+                        <span class="summary-total-price">239,000 đ</span>
+                    </div>
+
+                    <a href="thanh-toan.html#logged-in" class="btn-checkout">Tiến Hành Thanh Toán</a>
                 </div>
 
-                <a href="javascript:void(0)" class="btn-checkout">Tiến Hành Thanh Toán</a>
             </div>
-
         </div>
     </main>
 
