@@ -1,0 +1,187 @@
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chi Tiết Đơn Hàng #DH98421 - Nhà Sách Online</title>
+        <link rel="stylesheet" href="style-chung.css">
+    </head>
+    <body>
+
+        <!-- THANH HEADER CHÍNH -->
+        <header class="header">
+            <div class="container">
+                <div class="logo"><a href="index.html#logged-in">NHÀ SÁCH ONLINE</a></div>
+
+                <!-- THANH TÌM KIẾM DÀNH CHO USER (GIỮ TRẠNG THÁI ĐĂNG NHẬP) -->
+                <div class="header-search">
+                    <form action="san-pham.html#search-user" onsubmit="location.href='san-pham.html?q=' + encodeURIComponent(this.q.value) + '#search-user'; return false;">
+                        <div class="search-wrapper">
+                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" name="q" placeholder="Tìm kiếm cơ bản (Tên sách)">
+                            <button type="submit">Tìm kiếm</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- BỘ MENU -->
+                <ul class="nav-menu">
+                    <li><a href="index.html#logged-in">Trang chủ</a></li>
+                    <li><a href="san-pham.html#logged-in">Sản phẩm</a></li>
+                    <li><a href="gio-hang.html#logged-in">Giỏ hàng</a></li>
+                </ul>
+
+                <!-- MENU TÀI KHOẢN TÈO -->
+                <div class="user-dropdown" style="display: block;">
+                    <input type="checkbox" id="user-menu-toggle" hidden>
+                    <label for="user-menu-toggle" class="user-name">Chào, Nguyễn Văn Tèo <span>▼</span></label>
+                    <ul class="dropdown-content">
+                        <li><a href="ho-so.html">Thông tin tài khoản</a></li>
+                        <li><a href="lich-su.html">Lịch sử đơn hàng</a></li>
+                        <li><a href="index.html#logout-success" class="text-danger">Đăng xuất</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </header>
+        <!-- KẾT THÚC HEADER -->
+
+        <main class="container">
+            
+            <div class="breadcrumb">
+                <a href="index.html">Trang chủ</a> &gt; <a href="lich-su.html">Lịch sử đơn hàng</a> &gt; <span>Chi tiết đơn hàng #DH98421</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0 20px;">
+                <h2 class="section-title" style="margin-bottom: 0; border-bottom: none;">Chi Tiết Đơn Hàng #DH98421</h2>
+                <a href="lich-su.html" class="btn-order-action btn-order-detail" style="font-size: 14px;">⬅ Quay lại danh sách</a>
+            </div>
+
+            <!-- THẺ 1: TIẾN TRÌNH VẬN CHUYỂN (TIMELINE) -->
+            <div class="order-detail-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 15px; color: #555;">Mã vận đơn: <strong style="color: #0f5132;">GHN8829104VN</strong> (Giao Hàng Nhanh)</span>
+                    <span class="order-badge badge-shipping">🚚 ĐANG VẬN CHUYỂN</span>
+                </div>
+
+                <div class="order-timeline">
+                    <div class="timeline-step completed">
+                        <div class="timeline-icon">✔</div>
+                        <div class="timeline-label">Đặt hàng</div>
+                        <div class="timeline-time">14:30 23/10/2026</div>
+                    </div>
+                    <div class="timeline-step completed">
+                        <div class="timeline-icon">✔</div>
+                        <div class="timeline-label">Đã xác nhận</div>
+                        <div class="timeline-time">16:00 23/10/2026</div>
+                    </div>
+                    <div class="timeline-step current">
+                        <div class="timeline-icon">🚚</div>
+                        <div class="timeline-label">Đang vận chuyển</div>
+                        <div class="timeline-time">08:00 24/10/2026</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">📦</div>
+                        <div class="timeline-label">Giao thành công</div>
+                        <div class="timeline-time">Dự kiến 25/10/2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THẺ 2: THÔNG TIN NGƯỜI NHẬN & PHƯƠNG THỨC THANH TOÁN -->
+            <div class="order-info-grid">
+                <div class="order-info-box">
+                    <div class="order-info-title">📍 ĐỊA CHỈ NHẬN HÀNG</div>
+                    <div class="order-info-desc">
+                        <p><strong>Người nhận:</strong> Nguyễn Văn Tèo</p>
+                        <p><strong>Số điện thoại:</strong> 0987 654 321</p>
+                        <p><strong>Địa chỉ:</strong> Số 45, Đường 3 Tháng 2, Phường 11, Quận 10, TP.HCM</p>
+                        <p><strong>Ghi chú:</strong> Giao hàng vào giờ hành chính, gọi trước khi đến.</p>
+                    </div>
+                </div>
+
+                <div class="order-info-box">
+                    <div class="order-info-title">💳 HÌNH THỨC THANH TOÁN & VẬN CHUYỂN</div>
+                    <div class="order-info-desc">
+                        <p><strong>Hình thức thanh toán:</strong> Thanh toán tiền mặt khi nhận hàng (COD)</p>
+                        <p><strong>Đơn vị vận chuyển:</strong> Giao Hàng Nhanh (Giao tiêu chuẩn)</p>
+                        <p><strong>Thời gian đặt hàng:</strong> 14:30:22 - Thứ Sáu, ngày 23/10/2026</p>
+                        <p><strong>Trạng thái thanh toán:</strong> <span style="color: #e65100; font-weight: bold;">Chưa thanh toán (Thanh toán khi nhận)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THẺ 3: DANH SÁCH 2 CUỐN SÁCH CỤ THỂ TRONG ĐƠN -->
+            <div class="order-detail-card" style="padding: 0; overflow: hidden;">
+                <div style="padding: 15px 20px; background-color: #fafbfc; border-bottom: 1px solid #eee; font-weight: bold; color: #0f5132;">
+                    DANH SÁCH SẢN PHẨM (2 CUỐN SÁCH)
+                </div>
+
+                <!-- CUỐN SÁCH 1 -->
+                <div class="order-item">
+                    <img src="images/sach_4.avif" alt="Muôn Kiếp Nhân Sinh" class="order-item-img">
+                    <div class="order-item-detail">
+                        <a href="chi-tiet.html" class="order-item-name">Muôn Kiếp Nhân Sinh - Tập 1</a>
+                        <div class="order-item-qty">Tác giả: Nguyên Phong | Thể loại: Tâm lý - Triết học</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">Đơn giá: 128,000 đ | Số lượng: <strong>x1</strong></div>
+                    </div>
+                    <div class="order-item-price">128,000 đ</div>
+                </div>
+
+                <!-- CUỐN SÁCH 2 -->
+                <div class="order-item">
+                    <img src="images/sach_2(1).avif" alt="Đắc Nhân Tâm" class="order-item-img">
+                    <div class="order-item-detail">
+                        <a href="chi-tiet.html" class="order-item-name">Đắc Nhân Tâm</a>
+                        <div class="order-item-qty">Tác giả: Dale Carnegie | Thể loại: Kỹ năng sống</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">Đơn giá: 86,000 đ | Số lượng: <strong>x1</strong></div>
+                    </div>
+                    <div class="order-item-price">86,000 đ</div>
+                </div>
+
+                <!-- TỔNG KẾT TIỀN ĐƠN HÀNG -->
+                <div style="padding: 20px; background-color: #fafbfc; border-top: 1px solid #eee;">
+                    <div style="max-width: 400px; margin-left: auto;">
+                        <table class="order-summary-table">
+                            <tr>
+                                <td>Tổng tiền sách:</td>
+                                <td class="text-right">214,000 đ</td>
+                            </tr>
+                            <tr>
+                                <td>Phí vận chuyển:</td>
+                                <td class="text-right">25,000 đ</td>
+                            </tr>
+                            <tr>
+                                <td>Giảm giá vận chuyển:</td>
+                                <td class="text-right" style="color: #0f5132;">-25,000 đ</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>Tổng thanh toán:</td>
+                                <td class="text-right">214,000 đ</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;">
+                        <a href="lich-su.html" class="btn-order-action btn-order-detail">Quay lại lịch sử đơn hàng</a>
+                        <a href="san-pham.html#logged-in" class="btn-order-action btn-order-rebuy">Mua lại đơn hàng này</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- CHÂN TRANG DÙNG CHUNG CẢ WEB -->
+        <footer class="footer">
+            <div class="container">
+                <p><strong>NHÀ SÁCH ONLINE - ĐỒ ÁN MÔN LẬP TRÌNH WEB 1</strong></p>
+                <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP.HCM</p>
+                <p>Số điện thoại: 0123 456 789 | Email: contact@nhasachonline.com</p>
+                <p>&copy; 2026 Bản quyền thuộc về Nhóm 9876.</p>
+            </div>
+        </footer>
+
+    </body>
+    </html>
+
