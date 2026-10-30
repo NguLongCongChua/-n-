@@ -2385,8 +2385,6 @@ body {
     animation: showToast 4s ease forwards;
     animation-delay: 0.3s; /* Đợi load trang xong 0.3s rồi trượt ra */
 }
-<<<<<<< HEAD
-=======
 /* 1. KHI MÀN HÌNH NHỎ LẠI CỠ IPAD / LAPTOP NHỎ (Dưới 992px) */
 @media (max-width: 992px) {
     /* Ép tất cả các trang không được tràn viền */
@@ -2497,4 +2495,3 @@ body {
 .auth-buttons a {
     white-space: nowrap !important; /* Tuyệt đối cấm bẻ chữ rớt thành 2 dòng */
 }
->>>>>>> 40ae7b7a6b4dba54589c86bd27e3d00f8b482a48
