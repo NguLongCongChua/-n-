@@ -544,3 +544,385 @@ body.page-reloading {
 }
 
 
+/* KHUNG POPUP */
+.toast-msg {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 350px;
+    padding: 16px 20px;
+
+    background-color: white;
+    border-left: 5px solid #0f5132;
+    border-radius: 8px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+    z-index: 9999;
+}
+
+/* ICON DẤU TÍCH */
+.toast-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #e6f4ec;
+    color: #0f5132;
+
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* NỘI DUNG POPUP */
+.toast-content strong {
+    display: block;
+    font-size: 15px;
+    color: #0f5132;
+    margin-bottom: 5px;
+}
+
+.toast-content p {
+    font-size: 13px;
+    color: #666;
+}
+/* HIỆU ỨNG TRƯỢT TỪ PHẢI SANG TRÁI */
+.toast-msg {
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.toast-msg {
+    animation:
+        slideIn 0.5s ease forwards,
+        slideOut 0.5s ease 3s forwards;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+
+
+/* =================================
+   ADMIN USER DROPDOWN
+================================= */
+
+.admin-user-dropdown {
+    position: relative;
+    width: 100%;
+    overflow: visible !important;
+}
+
+/* Ẩn checkbox */
+#admin-menu-toggle {
+    display: none;
+}
+
+/* Khu vực bấm mở dropdown */
+.admin-user-trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.admin-user-trigger:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Avatar */
+.admin-user-trigger .user-avatar img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Thông tin Admin */
+.admin-user-trigger .user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-user-trigger .user-info h4 {
+    margin: 0;
+}
+
+.admin-user-trigger .user-info p {
+    margin: 4px 0 0;
+}
+
+/* Mũi tên */
+.admin-dropdown-arrow {
+    transition: transform 0.25s ease;
+}
+
+/* Menu dropdown */
+.admin-user-dropdown .admin-dropdown-menu {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 10px);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+
+    transition: opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+}
+
+/* Các mục menu */
+.admin-user-dropdown .admin-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: #334155;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 7px;
+}
+
+.admin-user-dropdown .admin-dropdown-menu a:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.admin-user-dropdown .admin-dropdown-menu a i {
+    width: 18px;
+    text-align: center;
+}
+
+/* Đường phân cách */
+.admin-user-dropdown .admin-dropdown-menu hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 5px 0;
+}
+
+/* Đăng xuất */
+.admin-user-dropdown .admin-dropdown-menu .logout-link {
+    color: #dc2626;
+}
+
+/* Khi checkbox được chọn */
+#admin-menu-toggle:checked ~ .admin-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Xoay mũi tên */
+#admin-menu-toggle:checked ~ .admin-user-trigger .admin-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ================= MODAL THÊM KHÁCH HÀNG ================= */
+
+/* Lớp nền phía sau popup */
+.admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    z-index: 9999;
+}
+
+/* Hiển thị popup khi được chọn */
+.admin-modal-overlay:target {
+    display: flex;
+}
+
+/* Khung popup */
+.admin-modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+
+    animation: modalShow 0.3s ease;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes modalShow {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.modal-close-btn {
+    text-decoration: none;
+    color: #64748b;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-close-btn:hover {
+    color: #ef4444;
+}
+
+/* Nội dung form */
+.modal-body {
+    padding: 24px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.required {
+    color: red;
+}
+
+/* Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 24px;
+    border-top: 1px solid #eee;
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-submit {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #cbd5e1;
+}
+
+.btn-submit:hover {
+    background: #1d4ed8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+}

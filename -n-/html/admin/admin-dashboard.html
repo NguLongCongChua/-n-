@@ -15,6 +15,17 @@
 </head>
 <body>
 
+     <!-- KHU VỰC HIỂN THỊ POPUP -->
+    <div class="toast-msg">
+        <div class="toast-icon">
+            ✔
+        </div>
+
+        <div class="toast-content">
+            <strong>Thành công!</strong>
+            <p>Chào mừng trở lại!</p>
+        </div>
+    </div>
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar) -->
         <aside class="admin-sidebar">
@@ -68,23 +79,53 @@
             </div>
 
             <!-- Profile Admin ở góc dưới có Dropdown Menu -->
-            <div class="sidebar-user admin-user-dropdown">
-                <div class="user-avatar" id="adminUserToggle" title="Tùy chọn tài khoản">
-                    <img src="../../images/avatars/Admin.png" alt="Admin">  
-                </div>
-                <div class="user-info" id="adminUserInfoToggle">
-                    <h4>Admin</h4>
-                    <p>Quản trị viên chính</p>
-                </div>
-                
-                <!-- Menu thả xuống khi bấm vào Avatar hoặc tên -->
-                <div class="admin-dropdown-menu" id="adminDropdownMenu">
-                    <a href="#" id="infoModalBtn"><i class="fa-solid fa-user-gear"></i> Thông tin tài khoản</a>
-                    <a href="#" id="changePasswordBtn"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
-                    <hr>
-                    <a href="../admin/index.html" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
-                </div>
-            </div>
+            
+<div class="sidebar-user admin-user-dropdown">
+
+    <!-- Checkbox điều khiển dropdown -->
+    <input type="checkbox" id="admin-menu-toggle" hidden>
+
+    <!-- Avatar và thông tin Admin -->
+    <label for="admin-menu-toggle" class="admin-user-trigger">
+
+        <div class="user-avatar">
+            <img src="../../images/avatars/Admin.png" alt="Admin">
+        </div>
+
+        <div class="user-info">
+            <h4>Admin</h4>
+            <p>Quản trị viên chính</p>
+        </div>
+
+        <i class="fa-solid fa-chevron-down admin-dropdown-arrow"></i>
+
+    </label>
+
+    <!-- Menu dropdown -->
+    <div class="admin-dropdown-menu">
+
+        <a href="#adminInfoModal">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Thông tin tài khoản</span>
+        </a>
+
+
+        <a href="#changePasswordModal">
+            <i class="fa-solid fa-key"></i>
+                Đổi mật khẩu
+
+        </a>
+
+        <hr>
+
+        <a href="../admin/index.html" class="logout-link">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+        </a>
+
+    </div>
+</div>
+
         </aside>
 
         <!-- CỘT PHẢI: Vùng nội dung chính -->
@@ -378,75 +419,62 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-edit-modal" id="editModalFooterBtn">Chỉnh sửa</button>
-                <button class="btn-close-modal" id="closeModalFooterBtn">Đóng</button>
-            </div>
+                <a href="#" class="btn-cancel">Đóng</a>
+                </div>
         </div>
     </div>
 
-    ```html
 <!-- MODAL ĐỔI MẬT KHẨU -->
 <div class="admin-modal-overlay" id="changePasswordModal">
-    <div class="admin-modal-card">
+
+    <div class="admin-modal-card modal-medium">
 
         <div class="modal-header">
             <h3>
                 <i class="fa-solid fa-key" style="color: #2563eb;"></i>
-                Đổi mật khẩu
+                Đổi Mật Khẩu
             </h3>
 
-            <button type="button"
-                    class="modal-close-btn"
-                    id="closeAddModalBtn">
-                &times;
-            </button>
+            <a href="#" class="modal-close-btn">&times;</a>
         </div>
 
-        <form id="changePasswordForm">
+        <form action="#" method="get">
+
             <div class="modal-body">
 
-                <div class="form-group">
-                    <label for="userPassword">
-                        Mật khẩu mới
-                    </label>
-
-                    <input type="password"
-                           id="userPassword"
-                           placeholder="Nhập mật khẩu mới"
-                           >
+                <div class="form-group full-width">
+                    <label for="oldPassword">Mật khẩu hiện tại</label>
+                    <input type="password" id="oldPassword"
+                           placeholder="Nhập mật khẩu hiện tại" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="confirmPassword">
-                        Xác nhận mật khẩu mới
-                    </label>
+                <div class="form-group full-width">
+                    <label for="newPassword">Mật khẩu mới</label>
+                    <input type="password" id="newPassword"
+                           placeholder="Nhập mật khẩu mới" required>
+                </div>
 
-                    <input type="password"
-                           id="confirmPassword"
-                           placeholder="Nhập lại mật khẩu mới"
-                           >
+                <div class="form-group full-width">
+                    <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                    <input type="password" id="confirmPassword"
+                           placeholder="Nhập lại mật khẩu mới" required>
                 </div>
 
             </div>
 
             <div class="modal-footer">
-                <button type="button"
-                        class="btn-close-modal"
-                        id="loseModalBtn">
-                    Đóng
-                </button>
+                <a href="#" class="btn-cancel">Hủy bỏ</a>
 
-                <button type="submit"
-                        class="btn-edit-modal">
+                <button type="submit" class="btn-submit">
                     <i class="fa-solid fa-check"></i>
                     Xác nhận
                 </button>
             </div>
-        </form>
 
+        </form>
     </div>
 </div>
-```
+
 
     <!-- Gọi file JavaScript (nếu yêu cầu) -->
     <!-- <script src="../../JS/admin-dashboard.js"></script>
