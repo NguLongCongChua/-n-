@@ -418,3 +418,19 @@
 .admin-table tbody tr.hidden-row {
     display: none !important;
 }
+show {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 25px;
+    background: white;
+    border-left: 5px solid #22c55e;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    z-index: 9999;
+
+    animation: toastAnimation 2s ease forwards;
+}

@@ -1,0 +1,115 @@
+/* Định dạng riêng cho trang Quản lý Sách */
+
+/* Khung bọc từng phần nội dung */
+.section-box {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.section-box h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-left: 4px solid #2c3e50;
+    padding-left: 10px;
+}
+
+/* Biểu mẫu thêm sách */
+.form-sach .form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-sach .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sach .full-width {
+    flex: 100%;
+}
+
+.form-sach label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-sach input, 
+.form-sach select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-luu {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-luu:hover {
+    background-color: #219653;
+}
+
+/* Bảng dữ liệu sách */
+.bang-du-lieu {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.bang-du-lieu th, 
+.bang-du-lieu td {
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+.bang-du-lieu th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.anh-bia-nho {
+    width: 40px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+/* Các nút hành động trong bảng */
+.btn-sua {
+    background-color: #2980b9;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.btn-xoa {
+    background-color: #c0392b;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.btn-sua:hover { background-color: #2471a3; }
+.btn-xoa:hover { background-color: #a93226; }

@@ -55,7 +55,7 @@ body {
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto;
+    overflow: visible;
 }
 
 .sidebar-brand {
@@ -542,3 +542,5 @@ body.page-reloading {
         width: calc(100vw - 24px);
     }
 }
+
+
