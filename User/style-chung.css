@@ -2385,3 +2385,113 @@ body {
     animation: showToast 4s ease forwards;
     animation-delay: 0.3s; /* Đợi load trang xong 0.3s rồi trượt ra */
 }
+/* 1. KHI MÀN HÌNH NHỎ LẠI CỠ IPAD / LAPTOP NHỎ (Dưới 992px) */
+@media (max-width: 992px) {
+    /* Ép tất cả các trang không được tràn viền */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    /* TRANG THANH TOÁN: Rớt 2 cột (Địa chỉ & Tóm tắt) thành 1 cột dọc thẳng đứng */
+    .checkout-page {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkout-left, .checkout-right {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* TRANG GIỎ HÀNG: Cột Tóm tắt rớt xuống dưới, Bảng cho phép cuộn ngang (không bị méo) */
+    .cart-page {
+        display: flex;
+        flex-direction: column;
+    }
+    .cart-list {
+        width: 100%;
+        overflow-x: auto; /* Bật thanh cuộn ngang nếu bảng quá to */
+    }
+    .cart-table {
+        min-width: 700px; /* Khóa cứng kích thước bảng, tràn thì cuộn chứ không vỡ */
+    }
+    .cart-summary {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* 2. KHI MÀN HÌNH BÉ TÍ NHƯ ĐIỆN THOẠI (Dưới 768px) */
+@media (max-width: 768px) {
+    /* HEADER: Xếp dọc từ trên xuống dưới (Logo -> Thanh tìm kiếm -> Menu) */
+    .header .container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .header-search {
+        width: 100%;
+    }
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .auth-buttons, .user-dropdown {
+        margin: 0 auto;
+    }
+
+    /* TRANG THANH TOÁN: Ô nhập Họ Tên & SĐT rớt thành 2 hàng (thay vì 1 hàng ngang 50/50) */
+    .addr-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .addr-form-row input {
+        width: 100%;
+        margin-bottom: 12px !important;
+    }
+    /* Các nút chọn thanh toán cũng rớt xuống xếp dọc */
+    .payment-methods-inline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* TRANG THÀNH CÔNG (Biên lai): Thu hẹp khoảng cách cho vừa đt */
+    .success-receipt-card {
+        padding: 20px 15px;
+    }
+    .receipt-info-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .text-right {
+        text-align: left; /* Điện thoại thì căn trái hết cho dễ đọc */
+    }
+    
+    /* CHUNG: Nút bấm bung full chiều ngang cho dễ bấm bằng ngón tay */
+    .success-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-to-home, .btn-to-login {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0 !important; /* Cấm trình duyệt bóp nghẹt cụm nút này khi hết chỗ */
+}
+
+.auth-buttons a {
+    white-space: nowrap !important; /* Tuyệt đối cấm bẻ chữ rớt thành 2 dòng */
+}
