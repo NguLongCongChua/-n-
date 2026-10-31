@@ -1,0 +1,2517 @@
+/* --- RESET CƠ BẢN --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, "Segoe UI", sans-serif;
+    background-color: #f4f5f7;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* =========================================
+   THIẾT KẾ HEADER (THANH MENU CHUNG)
+========================================= */
+.header {
+    background-color: #0f5132;
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+.nav-menu a:hover {
+    color: #ff5722; 
+}
+.auth-buttons {
+    margin-left: 45px; 
+}
+.auth-buttons a {
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.btn-login {
+    color: white;
+    border: 1px solid white;
+}
+.btn-register {
+    background-color: #ff5722;
+    color: white;
+    border: 1px solid #ff5722;
+}
+.btn-login:hover {
+    background-color: white;
+    color: #0f5132;
+}
+.btn-register:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+}
+
+/* --- THANH TÌM KIẾM TRÊN HEADER --- */
+.header-search {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 20px;
+}
+.search-wrapper {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+}
+.search-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+.search-wrapper input {
+    width: 100%;
+    padding: 9px 15px 9px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-family: inherit;
+}
+.search-wrapper button {
+    padding: 9px 20px;
+    background-color: #ff5722; 
+    color: white;
+    border: 1px solid #ff5722;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.search-wrapper button:hover {
+    background-color: #e64a19;
+}
+
+/* =========================================
+   CSS KHUNG LƯỚT ẢNH TỰ ĐỘNG (BANNER)
+========================================= */
+.banner {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #eee;
+}
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    animation: autoSlide 12s infinite; 
+}
+.slide {
+    width: 33.3333%;
+    height: 100%;
+}
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+@keyframes autoSlide {
+    0%, 25% { transform: translateX(0%); }
+    33%, 58% { transform: translateX(-33.3333%); }
+    66%, 91% { transform: translateX(-66.6666%); }
+    100% { transform: translateX(0%); }
+}
+.slider-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none; 
+}
+.slider-nav span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.nav-dot1 { animation: dotAuto1 12s infinite; }
+.nav-dot2 { animation: dotAuto2 12s infinite; }
+.nav-dot3 { animation: dotAuto3 12s infinite; }
+@keyframes dotAuto1 { 0%, 25% { background: #ff5722; } 33%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto2 { 0%, 25% { background: rgba(255,255,255,0.5); } 33%, 58% { background: #ff5722; } 66%, 100% { background: rgba(255,255,255,0.5); } }
+@keyframes dotAuto3 { 0%, 58% { background: rgba(255,255,255,0.5); } 66%, 91% { background: #ff5722; } 100% { background: rgba(255,255,255,0.5); } }
+
+/* =========================================
+   CÁC KHU VỰC SÁCH TRANG CHỦ
+========================================= */
+.book-section { margin-bottom: 50px; }
+.section-title {
+    color: #0f5132;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+.book-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.book-card {
+    background-color: white;
+    width: 23%; 
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.book-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+.book-title {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    height: 40px; 
+    overflow: hidden;
+}
+.book-price {
+    font-size: 18px;
+    color: #ff5722; 
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.btn-detail {
+    display: inline-block;
+    background-color: white;
+    color: #0f5132;
+    border: 1px solid #0f5132;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.btn-detail:hover {
+    background-color: #0f5132;
+    color: white;
+}
+
+/* =========================================
+   CHÂN TRANG (FOOTER)
+========================================= */
+.footer {
+    background-color: #0f5132;
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+    text-align: center;
+    line-height: 1.6;
+}
+.footer p { font-size: 14px; }
+
+/* =========================================
+   POPUP THÔNG BÁO (TOAST CHUNG)
+========================================= */
+.toast-msg {
+    position: fixed;
+    top: 80px; 
+    right: 25px;
+    background-color: white;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-left: 5px solid #0f5132;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+}
+.toast-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #0f5132;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+@keyframes showToast {
+    0% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+    10% { opacity: 1; visibility: visible; transform: translateX(0); }
+    90% { opacity: 1; visibility: visible; transform: translateX(0); }
+    100% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+}
+/* Kích hoạt popup tương ứng với từng URL */
+#reg-success:target ~ .toast-reg,
+#update-success:target ~ .toast-update,
+#login-success:target ~ .toast-login,
+#logout-success:target ~ .toast-logout,
+#add-cart-success:target ~ .toast-cart {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   MENU NGƯỜI DÙNG SAU KHI ĐĂNG NHẬP
+========================================= */
+.user-dropdown {
+    position: relative;
+    margin-left: 45px;
+    display: none; /* Mặc định ẩn */
+}
+
+/* Ẩn checkbox điều khiển menu */
+#user-menu-toggle {
+    display: none;
+}
+
+/* Nút hiển thị tên (Đổi thành thẻ label để click được) */
+.user-name {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+.user-name span {
+    font-size: 10px; 
+    transition: transform 0.3s;
+}
+
+/* Khung danh sách xổ xuống */
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    min-width: 190px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    list-style: none;
+    overflow: hidden;
+    
+    /* Mặc định ẩn */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+.dropdown-content li {
+    border-bottom: 1px solid #eee;
+}
+.dropdown-content li:last-child {
+    border-bottom: none;
+}
+.dropdown-content a {
+    color: #333;
+    padding: 12px 18px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+.dropdown-content a:hover {
+    background-color: #e8f5e9;
+    color: #0f5132;
+    font-weight: bold;
+}
+
+/* Format riêng cho nút Đăng xuất màu đỏ */
+.dropdown-content a.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+.dropdown-content a.text-danger:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* KÍCH HOẠT MENU KHI CLICK VÀO TÊN TÈO */
+#user-menu-toggle:checked ~ .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#user-menu-toggle:checked ~ .user-name span {
+    transform: rotate(180deg);
+}
+
+/* =========================================
+   CÔNG TẮC ĐỔI GIAO DIỆN THÔNG MINH BẰNG URL (:target)
+========================================= */
+/* Mặc định ẨN các thành phần của User */
+.menu-user, .search-user, .logo-user {
+    display: none; 
+}
+
+/* KHI ĐĂNG NHẬP HOẶC TÌM KIẾM HOẶC CẬP NHẬT HỒ SƠ -> ẨN GIAO DIỆN KHÁCH */
+#login-success:target ~ .header .auth-buttons,
+#logged-in:target ~ .header .auth-buttons,
+#update-success:target ~ .header .auth-buttons,
+#search-user:target ~ .header .auth-buttons,
+#login-success:target ~ .header .menu-guest,
+#logged-in:target ~ .header .menu-guest,
+#update-success:target ~ .header .menu-guest,
+#search-user:target ~ .header .menu-guest,
+#login-success:target ~ .header .search-guest,
+#logged-in:target ~ .header .search-guest,
+#update-success:target ~ .header .search-guest,
+#search-user:target ~ .header .search-guest,
+#login-success:target ~ .header .logo-guest,
+#logged-in:target ~ .header .logo-guest,
+#update-success:target ~ .header .logo-guest,
+#search-user:target ~ .header .logo-guest {
+    display: none; 
+}
+
+/* BẬT HIỂN THỊ GIAO DIỆN USER */
+#login-success:target ~ .header .user-dropdown,
+#logged-in:target ~ .header .user-dropdown,
+#update-success:target ~ .header .user-dropdown,
+#search-user:target ~ .header .user-dropdown,
+#login-success:target ~ .header .search-user,
+#logged-in:target ~ .header .search-user,
+#update-success:target ~ .header .search-user,
+#search-user:target ~ .header .search-user,
+#login-success:target ~ .header .logo-user,
+#logged-in:target ~ .header .logo-user,
+#update-success:target ~ .header .logo-user,
+#search-user:target ~ .header .logo-user {
+    display: block; 
+}
+#login-success:target ~ .header .menu-user,
+#logged-in:target ~ .header .menu-user,
+#update-success:target ~ .header .menu-user,
+#search-user:target ~ .header .menu-user {
+    display: flex; 
+}
+
+/* =========================================
+   TIÊU ĐỀ TRANG SẢN PHẨM ĐỘNG
+========================================= */
+.dynamic-heading {
+    font-size: 22px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+/* Ẩn chữ Kết quả tìm kiếm mặc định */
+.hd-search { display: none; } 
+/* =========================================
+   HIỆU ỨNG GIẢ LẬP LỌC KẾT QUẢ TÌM KIẾM
+========================================= */
+/* Dòng chữ báo số lượng kết quả (Mặc định ẩn) */
+.search-meta {
+    display: none;
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: HIỆN Dòng thông báo số lượng */
+#search-result:target ~ .product-page .search-meta,
+#search-user:target ~ .product-page .search-meta { 
+    display: block; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: ẨN bớt các sách có gắn class "search-hide" */
+#search-result:target ~ .product-page .search-hide,
+#search-user:target ~ .product-page .search-hide { 
+    display: none; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Làm mờ và khóa click các nút phân trang (trừ trang 1 đang active) */
+#search-result:target ~ .product-page .pagination a:not(.active),
+#search-user:target ~ .product-page .pagination a:not(.active) { 
+    opacity: 0.4;
+    pointer-events: none; /* Khóa hoàn toàn, không cho click */
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+    color: #999;
+    border-color: #ddd;
+}
+
+/* KHI BẤM TÌM KIẾM (URL có đuôi search) -> Đổi tiêu đề thành KẾT QUẢ TÌM KIẾM */
+#search-result:target ~ .product-page .hd-all,
+#search-user:target ~ .product-page .hd-all { display: none; }
+
+#search-result:target ~ .product-page .hd-search,
+#search-user:target ~ .product-page .hd-search { display: block; }
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Ẩn cột chọn thể loại bên trái */
+#search-result:target ~ .product-page .sidebar-filter,
+#search-user:target ~ .product-page .sidebar-filter { 
+    display: none; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Kéo giãn cột kết quả sản phẩm bên phải ra 100% */
+#search-result:target ~ .product-page .product-list,
+#search-user:target ~ .product-page .product-list { 
+    width: 100%; 
+}
+
+/* KHI CÓ ĐUÔI TÌM KIẾM: Ép lưới sản phẩm thành 1 hàng 4 ô (giống trang chủ) */
+#search-result:target ~ .product-page .product-grid-multi,
+#search-user:target ~ .product-page .product-grid-multi { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Ép lại chiều rộng của từng quyển sách thành 25% (4 cột) để không bị phình to */
+#search-result:target ~ .product-page .product-grid-multi .book-card,
+#search-user:target ~ .product-page .product-grid-multi .book-card {
+    width: calc(25% - 15px); /* 100% chia 4 trừ đi khoảng cách gap */
+    margin-bottom: 20px;
+}
+/* =========================================
+   POPUP THÔNG BÁO (TOAST CHUNG)
+========================================= */
+.toast-msg {
+    position: fixed;
+    top: 80px; 
+    right: 25px;
+    background-color: white;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+}
+
+.toast-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+}
+
+/* Popup Xanh lá (Đăng nhập / Đăng ký) */
+.toast-success { border-left: 5px solid #0f5132; }
+.toast-success .toast-icon { background-color: #0f5132; }
+
+/* Popup Đỏ (Đăng xuất) */
+.toast-danger { border-left: 5px solid #dc3545; }
+.toast-danger .toast-icon { background-color: #dc3545; }
+
+@keyframes showToast {
+    0% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+    10% { opacity: 1; visibility: visible; transform: translateX(0); }
+    90% { opacity: 1; visibility: visible; transform: translateX(0); }
+    100% { opacity: 0; visibility: hidden; transform: translateX(120%); }
+}
+
+/* Kích hoạt popup tương ứng với từng URL */
+#reg-success:target ~ .toast-reg,
+#login-success:target ~ .toast-login,
+#logout-success:target ~ .toast-logout {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   GIAO DIỆN TRANG SẢN PHẨM (CHIA 2 CỘT)
+========================================= */
+.product-page {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* CỘT TRÁI: BỘ LỌC TÌM KIẾM */
+.sidebar-filter {
+    width: 25%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    align-self: flex-start; 
+}
+.filter-group {
+    margin-bottom: 25px;
+}
+.filter-title {
+    font-size: 16px;
+    color: #0f5132;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.filter-list {
+    list-style: none;
+}
+/* Style biến chữ thành nút bấm cực xịn */
+.filter-list label {
+    display: block;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    color: #444;
+    border: 1px solid transparent;
+}
+.filter-list label:hover {
+    background-color: #e8f5e9;
+    color: #0f5132;
+    border-color: #0f5132;
+}
+
+/* CỘT PHẢI: LƯỚI SẢN PHẨM */
+.product-list {
+    width: 75%;
+}
+
+/* --- ĐIỀU KHIỂN TIÊU ĐỀ ĐỘNG --- */
+.dynamic-heading {
+    font-size: 22px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0f5132;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+/* Ẩn chữ Kết quả tìm kiếm mặc định */
+.hd-search { display: none; } 
+
+/* KHI URL CÓ ĐUÔI TÌM KIẾM -> Đổi tiêu đề thành KẾT QUẢ TÌM KIẾM */
+#search-result:target ~ .product-page .hd-all,
+#search-user:target ~ .product-page .hd-all { display: none; }
+
+#search-result:target ~ .product-page .hd-search,
+#search-user:target ~ .product-page .hd-search { display: block; }
+
+/* KHI TÈO TÌM KIẾM -> BẬT LẠI GIAO DIỆN TÈO (Giữ acc) */
+#search-user:target ~ .header .auth-buttons,
+#search-user:target ~ .header .menu-guest,
+#search-user:target ~ .header .search-guest,
+#search-user:target ~ .header .logo-guest { display: none; }
+
+#search-user:target ~ .header .user-dropdown,
+#search-user:target ~ .header .search-user,
+#search-user:target ~ .header .logo-user { display: block; }
+#search-user:target ~ .header .menu-user { display: flex; }
+
+
+/* ĐỔI MÀU NÚT LỌC KHI CLICK BẰNG RADIO ẨN (Không xài JS) */
+#cat-all:checked ~ .sidebar-filter .lbl-cat-all,
+#cat-vanhoc:checked ~ .sidebar-filter .lbl-cat-vanhoc,
+#cat-kinhte:checked ~ .sidebar-filter .lbl-cat-kinhte,
+#cat-kynang:checked ~ .sidebar-filter .lbl-cat-kynang,
+#cat-tamly:checked ~ .sidebar-filter .lbl-cat-tamly,
+#cat-thieunhi:checked ~ .sidebar-filter .lbl-cat-thieunhi,
+#price-all:checked ~ .sidebar-filter .lbl-price-all,
+#price-1:checked ~ .sidebar-filter .lbl-price-1,
+#price-2:checked ~ .sidebar-filter .lbl-price-2,
+#price-3:checked ~ .sidebar-filter .lbl-price-3,
+#price-4:checked ~ .sidebar-filter .lbl-price-4 {
+    background-color: #0f5132;
+    color: white;
+    font-weight: bold;
+    border-color: #0f5132;
+    box-shadow: 0 4px 10px rgba(15, 81, 50, 0.2);
+}
+
+.product-grid-multi {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+.product-grid-multi .book-card {
+    width: calc(33.333% - 14px); 
+    margin-bottom: 15px;
+}
+
+/* THANH PHÂN TRANG (1, 2, 3, Tiếp theo) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+.pagination a {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.pagination a:hover, .pagination a.active {
+    background-color: #0f5132;
+    color: white;
+    border-color: #0f5132;
+}
+/* =========================================
+   THANH TÌM KIẾM NÂNG CAO (TRANG SẢN PHẨM)
+========================================= */
+.adv-search-box {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    border-top: 4px solid #0f5132;
+}
+.adv-search-flex {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.adv-search-flex input,
+.adv-search-flex select {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+.adv-search-flex input:focus,
+.adv-search-flex select:focus {
+    border-color: #ff5722;
+}
+.btn-adv-search {
+    padding: 10px 25px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.btn-adv-search:hover {
+    background-color: #e64a19;
+}
+
+/* ĐIỀU KHIỂN TRẠNG THÁI KHÁCH VÀ USER (Giữ Acc) CHO THANH TÌM KIẾM NÂNG CAO */
+.adv-search-user {
+    display: none; /* Mặc định ẩn form của User */
+}
+
+/* Khi có acc -> Ẩn form Khách, Hiện form User */
+#login-success:target ~ .product-page .adv-search-guest,
+#logged-in:target ~ .product-page .adv-search-guest,
+#search-user:target ~ .product-page .adv-search-guest {
+    display: none;
+}
+#login-success:target ~ .product-page .adv-search-user,
+#logged-in:target ~ .product-page .adv-search-user,
+#search-user:target ~ .product-page .adv-search-user {
+    display: block;
+}
+/* =========================================
+   HỆ THỐNG ĐIỀU HƯỚNG NÚT BẤM (GIỮ ACC XUYÊN THẤU)
+========================================= */
+/* Mặc định nút "Xem chi tiết" của Khách hiện, nút của User ẩn */
+.btn-detail-user {
+    display: none;
+}
+.btn-detail-guest {
+    display: inline-block;
+}
+
+/* Áp dụng quét toàn bộ thẻ <main> trên tất cả các trang */
+#login-success:target ~ main .btn-detail-guest,
+#logged-in:target ~ main .btn-detail-guest,
+#search-user:target ~ main .btn-detail-guest {
+    display: none;
+}
+
+#login-success:target ~ main .btn-detail-user,
+#logged-in:target ~ main .btn-detail-user,
+#search-user:target ~ main .btn-detail-user {
+    display: inline-block;
+}
+
+/* =========================================
+   GIAO DIỆN VÀ KIỂM SOÁT QUYỀN TRUY CẬP TRANG HỒ SƠ
+========================================= */
+/* Khi chưa đăng nhập (không có hash #logged-in hoặc #update-success):
+   - Mặc định HIỆN màn hình từ chối / yêu cầu đăng nhập
+   - Mặc định ẨN toàn bộ thông tin hồ sơ cá nhân
+*/
+.profile-denied {
+    display: block;
+    max-width: 580px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 45px 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+.denied-icon-wrap {
+    width: 80px;
+    height: 80px;
+    background-color: #fff3cd;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border: 2px dashed #ffc107;
+}
+.denied-icon-wrap svg {
+    width: 42px;
+    height: 42px;
+    fill: #ff5722;
+}
+.profile-denied h2 {
+    color: #dc3545;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+.profile-denied p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.denied-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.btn-to-login {
+    background-color: #0f5132;
+    color: white;
+    padding: 11px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+}
+.btn-to-login:hover {
+    background-color: #146c43;
+}
+.btn-to-home {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ced4da;
+    padding: 11px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+}
+.btn-to-home:hover {
+    background-color: #e2e6ea;
+}
+
+/* Nội dung hồ sơ cá nhân - Mặc định hiển thị tiện lợi cho việc test web */
+.profile-container {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 40px;
+    gap: 25px;
+}
+
+/* CỘT SIDEBAR TRÁI CỦA TRANG HỒ SƠ */
+.profile-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+.profile-sidebar-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 25px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile-avatar-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+}
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0f5132;
+    background-color: #e8f5e9;
+}
+.profile-avatar-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #ff5722;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+.profile-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 4px;
+}
+.profile-username {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 12px;
+}
+.vip-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700, #ff9800);
+    color: #4a2c00;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+.stat-item {
+    text-align: center;
+}
+.stat-num {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0f5132;
+}
+.stat-label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* Danh mục điều hướng sidebar */
+.profile-menu {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    overflow: hidden;
+    list-style: none;
+}
+.profile-menu li {
+    border-bottom: 1px solid #f0f0f0;
+}
+.profile-menu li:last-child {
+    border-bottom: none;
+}
+.profile-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s;
+}
+.profile-menu a:hover {
+    background-color: #f4fbf7;
+    color: #0f5132;
+}
+.profile-menu a.active {
+    background-color: #e8f5e9;
+    color: #0f5132;
+    font-weight: bold;
+    border-left: 4px solid #0f5132;
+}
+.profile-menu a.text-danger {
+    color: #dc3545;
+}
+.profile-menu a.text-danger:hover {
+    background-color: #fdf2f2;
+}
+
+/* CỘT PHẢI - NỘI DUNG CHI TIẾT HỒ SƠ */
+.profile-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.profile-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 30px;
+}
+.profile-card-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+.profile-card-title {
+    font-size: 20px;
+    color: #0f5132;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.profile-card-desc {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.form-group-full {
+    grid-column: 1 / -1;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #0f5132;
+    box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.15);
+}
+.form-group textarea {
+    resize: none;
+    min-height: 85px;
+}
+.form-group input[readonly] {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+.gender-options {
+    display: flex;
+    gap: 25px;
+    padding: 10px 0;
+}
+.gender-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.verified-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #198754;
+    font-weight: normal;
+    margin-left: 8px;
+}
+.btn-save-profile {
+    background-color: #0f5132;
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-save-profile:hover {
+    background-color: #146c43;
+}
+.btn-cancel-profile {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10px;
+}
+.btn-cancel-profile:hover {
+    background-color: #dee2e6;
+}
+
+/* BREADCRUMB */
+.breadcrumb {
+    padding: 15px 0 5px;
+    font-size: 14px;
+    color: #666;
+}
+.breadcrumb a {
+    color: #0f5132;
+    text-decoration: none;
+    font-weight: 500;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   GIAO DIỆN VÀ PHÂN QUYỀN TRANG LỊCH SỬ ĐƠN HÀNG
+========================================= */
+.order-history-container {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+/* TABS LỌC TRẠNG THÁI ĐƠN HÀNG */
+.order-status-tabs {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-bottom: 2px solid #e9ecef;
+}
+.order-tab {
+    flex: 1;
+    min-width: 130px;
+    text-align: center;
+    padding: 14px 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.order-tab:hover {
+    color: #0f5132;
+    background-color: #f8f9fa;
+}
+.order-tab.active {
+    color: #0f5132;
+    border-bottom: 3px solid #0f5132;
+    background-color: #f4fbf7;
+}
+
+/* CARD ĐƠN HÀNG */
+.order-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 22px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+    transition: box-shadow 0.2s;
+}
+.order-card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.09);
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background-color: #fafbfc;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.order-id {
+    font-weight: bold;
+    color: #222;
+}
+.order-date {
+    color: #777;
+    margin-left: 10px;
+    font-size: 13px;
+}
+.order-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+.badge-shipping {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+.badge-delivered {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+.badge-pending {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+.badge-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* DANH SÁCH SÁCH TRONG ĐƠN HÀNG */
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f4f4f4;
+    gap: 15px;
+}
+.order-item:last-child {
+    border-bottom: none;
+}
+.order-item-img {
+    width: 65px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+}
+.order-item-detail {
+    flex: 1;
+}
+.order-item-name {
+    font-weight: bold;
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 6px;
+    text-decoration: none;
+    display: inline-block;
+}
+.order-item-name:hover {
+    color: #0f5132;
+}
+.order-item-qty {
+    font-size: 13px;
+    color: #666;
+}
+.order-item-price {
+    font-weight: bold;
+    color: #ff5722;
+    font-size: 15px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* FOOTER ĐƠN HÀNG */
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #fafbfc;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.order-total-wrap {
+    font-size: 14px;
+    color: #444;
+}
+.order-total-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff5722;
+    margin-left: 6px;
+}
+.order-actions {
+    display: flex;
+    gap: 10px;
+}
+.btn-order-action {
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.25s;
+    cursor: pointer;
+}
+.btn-order-detail {
+    background-color: #f1f3f5;
+    color: #333;
+    border: 1px solid #ced4da;
+}
+.btn-order-detail:hover {
+    background-color: #e2e6ea;
+}
+.btn-order-rebuy {
+    background-color: #0f5132;
+    color: white;
+    border: 1px solid #0f5132;
+}
+.btn-order-rebuy:hover {
+    background-color: #146c43;
+}
+.btn-order-cancel {
+    background-color: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+.btn-order-cancel:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* =========================================
+   HỆ THỐNG MODAL POP-UP HỦY ĐƠN HÀNG
+========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.25s ease;
+}
+.modal-overlay:target {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.modal-box {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 480px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+    position: relative;
+    text-align: center;
+}
+.modal-overlay:target .modal-box {
+    transform: scale(1);
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    color: #888;
+    text-decoration: none;
+    font-weight: bold;
+}
+.modal-close:hover {
+    color: #333;
+}
+.modal-icon-warn {
+    width: 60px;
+    height: 60px;
+    background-color: #fff3cd;
+    color: #e65100;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.modal-icon-success {
+    width: 60px;
+    height: 60px;
+    background-color: #e8f5e9;
+    color: #0f5132;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.modal-title {
+    font-size: 20px;
+    color: #222;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+.modal-body {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.modal-reason-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 15px 0 20px;
+    text-align: left;
+}
+.modal-reason-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+.modal-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    resize: none;
+    font-family: inherit;
+    font-size: 13px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.btn-modal-cancel {
+    background-color: #f1f3f5;
+    color: #333;
+    border: 1px solid #ced4da;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.btn-modal-cancel:hover {
+    background-color: #e2e6ea;
+}
+.btn-modal-confirm {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.btn-modal-confirm:hover {
+    background-color: #bb2d3b;
+}
+.btn-modal-done {
+    background-color: #0f5132;
+    color: white;
+    padding: 10px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.btn-modal-done:hover {
+    background-color: #146c43;
+}
+
+/* =========================================
+   CHI TIẾT ĐƠN HÀNG (TIMELINE & THÔNG TIN)
+========================================= */
+.order-detail-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    border: 1px solid #edf0f2;
+}
+.order-timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 30px 10px;
+}
+.order-timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    right: 40px;
+    height: 4px;
+    background-color: #e0e0e0;
+    z-index: 1;
+}
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 25%;
+}
+.timeline-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 3px solid white;
+}
+.timeline-step.completed .timeline-icon {
+    background-color: #0f5132;
+}
+.timeline-step.current .timeline-icon {
+    background-color: #ff5722;
+    box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.2);
+}
+.timeline-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+.timeline-time {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.order-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+.order-info-box {
+    background: #fdfdfd;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+}
+.order-info-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0f5132;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #ced4da;
+}
+.order-info-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.order-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.order-summary-table td {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+.order-summary-table td.text-right {
+    text-align: right;
+}
+.order-summary-table tr.total-row td {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff5722;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+/* =========================================
+   GIAO DIỆN TRANG GIỎ HÀNG
+========================================= */
+.cart-page {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    align-items: flex-start;
+}
+
+/* BÊN TRÁI: BẢNG DANH SÁCH SẢN PHẨM */
+.cart-list {
+    flex: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+.cart-title {
+    font-size: 20px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #0f5132;
+    font-weight: bold;
+}
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.cart-table th {
+    text-align: left;
+    padding: 12px;
+    background-color: #f8f9fa;
+    color: #555;
+    font-size: 14px;
+    border-bottom: 2px solid #ddd;
+}
+.cart-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+/* Style cho Checkbox chọn hàng */
+.cart-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #0f5132;
+}
+
+.cart-item-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.cart-item-img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.cart-item-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+.cart-item-name:hover {
+    color: #0f5132;
+}
+.cart-price {
+    font-weight: bold;
+    color: #555;
+}
+.cart-subtotal {
+    font-weight: bold;
+    color: #ff5722;
+}
+.btn-remove-cart {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-remove-cart:hover {
+    color: #a71d2a;
+    transform: scale(1.1);
+}
+
+/* KHUNG SỐ LƯỢNG MỚI (Shopee Style) */
+.qty-wrapper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.qty-wrapper button {
+    width: 28px;
+    height: 28px;
+    background-color: #f8f9fa;
+    border: none;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.qty-wrapper button:hover {
+    background-color: #e2e6ea;
+}
+.qty-wrapper input {
+    width: 40px;
+    height: 28px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+}
+
+/* BÊN PHẢI: TỔNG KẾT ĐƠN HÀNG */
+.cart-summary {
+    width: 320px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+.summary-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+}
+/* Ô Nhập mã giảm giá */
+.coupon-box {
+    display: flex;
+    margin-top: 15px;
+}
+.coupon-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+}
+.coupon-box input:focus {
+    border-color: #0f5132;
+}
+.coupon-box button {
+    padding: 10px 15px;
+    background: #0f5132;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.2s;
+}
+.coupon-box button:hover {
+    background: #146c43;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+.summary-total-price {
+    font-size: 22px;
+    color: #ff5722;
+}
+.btn-checkout {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #0f5132;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 6px;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+.btn-checkout:hover {
+    background-color: #146c43;
+}
+/* =========================================
+   GIAO DIỆN TRANG CHI TIẾT SẢN PHẨM
+========================================= */
+.product-detail-container {
+    display: flex;
+    gap: 35px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    align-items: flex-start; /* Giúp các cột không bị kéo giãn chiều cao */
+}
+
+/* CỘT 1: ẢNH (32%) */
+.product-detail-left {
+    width: 32%;
+}
+.product-img-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #eaeaea;
+}
+.product-detail-img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Ép ảnh thành hình vuông chuẩn E-commerce */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.product-img-wrapper:hover .product-detail-img {
+    transform: scale(1.06); /* Hiệu ứng zoom nhẹ siêu mượt */
+}
+
+/* CỘT 2: THÔNG TIN SÁCH (40%) */
+.product-detail-middle {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.product-detail-title {
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 12px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+    color: #555;
+}
+.stars { color: #ffc107; font-size: 15px; letter-spacing: 1px; }
+.sold-count { padding-left: 15px; border-left: 1px solid #ddd; }
+
+.product-meta-list {
+    list-style: none;
+    color: #555;
+    font-size: 14.5px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+.product-meta-list li {
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+.product-meta-list li:last-child {
+    border-bottom: none;
+}
+.product-meta-list li strong {
+    color: #333;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.short-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+    background-color: #f8f9fa;
+    padding: 18px;
+    border-radius: 8px;
+    border-left: 4px solid #0f5132;
+}
+
+/* CỘT 3: KHUNG MUA HÀNG - BUY BOX (28%) */
+.product-detail-right.buy-box {
+    width: 28%;
+    background-color: #fafbfc;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.product-detail-price {
+    font-size: 32px;
+    color: #ff5722;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.stock-status {
+    font-size: 13.5px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.qty-selector-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.qty-selector-group > span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* NÚT BẤM KÉP (Xếp dọc cho gọn) */
+.action-buttons.vertical-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.btn-add-cart, .btn-buy-now {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.btn-add-cart {
+    background-color: #e8f5e9;
+    color: #0f5132;
+    border: 2px solid #0f5132;
+}
+.btn-add-cart:hover {
+    background-color: #0f5132;
+    color: white;
+}
+.btn-buy-now {
+    background-color: #ff5722;
+    color: white;
+    border: 2px solid #ff5722;
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.2);
+}
+.btn-buy-now:hover {
+    background-color: #e64a19;
+    border-color: #e64a19;
+}
+
+/* DẢI CAM KẾT (Xếp dọc) */
+.trust-badges.vertical-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+}
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #555;
+}
+.trust-item span { font-size: 18px; }
+
+/* POP-UP THÊM GIỎ HÀNG (Đổi sang xanh lá) */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
+
+/* Kích hoạt Pop-up bằng Checkbox Ẩn (Không làm đổi URL, không văng acc) */
+/* =========================================
+   PHÂN QUYỀN NÚT MUA & CẢNH BÁO ĐĂNG NHẬP
+========================================= */
+/* Mặc định hiện bộ nút của Khách, ẩn bộ nút của User */
+.btn-action-user { display: none; }
+.btn-action-guest { display: flex; }
+
+/* Khi có tài khoản -> Lật ngược: Ẩn Khách, Hiện User */
+#login-success:target ~ main .btn-action-guest,
+#logged-in:target ~ main .btn-action-guest,
+#search-user:target ~ main .btn-action-guest { display: none; }
+
+#login-success:target ~ main .btn-action-user,
+#logged-in:target ~ main .btn-action-user,
+#search-user:target ~ main .btn-action-user { display: flex; }
+
+/* Pop-up Đỏ và Xanh */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
+.toast-need-login { border-left: 5px solid #dc3545; }
+.toast-need-login .toast-icon { background-color: #dc3545; }
+
+/* Bật Pop-up Đỏ (cho Khách) qua URL */
+#need-login:target ~ .toast-need-login {
+    animation: showToast 4s ease forwards;
+}
+
+/* Bật Pop-up Xanh (cho User) qua Checkbox ẩn */
+#cart-toast-toggle:checked ~ .toast-cart {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   BẢO MẬT TRANG GIỎ HÀNG (CHẶN KHÁCH VÃNG LAI)
+========================================= */
+/* Mặc định: Ẩn nội dung giỏ hàng, Hiện thông báo yêu cầu đăng nhập */
+.cart-secure-content {
+    display: none;
+}
+.cart-secure-denied {
+    display: block;
+}
+
+/* Khi có "bùa" tài khoản trên URL -> Lật ngược trạng thái */
+#login-success:target ~ main .cart-secure-denied,
+#logged-in:target ~ main .cart-secure-denied,
+#search-user:target ~ main .cart-secure-denied {
+    display: none;
+}
+
+#login-success:target ~ main .cart-secure-content,
+#logged-in:target ~ main .cart-secure-content,
+#search-user:target ~ main .cart-secure-content {
+    display: block;
+}
+/* =========================================
+   PHÂN QUYỀN VÀ PING-PONG NÚT BẤM (BẤM VÔ HẠN)
+========================================= */
+/* 1. Bọc nhóm nút Khách/User (Dùng display: contents để giữ nguyên khung Flexbox) */
+.auth-wrapper { display: contents; }
+.btn-action-user { display: none; }
+.btn-action-guest { display: contents; }
+
+/* Lật trạng thái khi có tài khoản */
+#login-success:target ~ main .btn-action-guest,
+#logged-in:target ~ main .btn-action-guest,
+#search-user:target ~ main .btn-action-guest { display: none; }
+
+#login-success:target ~ main .btn-action-user,
+#logged-in:target ~ main .btn-action-user,
+#search-user:target ~ main .btn-action-user { display: contents; }
+
+/* 2. Thiết kế Pop-up Đỏ và Xanh */
+.toast-cart { border-left: 5px solid #0f5132; }
+.toast-cart .toast-icon { background-color: #0f5132; }
+.toast-need-login { border-left: 5px solid #dc3545; }
+.toast-need-login .toast-icon { background-color: #dc3545; }
+
+/* 3. Logic Ping-Pong (Lật công tắc luân phiên để click liên tục) */
+.lbl-pong { display: none !important; }
+
+/* -- Khi KHÁCH bấm: Tráo Ping/Pong để báo Đỏ liên tục -- */
+#err-ping:checked ~ main .btn-action-guest .lbl-ping { display: none !important; }
+#err-ping:checked ~ main .btn-action-guest .lbl-pong { display: flex !important; }
+#err-pong:checked ~ main .btn-action-guest .lbl-pong { display: none !important; }
+#err-pong:checked ~ main .btn-action-guest .lbl-ping { display: flex !important; }
+
+/* -- Khi TÈO bấm: Tráo Ping/Pong để báo Xanh liên tục -- */
+#cart-ping:checked ~ main .btn-action-user .lbl-ping { display: none !important; }
+#cart-ping:checked ~ main .btn-action-user .lbl-pong { display: flex !important; }
+#cart-pong:checked ~ main .btn-action-user .lbl-pong { display: none !important; }
+#cart-pong:checked ~ main .btn-action-user .lbl-ping { display: flex !important; }
+
+/* 4. Kích hoạt hiệu ứng Pop-up (Reset khi đổi trạng thái công tắc) */
+#err-ping:checked ~ .t-err-ping,
+#err-pong:checked ~ .t-err-pong,
+#cart-ping:checked ~ .t-cart-ping,
+#cart-pong:checked ~ .t-cart-pong {
+    animation: showToast 4s ease forwards;
+}
+/* =========================================
+   GIAO DIỆN TRANG THANH TOÁN (CHECKOUT)
+========================================= */
+.checkout-page {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    align-items: flex-start;
+}
+
+/* CỘT TRÁI: THÔNG TIN GIAO HÀNG & THANH TOÁN */
+.checkout-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.checkout-box {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+.checkout-box-title {
+    font-size: 18px;
+    color: #0f5132;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #0f5132;
+    font-weight: bold;
+}
+
+/* =========================================
+   LOGIC CHỌN ĐỊA CHỈ (HIỆU ỨNG LÀM MỜ NẾU KHÔNG CHỌN)
+========================================= */
+.addr-option { margin-bottom: 15px; }
+.addr-label {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: bold; cursor: pointer;
+    font-size: 15px; color: #333;
+}
+/* Thiết kế nút Radio giả mạo cho đẹp */
+.fake-radio {
+    display: inline-block; width: 18px; height: 18px;
+    border: 2px solid #ccc; border-radius: 50%; position: relative;
+}
+
+/* 1. MẶC ĐỊNH LÀM MỜ CẢ 2 BẢNG (Chờ radio kích hoạt) */
+.default-addr-card {
+    background-color: #f8f9fa; border: 1px solid #ddd;
+    padding: 15px; border-radius: 6px;
+    margin-top: 10px; margin-left: 28px;
+    font-size: 14.5px; line-height: 1.6; color: #444;
+    transition: 0.3s;
+    opacity: 0.4; pointer-events: none; /* Bị liệt */
+}
+.new-addr-form {
+    margin-top: 15px; margin-left: 28px; background-color: #f8f9fa;
+    padding: 20px; border: 1px dashed #ccc; border-radius: 6px;
+    transition: 0.3s;
+    opacity: 0.4; pointer-events: none; /* Bị liệt */
+}
+.new-addr-form input {
+    width: 100%; padding: 10px 15px; margin-bottom: 12px;
+    border: 1px solid #ccc; border-radius: 4px; font-family: inherit;
+}
+
+/* 2. KHI CHỌN "ĐỊA CHỈ MẶC ĐỊNH" -> Bảng mặc định sáng lên, Radio xanh lên */
+#addr-default:checked ~ .addr-option .default-addr-card { 
+    background-color: #e8f5e9; border-color: #0f5132; 
+    opacity: 1; pointer-events: auto; /* Sống lại */
+}
+#addr-default:checked ~ .addr-option label[for="addr-default"] .fake-radio { border-color: #0f5132; }
+#addr-default:checked ~ .addr-option label[for="addr-default"] .fake-radio::after {
+    content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px; background-color: #0f5132; border-radius: 50%;
+}
+
+/* 3. KHI CHỌN "ĐỊA CHỈ MỚI" -> Form nhập liệu sáng lên, Radio xanh lên */
+#addr-new:checked ~ .addr-option .new-addr-form {
+    background-color: #fff; border-color: #0f5132; border-style: solid;
+    opacity: 1; pointer-events: auto; /* Sống lại */
+}
+#addr-new:checked ~ .addr-option label[for="addr-new"] .fake-radio { border-color: #0f5132; }
+#addr-new:checked ~ .addr-option label[for="addr-new"] .fake-radio::after {
+    content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px; background-color: #0f5132; border-radius: 50%;
+}
+
+/* =========================================
+   GIAO DIỆN TRANG ĐẶT HÀNG THÀNH CÔNG
+========================================= */
+.success-page {
+    max-width: 600px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #e8f5e9;
+    color: #0f5132;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 20px;
+}
+.success-page h1 { color: #0f5132; margin-bottom: 10px; }
+.success-page p { color: #555; line-height: 1.6; margin-bottom: 25px; }
+.order-ref {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff5722;
+    margin-bottom: 30px;
+    border: 1px dashed #ccc;
+}
+.success-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+/* =========================================
+   SỬA GIAO DIỆN THANH TOÁN (FORM & CỘT PHẢI)
+========================================= */
+/* 1. Chia 2 ô nhập liệu Họ tên & SĐT nằm ngang 50/50 */
+.addr-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+.addr-form-row input {
+    margin-bottom: 0 !important; /* Xóa khoảng cách thừa */
+    flex: 1; /* Hai ô tự chia đều diện tích ngang */
+}
+
+/* 2. Sửa lỗi vỡ khung cột phải (Ép cứng kích thước ảnh bìa sách) */
+.checkout-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #eee;
+}
+.checkout-item img {
+    width: 50px !important;  /* Khóa chết chiều rộng */
+    height: 70px !important; /* Khóa chết chiều cao */
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-shrink: 0; /* Tuyệt đối không cho phép ảnh phình to hay co rút */
+}
+.checkout-item-info { 
+    flex: 1; 
+}
+.checkout-item-info h4 { 
+    margin-bottom: 5px; 
+    color: #333; 
+    font-size: 15px;
+    line-height: 1.4;
+}
+.checkout-item-info p { 
+    margin: 0; 
+    color: #666; 
+    font-size: 13px;
+}
+.checkout-item-price { 
+    font-weight: bold; 
+    color: #ff5722; 
+    text-align: right; 
+    white-space: nowrap; /* Không cho giá tiền bị rớt dòng */
+}
+/* Màu xanh lá cho dòng Giảm giá vận chuyển */
+.discount-row {
+    color: #0f5132;
+    font-weight: bold;
+}
+
+/* ÉP PHƯƠNG THỨC THANH TOÁN THÀNH 2 DÒNG TRÊN DƯỚI, KHÔNG VIỀN HỘP */
+.payment-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Khoảng cách giữa dòng trên và dòng dưới */
+    margin-top: 15px;
+}
+.payment-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+}
+.payment-label input {
+    accent-color: #0f5132;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+/* =========================================
+   POPUP TỰ ĐỘNG (KHÔNG CẦN CLICK - CHO TRANG THÀNH CÔNG)
+========================================= */
+.toast-auto {
+    animation: showToast 4s ease forwards;
+    animation-delay: 0.3s; /* Đợi load trang xong 0.3s rồi trượt ra */
+}
+/* 1. KHI MÀN HÌNH NHỎ LẠI CỠ IPAD / LAPTOP NHỎ (Dưới 992px) */
+@media (max-width: 992px) {
+    /* Ép tất cả các trang không được tràn viền */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    /* TRANG THANH TOÁN: Rớt 2 cột (Địa chỉ & Tóm tắt) thành 1 cột dọc thẳng đứng */
+    .checkout-page {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkout-left, .checkout-right {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* TRANG GIỎ HÀNG: Cột Tóm tắt rớt xuống dưới, Bảng cho phép cuộn ngang (không bị méo) */
+    .cart-page {
+        display: flex;
+        flex-direction: column;
+    }
+    .cart-list {
+        width: 100%;
+        overflow-x: auto; /* Bật thanh cuộn ngang nếu bảng quá to */
+    }
+    .cart-table {
+        min-width: 700px; /* Khóa cứng kích thước bảng, tràn thì cuộn chứ không vỡ */
+    }
+    .cart-summary {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* 2. KHI MÀN HÌNH BÉ TÍ NHƯ ĐIỆN THOẠI (Dưới 768px) */
+@media (max-width: 768px) {
+    /* HEADER: Xếp dọc từ trên xuống dưới (Logo -> Thanh tìm kiếm -> Menu) */
+    .header .container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .header-search {
+        width: 100%;
+    }
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .auth-buttons, .user-dropdown {
+        margin: 0 auto;
+    }
+
+    /* TRANG THANH TOÁN: Ô nhập Họ Tên & SĐT rớt thành 2 hàng (thay vì 1 hàng ngang 50/50) */
+    .addr-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .addr-form-row input {
+        width: 100%;
+        margin-bottom: 12px !important;
+    }
+    /* Các nút chọn thanh toán cũng rớt xuống xếp dọc */
+    .payment-methods-inline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* TRANG THÀNH CÔNG (Biên lai): Thu hẹp khoảng cách cho vừa đt */
+    .success-receipt-card {
+        padding: 20px 15px;
+    }
+    .receipt-info-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .text-right {
+        text-align: left; /* Điện thoại thì căn trái hết cho dễ đọc */
+    }
+    
+    /* CHUNG: Nút bấm bung full chiều ngang cho dễ bấm bằng ngón tay */
+    .success-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-to-home, .btn-to-login {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0 !important; /* Cấm trình duyệt bóp nghẹt cụm nút này khi hết chỗ */
+}
+
+.auth-buttons a {
+    white-space: nowrap !important; /* Tuyệt đối cấm bẻ chữ rớt thành 2 dòng */
+}
+/* =========================================
+   FIX STICKY FOOTER TOÀN CỤC - KHÔNG BỊ BÓP CHIỀU NGANG
+========================================= */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* ÉP TẤT CẢ PHẢI BUNG FULL 100% CHIỀU NGANG, KHÔNG ĐƯỢC TEO LẠI */
+body > header,
+body > main,
+body > footer {
+    width: 100%;
+}
+
+body > main {
+    flex: 1; /* Đẩy footer xuống đáy */
+}
