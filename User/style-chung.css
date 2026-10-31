@@ -2495,3 +2495,23 @@ body {
 .auth-buttons a {
     white-space: nowrap !important; /* Tuyệt đối cấm bẻ chữ rớt thành 2 dòng */
 }
+/* =========================================
+   FIX STICKY FOOTER TOÀN CỤC - KHÔNG BỊ BÓP CHIỀU NGANG
+========================================= */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* ÉP TẤT CẢ PHẢI BUNG FULL 100% CHIỀU NGANG, KHÔNG ĐƯỢC TEO LẠI */
+body > header,
+body > main,
+body > footer {
+    width: 100%;
+}
+
+body > main {
+    flex: 1; /* Đẩy footer xuống đáy */
+}
