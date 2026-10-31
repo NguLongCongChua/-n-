@@ -253,51 +253,8 @@
 .btn-delete { color: #dc2626; }
 .btn-delete:hover { background-color: #fee2e2; }
 
-/* Phân Trang (Pagination) */
-.pagination-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-color);
-}
 
-.pagination-info {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
 
-.pagination {
-    display: flex;
-    list-style: none;
-    gap: 4px;
-}
-
-.page-item a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.page-item.active a {
-    background-color: var(--primary);
-    color: #ffffff;
-    border-color: var(--primary);
-}
-
-.page-item.disabled a {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
 
 /* Form Grid Trong Modal */
 .modal-medium {
