@@ -559,70 +559,50 @@
         <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
             <i class="fa-solid fa-check"></i> Xác nhận
         </a>
-    </div>
-
-    <!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
+                </div>
+            </form>
+        </div> 
+    </div> 
+<!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
     <div class="admin-modal-overlay" id="adminInfoModal">
-        <div class="admin-modal-card">
+        <div class="admin-modal-card modal-medium">
             <div class="modal-header">
-                <h3>
-                    <i class="fa-solid fa-user-gear" style="color: #2563eb;"></i>
-                    Thông Tin Tài Khoản
-                </h3>
-                <a href="#" class="modal-close-btn">&times;</a>
+                <h3><i class="fa-solid fa-user-gear" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
+                <button class="modal-close-btn" id="closeModalBtn">&times;</button>
             </div>
-
             <div class="modal-body">
                 <div class="admin-profile-header">
                     <img src="../images/avatars/Admin.png" alt="Admin Avatar" class="profile-avatar-large">
-
                     <div>
                         <h4>ADMIN</h4>
                         <p class="role-tag">ADMIN 1</p>
                     </div>
                 </div>
-
                 <div class="profile-details">
                     <div class="detail-item">
-                        <span class="label">
-                            <i class="fa-solid fa-id-badge"></i> ID:
-                        </span>
+                        <span class="label"><i class="fa-solid fa-id-badge"></i> ID:</span>
                         <span class="value">AD1</span>
                     </div>
-
                     <div class="detail-item">
-                        <span class="label">
-                            <i class="fa-solid fa-user"></i> Name:
-                        </span>
+                        <span class="label"><i class="fa-solid fa-user"></i> Name:</span>
                         <span class="value">ADMIN</span>
                     </div>
-
                     <div class="detail-item">
-                        <span class="label">
-                            <i class="fa-solid fa-cake-candles"></i> Tuổi:
-                        </span>
+                        <span class="label"><i class="fa-solid fa-cake-candles"></i> Tuổi:</span>
                         <span class="value">19</span>
                     </div>
-
                     <div class="detail-item">
-                        <span class="label">
-                            <i class="fa-solid fa-shield-halved"></i> Vai trò:
-                        </span>
+                        <span class="label"><i class="fa-solid fa-shield-halved"></i> Vai trò:</span>
                         <span class="value text-success">ADMIN 1</span>
                     </div>
-
                     <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-                        <span class="label">
-                            <i class="fa-solid fa-circle-info"></i> Mô tả:
-                        </span>
+                        <span class="label"><i class="fa-solid fa-circle-info"></i> Mô tả:</span>
                         <span class="value"
-                            style="font-weight: normal; color: var(--text-secondary); text-align: left;">
-                            Admin của Shop BookStore tạo ra bởi Team Ngũ Long Công Chúa
-                        </span>
+                            style="font-weight: normal; color: var(--text-secondary); text-align: left;">Admin của Shop
+                            BookStore tạo ra bởi Team Ngũ Long Công Chúa</span>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
                 <a href="#" class="btn-cancel">Đóng</a>
             </div>
