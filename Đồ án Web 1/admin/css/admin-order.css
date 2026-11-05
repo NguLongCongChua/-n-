@@ -1,4 +1,4 @@
-﻿/* =========================================================
+﻿﻿/* =========================================================
    1. BIẾN MÀU SẮC & GIAO DIỆN CHUNG ADMIN
 ========================================================= */
 :root {
@@ -48,7 +48,7 @@ body {
 }
 
 /* =========================================================
-   3. CỘT TRÁI: SIDEBAR (VỊ TRÍ ADMIN CHUẨN ĐÁY THEO ẢNH 4)
+   3. CỘT TRÁI: SIDEBAR
 ========================================================= */
 .admin-sidebar {
     width: 270px;
@@ -58,16 +58,11 @@ body {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Đẩy khối user xuống sát đáy */
+    justify-content: space-between;
     position: sticky;
     top: 0;
     height: 100vh;
     overflow-y: auto;
-}
-
-.sidebar-top-section {
-    display: flex;
-    flex-direction: column;
 }
 
 .sidebar-brand {
@@ -118,207 +113,8 @@ body {
     padding: 0 12px 10px 12px;
 }
 
-.sidebar-menu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
 
-.sidebar-menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: all 0.2s ease;
-}
 
-.sidebar-menu a i {
-    font-size: 18px;
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar-menu a:hover {
-    background-color: var(--sidebar-hover);
-    color: #ffffff;
-    transform: translateX(2px);
-}
-
-.sidebar-menu a.active {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
-    color: #ffffff;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-.sidebar-menu hr {
-    border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin: 16px 0;
-}
-
-.sidebar-menu a.back-web {
-    color: #f87171;
-    background-color: rgba(239, 68, 68, 0.08);
-}
-
-.sidebar-menu a.back-web:hover {
-    background-color: #ef4444;
-    color: #ffffff;
-}
-
-/* KHỐI USER ADMIN: NẰM SÁT ĐÁY SIDEBAR (CHUẨN ẢNH 4) */
-.sidebar-user-container {
-    position: relative;
-    margin-top: auto; /* Đẩy khối này xuống đáy */
-    padding-top: 16px;
-}
-
-.sidebar-user {
-    padding: 12px 14px;
-    background-color: #17233f;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
-}
-
-.sidebar-user:hover {
-    background-color: #1e2e54;
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.user-avatar-blue {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background-color: #2563eb;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.user-avatar-blue img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.user-info {
-    flex: 1;
-}
-
-.user-info h4 {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.user-info p {
-    font-size: 11.5px;
-    color: #94a3b8;
-}
-
-.user-arrow-icon {
-    font-size: 13px;
-    color: #94a3b8;
-    transition: transform 0.25s ease;
-}
-
-/* Lớp phủ tàng hình click ra ngoài tự tắt dropdown */
-.dropdown-backdrop-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 998;
-    cursor: default;
-}
-
-/* DROPDOWN MENU MÀU TRẮNG BO GÓC NỔI PHÍA TRÊN */
-.admin-dropdown-menu {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 12px);
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
-    padding: 10px 8px;
-    z-index: 999;
-    animation: modalSlideIn 0.2s ease forwards;
-}
-
-/* KHI BẤM VÀO ADMIN (CHECKBOX CHECKED) -> MENU MỚI HIỆN */
-#adminDropdownToggle:checked ~ .admin-container .admin-dropdown-menu {
-    display: block !important;
-}
-
-#adminDropdownToggle:checked ~ .admin-container .dropdown-backdrop-overlay {
-    display: block !important;
-}
-
-#adminDropdownToggle:checked ~ .admin-container .user-arrow-icon {
-    transform: rotate(180deg);
-}
-
-.admin-dropdown-menu a,
-.admin-dropdown-menu .dropdown-item-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-    color: #0f172a;
-    text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: background 0.2s;
-    cursor: pointer;
-}
-
-.admin-dropdown-menu a i,
-.admin-dropdown-menu .dropdown-item-label i {
-    font-size: 15px;
-    width: 18px;
-    color: #475569;
-}
-
-.admin-dropdown-menu a:hover,
-.admin-dropdown-menu .dropdown-item-label:hover {
-    background-color: #f1f5f9;
-}
-
-.admin-dropdown-menu hr {
-    border: 0;
-    border-top: 1px solid #f1f5f9;
-    margin: 6px 0;
-}
-
-.admin-dropdown-menu a.logout-link {
-    color: #ef4444;
-}
-
-.admin-dropdown-menu a.logout-link i {
-    color: #ef4444;
-}
-
-.admin-dropdown-menu a.logout-link:hover {
-    background-color: #fee2e2;
-}
 
 /* =========================================================
    4. CỘT PHẢI: VÙNG NỘI DUNG CHÍNH
@@ -588,6 +384,28 @@ body {
     border-color: var(--primary);
 }
 
+/* Nút "+ Thêm đơn mới" ở header lọc */
+.btn-header-add {
+    background-color: #10b981;
+    color: #ffffff !important;
+    border: 1px solid #059669;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-header-add:hover {
+    background-color: #059669;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    transform: translateY(-1px);
+}
+
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -654,7 +472,7 @@ body {
     font-size: 15px;
 }
 
-/* PHẦN PHÂN TRANG (PAGINATION FOOTER) */
+/* PHÂN TRANG FOOTER */
 .pagination-footer {
     display: flex;
     justify-content: space-between;
@@ -712,7 +530,7 @@ body {
 }
 
 /* =========================================================
-   7. NHÃN TRẠNG THÁI & NÚT THAO TÁC
+   7. NHÃN TRẠNG THÁI & NÚT THAO TÁC TRONG BẢNG ĐƠN HÀNG
 ========================================================= */
 .badge {
     padding: 5px 12px;
@@ -751,6 +569,7 @@ body {
     user-select: none;
 }
 
+/* Nút Chi tiết đơn */
 .btn-detail {
     background-color: #f1f5f9;
     color: var(--text-secondary);
@@ -763,8 +582,48 @@ body {
     border-color: var(--primary);
 }
 
+/* Dấu cộng: Thêm đơn hàng */
+.btn-order.btn-action-add {
+    background-color: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    transition: all 0.25s ease;
+}
+
+.btn-order.btn-action-add:hover {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+    transform: translateY(-2px);
+}
+
+.btn-order.btn-action-add:hover i {
+    color: #ffffff !important;
+}
+
+/* Thùng rác: Xóa đơn hàng */
+.btn-order.btn-action-delete {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    transition: all 0.25s ease;
+}
+
+.btn-order.btn-action-delete:hover {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35) !important;
+    transform: translateY(-2px);
+}
+
+.btn-order.btn-action-delete:hover i {
+    color: #ffffff !important;
+}
+
 /* =========================================================
-   8. BẢNG TOP 5 KHÁCH HÀNG & NÚT XEM CHI TIẾT ĐƠN (HOVER MÀU XANH)
+   8. BẢNG TOP 5 KHÁCH HÀNG (CHỈ NÚT XEM CHI TIẾT ĐƠN)
 ========================================================= */
 .user-cell {
     display: flex;
@@ -838,7 +697,7 @@ body {
 }
 
 /* =========================================================
-   9. POPUP MODALS ĐIỀU KHIỂN BẰNG CHECKBOX ẨN (FIX LỖI NHẢY TRANG)
+   9. POPUP MODALS ĐIỀU KHIỂN BẰNG CHECKBOX ẨN (THUẦN CSS)
 ========================================================= */
 .modal-toggle-checkbox {
     display: none !important;
@@ -862,10 +721,12 @@ body {
     padding: 20px;
 }
 
+/* KÍCH HOẠT HIỂN THỊ MODAL BẰNG CHECKBOX SIBLING */
 #modalAdminInfoToggle:checked ~ #adminInfoModal,
-#modalChangePassToggle:checked ~ #changePasswordModal,
 #modalOrderDetailToggle:checked ~ #orderDetailModal,
-#modalCustOrdersToggle:checked ~ #customerOrdersModal {
+#modalCustOrdersToggle:checked ~ #customerOrdersModal,
+#modalAddOrderToggle:checked ~ #addOrderModal,
+#modalDeleteOrderToggle:checked ~ #deleteOrderModal {
     display: flex !important;
 }
 
@@ -890,19 +751,12 @@ body {
     z-index: 10;
 }
 
-/* KÍCH THƯỚC RỘNG RÃI CHO POPUP THÔNG TIN TÀI KHOẢN (CHUẨN ẢNH 2) */
-.pure-modal-box.modal-box-info {
-    max-width: 580px;
-    width: 92%;
-}
-
-.pure-modal-box.modal-box-password {
-    max-width: 440px;
-    width: 90%;
-}
-
 .pure-modal-box.modal-box-medium {
     max-width: 720px;
+}
+
+.pure-modal-box.modal-box-confirm {
+    max-width: 480px;
 }
 
 @keyframes modalSlideIn {
@@ -930,13 +784,11 @@ body {
     color: #0f172a;
 }
 
-.icon-modal-blue {
-    color: #2563eb;
-    font-size: 18px;
-}
+.icon-modal-blue { color: #2563eb; font-size: 18px; }
+.icon-modal-green { color: #10b981; font-size: 18px; }
+.icon-modal-red { color: #ef4444; font-size: 18px; }
 
-.pure-modal-close-x,
-.pure-modal-close-btn-reset {
+.pure-modal-close-x {
     color: #94a3b8;
     font-size: 24px;
     line-height: 1;
@@ -947,8 +799,7 @@ body {
     user-select: none;
 }
 
-.pure-modal-close-x:hover,
-.pure-modal-close-btn-reset:hover {
+.pure-modal-close-x:hover {
     color: #0f172a;
 }
 
@@ -959,192 +810,7 @@ body {
 }
 
 /* =========================================================
-   POPUP 1: THÔNG TIN TÀI KHOẢN (CHUẨN THEO ẢNH 2)
-========================================================= */
-.pure-profile-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.pure-avatar-circle {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: #2563eb;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-}
-
-.pure-avatar-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.pure-avatar-circle i {
-    color: #ffffff;
-    font-size: 24px;
-}
-
-.pure-profile-text h4 {
-    font-size: 16.5px;
-    font-weight: 700;
-    color: #0f172a;
-    letter-spacing: 0.3px;
-}
-
-.pure-badge-role {
-    font-size: 11.5px;
-    color: #2563eb;
-    font-weight: 600;
-    background-color: #eff6ff;
-    padding: 2px 8px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 4px;
-}
-
-.info-items-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.info-item-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8fafc;
-    border: 1px solid #f1f5f9;
-    border-radius: 8px;
-    padding: 12px 18px;
-    font-size: 14px;
-}
-
-.info-item-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #475569;
-    font-weight: 500;
-}
-
-.info-item-label i {
-    color: #64748b;
-    font-size: 15px;
-    width: 18px;
-}
-
-.info-item-value {
-    font-weight: 600;
-    color: #0f172a;
-}
-
-.text-green-bold {
-    color: #10b981 !important;
-    font-weight: 700;
-}
-
-.info-desc-block {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-}
-
-.info-desc-content {
-    color: #475569;
-    font-size: 13.5px;
-    line-height: 1.5;
-    padding-left: 30px;
-}
-
-/* =========================================================
-   POPUP 2: ĐỔI MẬT KHẨU (TỰ ĐỘNG XÓA TRẮNG DỮ LIỆU)
-========================================================= */
-.password-change-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.password-change-form .pure-modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.form-group-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.form-group-item label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #334155;
-}
-
-.input-password-field {
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 13.5px;
-    outline: none;
-    transition: border-color 0.2s;
-    background-color: #ffffff;
-}
-
-.input-password-field:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.btn-gray-cancel {
-    background-color: #e2e8f0;
-    color: #334155;
-    font-size: 13.5px;
-    font-weight: 600;
-    padding: 9px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.2s;
-}
-
-.btn-gray-cancel:hover {
-    background-color: #cbd5e1;
-}
-
-.btn-primary-confirm {
-    background-color: var(--primary);
-    color: #ffffff;
-    font-size: 13.5px;
-    font-weight: 600;
-    padding: 9px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.2s;
-}
-
-.btn-primary-confirm:hover {
-    background-color: var(--primary-dark);
-}
-
-/* =========================================================
-   POPUP 3: CHI TIẾT ĐƠN HÀNG #DH001
+   CHI TIẾT ĐƠN HÀNG #DH001
 ========================================================= */
 .order-quick-summary {
     display: flex;
@@ -1292,8 +958,50 @@ body {
 }
 
 /* =========================================================
-   POPUP 4: DANH SÁCH 15 ĐƠN CỦA KHÁCH HÀNG (TOP 5)
+   POPUP LỊCH SỬ ĐƠN CỦA KHÁCH
 ========================================================= */
+.pure-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.pure-avatar-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.pure-avatar-circle i {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.pure-profile-text h4 {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.pure-badge-role {
+    font-size: 11.5px;
+    color: #2563eb;
+    font-weight: 600;
+    background-color: #eff6ff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
 .pure-summary-row {
     display: flex;
     justify-content: space-between;
@@ -1322,14 +1030,6 @@ body {
     padding-right: 4px;
 }
 
-.pure-orders-scroll-list::-webkit-scrollbar {
-    width: 6px;
-}
-.pure-orders-scroll-list::-webkit-scrollbar-thumb {
-    background-color: #cbd5e1;
-    border-radius: 10px;
-}
-
 .order-detail-card {
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -1338,12 +1038,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    transition: border-color 0.2s, background-color 0.2s;
-}
-
-.order-detail-card:hover {
-    background-color: #f1f5f9;
-    border-color: #cbd5e1;
 }
 
 .order-card-header {
@@ -1414,7 +1108,97 @@ body {
     color: #0f172a;
 }
 
-/* Footer Popup */
+/* =========================================================
+   POPUP TẠO ĐƠN & POPUP XÁC NHẬN XÓA ĐƠN HÀNG
+========================================================= */
+.confirm-content-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+}
+
+.confirm-icon-box.danger {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fee2e2;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.confirm-text h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.confirm-text p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Form tạo đơn */
+.custom-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-group-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group-item label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-group-item label i {
+    color: var(--primary);
+    font-size: 13px;
+}
+
+.form-control-input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #0f172a;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-control-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Các nút Footer Modal */
 .pure-modal-footer {
     display: flex;
     justify-content: flex-end;
@@ -1428,15 +1212,13 @@ body {
 .btn-gray-close {
     background-color: #e2e8f0;
     color: #334155;
-    text-decoration: none;
     font-size: 13.5px;
     font-weight: 600;
-    padding: 8px 24px;
+    padding: 8px 20px;
     border-radius: 8px;
-    transition: all 0.2s ease;
-    display: inline-block;
     cursor: pointer;
     user-select: none;
+    transition: all 0.2s ease;
 }
 
 .btn-gray-close:hover {
@@ -1444,97 +1226,281 @@ body {
     color: #0f172a;
 }
 
+.btn-danger-confirm {
+    background-color: #ef4444;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-danger-confirm:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+.btn-success-confirm {
+    background-color: #10b981;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-success-confirm:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
 /* =========================================================
-   10. TOAST NOTIFICATION: TỰ ĐỘNG BIẾN MẤT SAU 1.2 GIÂY (CHUẨN ẢNH 1)
+   10. MODAL GỌI QUA :TARGET (THÔNG TIN TÀI KHOẢN & ĐỔI MẬT KHẨU)
 ========================================================= */
-.toast-notification-card {
+.admin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.admin-modal-overlay:target {
+    display: flex;
+}
+
+.admin-modal-card {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close-btn {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 22px;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background-color: #f8fafc;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-cancel {
+    background-color: #e2e8f0;
+    color: var(--text-secondary);
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.btn-submit {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-dark);
+}
+
+.admin-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.profile-avatar-large {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+
+.role-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary);
+    background-color: #eff6ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-size: 13.5px;
+}
+
+.detail-item .label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-item .value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-group input {
+    padding: 9px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+}
+
+/* =========================================================
+   11. TOAST NOTIFICATION THÀNH CÔNG (GỌI QUA :TARGET)
+========================================================= */
+.toast-msg {
     display: none;
     position: fixed;
     top: 24px;
     right: 24px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.18), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.18);
     z-index: 100000;
-    overflow: hidden;
-}
-
-/* KHI BẬT CHECKBOX TOAST -> HIỆN 1 GIÂY VÀ TỰ ĐỘNG BIẾN MẤT */
-#toastSuccessToggle:checked ~ .toast-notification-card {
-    display: flex !important;
-    animation: toastAutoQuick 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes toastAutoQuick {
-    0% {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    15% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    75% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(60px);
-        visibility: hidden;
-        pointer-events: none;
-    }
-}
-
-.toast-left-border {
-    width: 5px;
-    background-color: #059669;
-    flex-shrink: 0;
-}
-
-.toast-body {
-    display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     padding: 14px 20px;
+    border-left: 5px solid #10b981;
 }
 
-.toast-icon-circle {
-    width: 36px;
-    height: 36px;
+.toast-target:target ~ .toast-password {
+    display: flex;
+    animation: modalSlideIn 0.3s ease forwards;
+}
+
+.toast-icon {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: #d1fae5;
-    color: #059669;
+    color: #10b981;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
+    font-weight: 700;
 }
 
-.toast-text h4 {
-    font-size: 15px;
-    font-weight: 700;
+.toast-content strong {
+    font-size: 14px;
     color: #064e3b;
+    display: block;
+}
+
+.toast-content p {
+    font-size: 12px;
+    color: #475569;
     margin: 0;
 }
 
-.toast-text p {
-    font-size: 13px;
-    color: #475569;
-    margin: 2px 0 0 0;
-}
-
-.toast-close-btn {
+.toast-close {
+    text-decoration: none;
     color: #94a3b8;
-    font-size: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-    line-height: 1;
-    user-select: none;
-    transition: color 0.2s;
+    font-size: 16px;
+    margin-left: 12px;
 }
 
-.toast-close-btn:hover {
+.toast-close:hover {
     color: #0f172a;
 }
