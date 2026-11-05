@@ -244,6 +244,9 @@
     margin: 0 2px;
 }
 
+.btn-review{ color: #1eac71; }
+.btn-edit:hover { background-color: #dee6f1; }
+
 .btn-edit { color: #2563eb; }
 .btn-edit:hover { background-color: #eff6ff; }
 

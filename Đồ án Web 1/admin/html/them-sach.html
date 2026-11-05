@@ -246,38 +246,6 @@
         </main>
     </div>
 
-    <!-- Script Xử lý -->
-    <script>
-        // 1. Script preview ảnh bìa sách
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    const text = document.getElementById('previewText');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    text.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // 2. Script Tự động thêm dấu phẩy hàng nghìn cho Giá bán
-        function formatPrice(input) {
-            // Lọc bỏ tất cả các ký tự không phải là số (kể cả dấu phẩy cũ)
-            let value = input.value.replace(/\D/g, '');
-            
-            // Format lại thành số có dấu phẩy nếu giá trị không rỗng
-            if (value !== '') {
-                value = parseInt(value, 10).toLocaleString('en-US');
-            }
-            
-            // Gắn lại vào ô input
-            input.value = value;
-        }
-    </script>
 </body>
 
 </html>
