@@ -17,7 +17,52 @@
 </head>
 
 <body>
+    <!-- Điểm neo (anchor) kích hoạt bằng url (#add-success) -->
+    <div id="add-success" style="display: none;"></div>
 
+    <!-- Nút bấm ẩn dùng để tắt thông báo -->
+    <input type="checkbox" id="close-add-success" class="hidden-checkbox">
+    
+    <!-- Khối Toast được dùng lại từ Dashboard -->
+    <div class="toast-msg toast-welcome toast-add-book">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Thành công!</strong>
+            <p>Thêm sách mới thành công!</p>
+        </div>
+        <a href="#" class="toast-close" onclick="document.getElementById('close-add-success').checked = true;" title="Đóng">✕</a>
+    </div>
+    
+    <style>
+       /* CSS cho hiệu ứng bật/tắt (Giống với Dashboard) */
+       
+       /* 1. Mặc định ẩn, sẽ hiển thị khi URL có #add-success */
+       .toast-add-book {
+           display: none;
+       }
+       
+       #add-success:target ~ .admin-container .toast-add-book, 
+       #add-success:target ~ .toast-add-book {
+           display: flex !important;
+           animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 3s forwards;
+       }
+       
+       /* 2. Đóng thông báo khi bấm nút X */
+       #close-add-success:checked ~ .toast-add-book {
+           display: none !important;
+           animation: none !important;
+       }
+       
+       /* 3. Tái tạo hiệu ứng chuyển động giống Dashboard */
+       @keyframes slideIn {
+           0% { transform: translateX(120%); opacity: 0; pointer-events: none; }
+           100% { transform: translateX(0); opacity: 1; pointer-events: auto; }
+       }
+       
+       @keyframes fadeOut {
+           100% { transform: translateX(120%); opacity: 0; visibility: hidden; pointer-events: none; }
+       }
+    </style>
     <!-- ==============================================
          2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
     =============================================== -->
@@ -210,77 +255,15 @@
 
             <!-- PHẦN 2: Biểu Mẫu Thêm / Cập Nhật Thông Tin Sách -->
             <section class="dashboard-sections">
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <h2><i class="fa-solid fa-pen-to-square icon-primary"></i> Thêm / Cập Nhật Thông Tin Sách</h2>
+                                <!-- Nút chuyển hướng sang trang Thêm Sách -->
+                <div class="dashboard-card" style="padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <div>
+                        <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px;">Thêm Đầu Sách Mới</h2>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Chuyển sang giao diện form để thêm sách mới vào kho.</p>
                     </div>
-                    <div class="form-container">
-                        <form class="form-sach" id="bookForm"
-                            onsubmit="event.preventDefault(); alert('Đã lưu thông tin sách thành công!');">
-                            <!-- Hàng 1: Mã sách & Tên sách -->
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Mã sách <span class="required">*</span></label>
-                                    <input type="text" id="bookIdInput" placeholder="Ví dụ: #S006">
-                                </div>
-                                <div class="form-group">
-                                    <label>Tên sách <span class="required">*</span></label>
-                                    <input type="text" id="bookNameInput" placeholder="Nhập tên sách...">
-                                </div>
-                            </div>
-
-                            <!-- Hàng 2: Tác giả & Thể loại -->
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Tác giả <span class="required">*</span></label>
-                                    <input type="text" id="bookAuthorInput" placeholder="Nhập tên tác giả...">
-                                </div>
-                                <div class="form-group">
-                                    <label>Thể loại <span class="required">*</span></label>
-                                    <select id="bookCategoryInput">
-                                        <option value="Kỹ năng">Kỹ năng</option>
-                                        <option value="Văn học">Văn học</option>
-                                        <option value="Kinh tế">Kinh tế</option>
-                                        <option value="Tâm lý">Tâm lý</option>
-                                        <option value="Thiếu nhi">Thiếu nhi</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Hàng 3: Giá bán & Số lượng tồn kho -->
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Giá bán (VNĐ) <span class="required">*</span></label>
-                                    <input type="number" id="bookPriceInput" placeholder="Ví dụ: 86000">
-                                </div>
-                                <div class="form-group">
-                                    <label>Số lượng nhập kho <span class="required">*</span></label>
-                                    <input type="number" id="bookStockInput" placeholder="Ví dụ: 50">
-                                </div>
-                            </div>
-
-                            <!-- Hàng 4: Tải ảnh bìa -->
-                            <div class="form-row">
-                                <div class="form-group full-width">
-                                    <label>Tải ảnh bìa (Chọn file từ thư mục images/books/):</label>
-                                    <input type="file" class="file-input" accept="image/*">
-                                </div>
-                            </div>
-
-                            <!-- Nút thao tác form -->
-                            <div class="form-actions">
-                                <a href="admin-sach.html" class="btn-submit">
-                                    <i class="fa-solid fa-check"></i>
-                                    Lưu thông tin sách
-                                </a>
-                                <a href="admin-sach.html" class="btn-reset">
-                                    <i class="fa-solid fa-rotate-left"></i>
-                                    Làm mới
-                                </a>
-
-                            </div>
-                        </form>
-                    </div>
+                    <a href="them-sach.html" class="btn-submit" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-plus"></i> Thêm Sách
+                    </a>
                 </div>
             </section>
 
@@ -337,11 +320,10 @@
                                     <td><strong>25</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon edit"
-                                                onclick="fillBookForm('#S001', 'Fear', 'Thích Nhất Hạnh', 'Kỹ năng', 86000, 25)"
-                                                title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S001', 'Fear', 'Thích Nhất Hạnh', 'Kỹ năng', 86000, 25)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -362,11 +344,10 @@
                                     <td><strong>12</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon edit"
-                                                onclick="fillBookForm('#S002', 'Ngày Nắng', 'Yasushi Kitagawa', 'Văn học', 79000, 12)"
-                                                title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S002', 'Ngày Nắng', 'Yasushi Kitagawa', 'Văn học', 79000, 12)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -388,11 +369,10 @@
                                     <td><strong>30</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon edit"
-                                                onclick="fillBookForm('#S003', 'Tuổi Trẻ Vừa Đi Vừa Học', 'Nguyễn Nguyệt Anh', 'Kỹ năng', 92000, 30)"
-                                                title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S003', 'Tuổi Trẻ Vừa Đi Vừa Học', 'Nguyễn Nguyệt Anh', 'Kỹ năng', 92000, 30)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -414,11 +394,10 @@
                                     <td><strong class="text-warning">8</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon edit"
-                                                onclick="fillBookForm('#S004', 'Tuổi Trẻ Đáng Giá Bao Nhiêu', 'Rosie Nguyễn', 'Kỹ năng', 115000, 8)"
-                                                title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S004', 'Tuổi Trẻ Đáng Giá Bao Nhiêu', 'Rosie Nguyễn', 'Kỹ năng', 115000, 8)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -426,25 +405,24 @@
                                     <td><strong>#S005</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Cuộc đời khi bị chó đen cắn.webp"
-                                                alt="Cuộc Đời Khi Bị Chó Đen Cắn" class="book-thumb"
+                                            <img src="../images/books/sach_2.avif"
+                                                alt="Đắc Nhân Tâm" class="book-thumb"
                                                 onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
-                                                <div class="book-title">Cuộc Đời Khi Bị Chó Đen Cắn</div>
-                                                <div class="book-author">Từ Dũng</div>
+                                                <div class="book-title">Đắc Nhân Tâm</div>
+                                                <div class="book-author">Dale Carnegie</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td><span class="badge badge-life category-badge">Đời sống</span></td>
-                                    <td><strong class="price-text">98,000 đ</strong></td>
+                                    <td><span class="badge badge-skill category-badge">Kỹ năng</span></td>
+                                    <td><strong class="price-text">86,000 đ</strong></td>
                                     <td><strong>15</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon edit"
-                                                onclick="fillBookForm('#S005', 'Cuộc Đời Khi Bị Chó Đen Cắn', 'Từ Dũng', 'Đời sống', 98000, 15)"
-                                                title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit" onclick="fillBookForm('#S005', 'Đắc Nhân Tâm', 'Dale Carnegie', 'Kỹ năng', 86000, 15)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
+                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
