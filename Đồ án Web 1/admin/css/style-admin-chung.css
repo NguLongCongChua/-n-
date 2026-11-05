@@ -1068,3 +1068,15 @@ body.page-reloading {
     max-width: 500px !important; /* Bạn có thể tăng/giảm con số 500px này tùy ý */
     width: 90%; /* Đảm bảo hiển thị tốt trên màn hình nhỏ */
 }
+.toast-edit-book { display: none; } /* Đã xóa mã màu cam ở đây */
+       
+       #edit-success:target ~ .admin-container .toast-edit-book, 
+       #edit-success:target ~ .toast-edit-book {
+           display: flex !important;
+           animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 3s forwards;
+       }
+       
+       #close-edit-success:checked ~ .toast-edit-book { 
+           display: none !important; 
+           animation: none !important; 
+       }
