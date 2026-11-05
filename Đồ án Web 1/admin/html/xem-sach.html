@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Chi Tiết Sách - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/style-chung.css">
+    <link rel="stylesheet" href="../css/style-admin-chung.css">
+    <link rel="stylesheet" href="../css/admin-book.css">
+    
+    <style>
+        .preview-container { border: 2px dashed var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center; background-color: #f8fafc; min-height: 400px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+        .preview-image { max-width: 100%; max-height: 100%; object-fit: contain; z-index: 2; display: block; }
+        .header, .footer, .breadcrumb { display: none !important; }
+        .admin-ip { width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none; font-size: 14px; font-family: inherit; }
+        
+        /* Style vô hiệu hoá ô nhập cho trang chỉ Xem */
+        .admin-ip:disabled, .admin-ip[readonly], select:disabled, textarea:disabled {
+            background-color: #f1f5f9 !important;
+            color: #64748b !important;
+            cursor: not-allowed !important;
+            border-style: dashed;
+        }
+
+        .product-meta-list { list-style: none; padding: 0; margin-bottom: 20px; }
+        .product-meta-list li { display: flex; align-items: center; margin-bottom: 15px; }
+        .product-meta-list li strong { width: 130px; flex-shrink: 0; color: #333; font-size: 14.5px; }
+        
+        .product-detail-container { display: flex; gap: 35px; align-items: flex-start; }
+        .product-detail-left { width: 32%; }
+        .product-detail-middle { width: 40%; display: flex; flex-direction: column; }
+        .product-detail-right.buy-box { width: 28%; background-color: #fafbfc; border: 1px solid #e0e0e0; border-radius: 10px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container">
+        <main class="admin-main-content">
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Chi Tiết Đầu Sách</h1>
+                </div>
+                <div class="header-actions">
+                    <a href="admin-sach.html" class="btn-cancel" style="padding: 10px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </header>
+
+            <section class="dashboard-sections">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-eye icon-primary"></i> Xem Thông Tin Sách</h2>
+                    </div>
+                    <div class="form-container">
+                            <div class="product-detail-container" style="padding: 0; box-shadow: none; border: none; margin-top: 0;">
+                                <div class="product-detail-left">
+                                    <div class="preview-container">
+                                        <img src="../images/books/Đắc nhân tâm.png" alt="Preview" class="preview-image" id="imagePreview">
+                                    </div>
+                                </div>
+
+                                <div class="product-detail-middle">
+                                    <h1 class="product-detail-title">
+                                        <input type="text" class="admin-ip" style="font-size: 20px; font-weight: bold; border-width: 2px;" value="Đắc Nhân Tâm" readonly>
+                                    </h1>
+                                    
+                                    <div class="product-rating" style="margin-bottom: 20px;"></div>
+
+                                    <ul class="product-meta-list">
+                                        <li><strong>Mã sách:</strong> <input type="text" class="admin-ip" value="#S005" readonly></li>
+                                        <li><strong>Tác giả:</strong> <input type="text" class="admin-ip" value="Dale Carnegie" readonly></li>
+                                        <li><strong>Nhà xuất bản:</strong> <input type="text" class="admin-ip" value="NXB Tổng hợp TP.HCM" readonly></li>
+                                        <li>
+                                            <strong>Thể loại:</strong> 
+                                            <select class="admin-ip" disabled>
+                                                <option value="Kỹ năng" selected>Kỹ năng</option>
+                                            </select>
+                                        </li>
+                                        <li><strong>Số trang:</strong> <input type="number" class="admin-ip" value="320" readonly></li>
+                                        <li>
+                                            <strong>Hình thức:</strong> 
+                                            <select class="admin-ip" disabled>
+                                                <option value="Bìa mềm" selected>Bìa mềm</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+
+                                    <div class="short-desc" style="background-color: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                                        <strong style="display: block; margin-bottom: 8px;">Tóm tắt nội dung:</strong>
+                                        <textarea rows="5" class="admin-ip" style="resize: vertical;" readonly>Quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất do báo The New York Times bình chọn suốt 10 năm liền. Sách mang lại những bài học sâu sắc về sự thấu hiểu và nghệ thuật thu phục lòng người.</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="product-detail-right buy-box" style="background-color: var(--bg-body); border-color: var(--border-color);">
+                                    <div style="margin-bottom: 20px; text-align: center;">
+                                        <span style="color: var(--text-secondary); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px;">Giá bán (VNĐ)</span>
+                                        <input type="text" class="admin-ip" style="font-size: 24px; font-weight: bold; color: var(--danger); text-align: center;" value="86,000" readonly>
+                                    </div>
+                                    <div class="stock-status" style="margin-bottom: 25px;">
+                                        Tình trạng: <span style="color: #0f5132; font-weight: bold;">Còn hàng (Sẵn sàng giao)</span>
+                                    </div>
+                                    <div class="qty-selector-group" style="margin-bottom: 30px;">
+                                        <span>Số lượng nhập kho:</span>
+                                        <input type="number" class="admin-ip" value="15" readonly style="width: 80px; text-align: center; font-weight: bold; font-size: 16px;">
+                                    </div>
+                                    
+                                    <!-- Nút quay lại dành cho chế độ Xem -->
+                                    <div class="action-buttons vertical-buttons" style="margin-top: auto; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+                                        <a href="admin-sach.html" class="btn-cancel" style="width: 100%; padding: 14px; text-decoration: none; text-align: center; color: var(--text-secondary); border-radius: 6px; box-sizing: border-box; display: block; background: #e2e8f0; font-weight: bold;">Quay Lại</a>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

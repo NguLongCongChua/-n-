@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,70 +10,150 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Liên kết file CSS chung và CSS riêng (Hỗ trợ cả 2 cấu trúc đường dẫn trong thư mục nhóm) -->
+    <!-- Liên kết file CSS chung và CSS riêng -->
     <link rel="stylesheet" href="../css/style-admin-chung.css">
     <link rel="stylesheet" href="../css/admin-book.css">
 </head>
 
 <body>
-    <!-- Điểm neo (anchor) kích hoạt bằng url (#add-success) -->
-    <div id="add-success" style="display: none;"></div>
-
-    <!-- Nút bấm ẩn dùng để tắt thông báo -->
-    <input type="checkbox" id="close-add-success" class="hidden-checkbox">
-    
-    <!-- Khối Toast được dùng lại từ Dashboard -->
-    <div class="toast-msg toast-welcome toast-add-book">
-        <div class="toast-icon">✔</div>
-        <div class="toast-content">
-            <strong>Thành công!</strong>
-            <p>Thêm sách mới thành công!</p>
-        </div>
-        <a href="#" class="toast-close" onclick="document.getElementById('close-add-success').checked = true;" title="Đóng">✕</a>
-    </div>
-    
-    <style>
-       /* CSS cho hiệu ứng bật/tắt (Giống với Dashboard) */
-       
-       /* 1. Mặc định ẩn, sẽ hiển thị khi URL có #add-success */
-       .toast-add-book {
-           display: none;
-       }
-       
-       #add-success:target ~ .admin-container .toast-add-book, 
-       #add-success:target ~ .toast-add-book {
-           display: flex !important;
-           animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 3s forwards;
-       }
-       
-       /* 2. Đóng thông báo khi bấm nút X */
-       #close-add-success:checked ~ .toast-add-book {
-           display: none !important;
-           animation: none !important;
-       }
-       
-       /* 3. Tái tạo hiệu ứng chuyển động giống Dashboard */
-       @keyframes slideIn {
-           0% { transform: translateX(120%); opacity: 0; pointer-events: none; }
-           100% { transform: translateX(0); opacity: 1; pointer-events: auto; }
-       }
-       
-       @keyframes fadeOut {
-           100% { transform: translateX(120%); opacity: 0; visibility: hidden; pointer-events: none; }
-       }
-    </style>
     <!-- ==============================================
-         2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
+         1. HỆ THỐNG CÔNG TẮC ĐIỀU KHIỂN (PHẢI TRÊN CÙNG)
     =============================================== -->
-    <div id="show-pass-toast" class="toast-target"></div>
-    <div class="toast-msg toast-password">
+    <!-- Đóng các popup Neo (URL Hash) -->
+    <input type="checkbox" id="close-add-success" class="hidden-checkbox" hidden>
+    <input type="checkbox" id="close-edit-success" class="hidden-checkbox" hidden>
+    <input type="checkbox" id="close-delete-success" class="hidden-checkbox" hidden>
+    
+    <!-- Ping-pong cho nút Lọc -->
+    <input type="radio" name="filter_trick" id="filter-ping" hidden>
+    <input type="radio" name="filter_trick" id="filter-pong" hidden>
+    <input type="radio" name="filter_trick" id="close-filter" hidden>
+
+    <!-- Ping-pong cho nút Ẩn -->
+    <input type="radio" name="hide_trick" id="hide-ping" hidden>
+    <input type="radio" name="hide_trick" id="hide-pong" hidden>
+    <input type="radio" name="hide_trick" id="close-hide" hidden>
+
+    <!-- ==============================================
+         2. HỆ THỐNG TOAST POP-UP (CHUẨN STYLE ADMIN)
+    =============================================== -->
+    <!-- [Xanh lá] Thêm sách thành công -->
+    <span id="add-success" style="display: none;"></span>
+    <div class="toast-msg toast-welcome t-add">
         <div class="toast-icon">✔</div>
-        <div class="toast-content">
-            <strong>Đổi mật khẩu thành công</strong>
-            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
-        </div>
-        <a href="#" class="toast-close" title="Đóng">✕</a>
+        <div class="toast-content"><strong>Thành công!</strong><p>Thêm sách mới thành công!</p></div>
+        <label for="close-add-success" class="toast-close">✕</label>
     </div>
+
+    <!-- [Xanh lá] Sửa sách thành công -->
+    <span id="edit-success" style="display: none;"></span>
+    <div class="toast-msg toast-welcome t-edit">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content"><strong>Thành công!</strong><p>Cập nhật sách thành công!</p></div>
+        <label for="close-edit-success" class="toast-close">✕</label>
+    </div>
+
+    <!-- [Đỏ] Xóa sách thành công -->
+    <span id="delete-success" style="display: none;"></span>
+    <div class="toast-msg toast-welcome t-delete" style="border-left-color: #dc2626;">
+        <div class="toast-icon" style="background-color: #fee2e2; color: #dc2626;">✔</div>
+        <div class="toast-content"><strong style="color:#dc2626;">Thành công!</strong><p>Đã xóa sách khỏi hệ thống.</p></div>
+        <label for="close-delete-success" class="toast-close">✕</label>
+    </div>
+
+    <!-- [Xanh lá] Lọc sách (Ping & Pong) -->
+    <div class="toast-msg toast-welcome t-filter-ping">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content"><strong>Hoàn tất!</strong><p>Đã áp dụng bộ lọc dữ liệu.</p></div>
+        <label for="close-filter" class="toast-close">✕</label>
+    </div>
+    <div class="toast-msg toast-welcome t-filter-pong">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content"><strong>Hoàn tất!</strong><p>Đã áp dụng bộ lọc dữ liệu.</p></div>
+        <label for="close-filter" class="toast-close">✕</label>
+    </div>
+
+    <!-- [Xám] Ẩn sách (Ping & Pong) -->
+    <div class="toast-msg toast-welcome t-hide-ping" style="border-left-color: #64748b;">
+        <div class="toast-icon" style="background-color: #f1f5f9; color: #64748b;">✔</div>
+        <div class="toast-content"><strong style="color:#475569;">Hoàn tất!</strong><p>Đã ẩn sách khỏi hệ thống.</p></div>
+        <label for="close-hide" class="toast-close">✕</label>
+    </div>
+    <div class="toast-msg toast-welcome t-hide-pong" style="border-left-color: #64748b;">
+        <div class="toast-icon" style="background-color: #f1f5f9; color: #64748b;">✔</div>
+        <div class="toast-content"><strong style="color:#475569;">Hoàn tất!</strong><p>Đã ẩn sách khỏi hệ thống.</p></div>
+        <label for="close-hide" class="toast-close">✕</label>
+    </div>
+
+    <style>
+        /* MẶC ĐỊNH ẨN TẤT CẢ TOAST (Chặn tự hiện khi load) */
+        .toast-msg {
+            position: fixed !important; top: 20px !important; right: 20px !important;
+            z-index: 99999 !important; display: flex; opacity: 0; pointer-events: none;
+            background: #fff; padding: 16px 24px; border-radius: 8px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); align-items: center; gap: 12px; 
+            transform: translateX(120%); border-left: 5px solid #10b981; display: none; 
+        }
+
+        .toast-icon {
+            width: 24px; height: 24px; background: #d1fae5; color: #10b981; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 14px;
+        }
+
+        /* HIỆU ỨNG TRƯỢT VÀO VÀ TỰ TẮT SAU 4 GIÂY */
+        @keyframes slideInAuto {
+            0% { transform: translateX(120%); opacity: 0; pointer-events: none; }
+            10% { transform: translateX(0); opacity: 1; pointer-events: auto; }
+            90% { transform: translateX(0); opacity: 1; pointer-events: auto; }
+            100% { transform: translateX(120%); opacity: 0; pointer-events: none; }
+        }
+
+        /* 1. HIỆN TOAST KHI CÓ URL NEO (Thêm, Sửa, Xóa) */
+        #add-success:target ~ .admin-container .t-add, #add-success:target ~ .t-add,
+        #edit-success:target ~ .admin-container .t-edit, #edit-success:target ~ .t-edit,
+        #delete-success:target ~ .admin-container .t-delete, #delete-success:target ~ .t-delete {
+            display: flex !important;
+            animation: slideInAuto 4s ease forwards !important;
+        }
+
+        /* 2. HIỆN TOAST KHI BẤM PING-PONG (Lọc, Ẩn) */
+        #filter-ping:checked ~ .t-filter-ping,
+        #filter-pong:checked ~ .t-filter-pong,
+        #hide-ping:checked ~ .t-hide-ping,
+        #hide-pong:checked ~ .t-hide-pong {
+            display: flex !important;
+            animation: slideInAuto 4s ease forwards !important;
+        }
+
+        /* 3. TẮT TỨC THÌ KHI BẤM DẤU X */
+        #close-add-success:checked ~ .t-add,
+        #close-edit-success:checked ~ .t-edit,
+        #close-delete-success:checked ~ .t-delete,
+        #close-filter:checked ~ .t-filter-ping,
+        #close-filter:checked ~ .t-filter-pong,
+        #close-hide:checked ~ .t-hide-ping,
+        #close-hide:checked ~ .t-hide-pong {
+            display: none !important;
+            animation: none !important;
+        }
+
+        /* 4. HOÁN ĐỔI NÚT BẤM BÊN TRONG CONTAINER (PING PONG UI) */
+        .lbl-pong { display: none !important; }
+
+        /* Nút Lọc Ping Pong */
+        #filter-ping:checked ~ .admin-container .auth-wrapper-filter .lbl-ping { display: none !important; }
+        #filter-ping:checked ~ .admin-container .auth-wrapper-filter .lbl-pong { display: inline-flex !important; }
+        #filter-pong:checked ~ .admin-container .auth-wrapper-filter .lbl-pong { display: none !important; }
+        #filter-pong:checked ~ .admin-container .auth-wrapper-filter .lbl-ping { display: inline-flex !important; }
+
+        /* Nút Ẩn Ping Pong */
+        #hide-ping:checked ~ .admin-container .action-group .lbl-ping { display: none !important; }
+        #hide-ping:checked ~ .admin-container .action-group .lbl-pong { display: inline-flex !important; }
+        #hide-pong:checked ~ .admin-container .action-group .lbl-pong { display: none !important; }
+        #hide-pong:checked ~ .admin-container .action-group .lbl-ping { display: inline-flex !important; }
+    </style>
+
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar đồng bộ) -->
         <aside class="admin-sidebar">
@@ -126,50 +205,32 @@
             </div>
 
             <!-- Profile Admin ở góc dưới có Dropdown Menu -->
-
             <div class="sidebar-user admin-user-dropdown">
-
-                <!-- Checkbox điều khiển dropdown -->
                 <input type="checkbox" id="admin-menu-toggle" hidden>
-
-                <!-- Avatar và thông tin Admin -->
                 <label for="admin-menu-toggle" class="admin-user-trigger">
-
                     <div class="user-avatar">
                         <img src="../images/avatars/Admin.png" alt="Admin">
                     </div>
-
                     <div class="user-info">
                         <h4>Admin</h4>
                         <p>Quản trị viên chính</p>
                     </div>
-
                     <i class="fa-solid fa-chevron-down admin-dropdown-arrow"></i>
-
                 </label>
-
-                <!-- Menu dropdown -->
                 <div class="admin-dropdown-menu">
-
                     <a href="#adminInfoModal">
                         <i class="fa-solid fa-user-gear"></i>
                         <span>Thông tin tài khoản</span>
                     </a>
-
-
                     <a href="#changePasswordModal">
                         <i class="fa-solid fa-key"></i>
                         Đổi mật khẩu
-
                     </a>
-
                     <hr>
-
                     <a href="index.html" class="logout-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Đăng xuất</span>
                     </a>
-
                 </div>
             </div>
         </aside>
@@ -255,7 +316,7 @@
 
             <!-- PHẦN 2: Biểu Mẫu Thêm / Cập Nhật Thông Tin Sách -->
             <section class="dashboard-sections">
-                                <!-- Nút chuyển hướng sang trang Thêm Sách -->
+                <!-- Nút chuyển hướng sang trang Thêm Sách -->
                 <div class="dashboard-card" style="padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                     <div>
                         <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px;">Thêm Đầu Sách Mới</h2>
@@ -276,8 +337,7 @@
                         <div class="filter-group">
                             <div class="input-icon-wrap">
                                 <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" id="searchBookInput" placeholder="Tìm mã sách, tên sách..."
-                                    class="input-search">
+                                <input type="text" id="searchBookInput" placeholder="Tìm mã sách, tên sách..." class="input-search">
                             </div>
                             <select id="filterCategorySelect" class="select-filter">
                                 <option value="all">Tất cả thể loại</option>
@@ -286,6 +346,17 @@
                                 <option value="Đời sống">Đời sống</option>
                                 <option value="Kinh tế">Kinh tế</option>
                             </select>
+                            
+                            <!-- BỘ NÚT LỌC PING-PONG -->
+                            <div class="auth-wrapper-filter" style="display: contents;">
+                                <label for="filter-ping" class="btn-submit lbl-ping" style="cursor: pointer; padding: 8px 16px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; user-select: none;">
+                                    <i class="fa-solid fa-filter"></i> Lọc
+                                </label>
+                                <label for="filter-pong" class="btn-submit lbl-pong" style="cursor: pointer; padding: 8px 16px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; user-select: none;">
+                                    <i class="fa-solid fa-filter"></i> Lọc
+                                </label>
+                            </div>
+                            
                             <span class="badge-total">Tổng: 5 đầu sách</span>
                         </div>
                     </div>
@@ -307,8 +378,7 @@
                                     <td><strong>#S001</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Fear.png" alt="Fear" class="book-thumb"
-                                                onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <img src="../images/books/Fear.png" alt="Fear" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
                                                 <div class="book-title">Fear</div>
                                                 <div class="book-author">Thích Nhất Hạnh</div>
@@ -320,10 +390,25 @@
                                     <td><strong>25</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                                            <button class="btn-icon edit" onclick="fillBookForm('#S001', 'Fear', 'Thích Nhất Hạnh', 'Kỹ năng', 86000, 25)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                            <!-- Xem -->
+                                            <a href="xem-sach.html" class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xem chi tiết">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <!-- Sửa -->
+                                            <a href="sua-sach.html" class="btn-icon edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Chỉnh sửa">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Ẩn (Ping-Pong) -->
+                                            <label for="hide-ping" class="btn-icon lbl-ping" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <label for="hide-pong" class="btn-icon lbl-pong" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <!-- Xóa (Gọi bảng hỏi Modal) -->
+                                            <a href="#deleteConfirmModal" class="btn-icon delete" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xóa">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -331,8 +416,7 @@
                                     <td><strong>#S002</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Ngày Nắng.png" alt="Ngày Nắng" class="book-thumb"
-                                                onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <img src="../images/books/Ngày Nắng.png" alt="Ngày Nắng" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
                                                 <div class="book-title">Ngày Nắng</div>
                                                 <div class="book-author">Yasushi Kitagawa</div>
@@ -344,10 +428,25 @@
                                     <td><strong>12</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                                            <button class="btn-icon edit" onclick="fillBookForm('#S002', 'Ngày Nắng', 'Yasushi Kitagawa', 'Văn học', 79000, 12)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                            <!-- Xem -->
+                                            <a href="xem-sach.html" class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xem chi tiết">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <!-- Sửa -->
+                                            <a href="sua-sach.html" class="btn-icon edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Chỉnh sửa">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Ẩn (Ping-Pong) -->
+                                            <label for="hide-ping" class="btn-icon lbl-ping" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <label for="hide-pong" class="btn-icon lbl-pong" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <!-- Xóa (Gọi bảng hỏi Modal) -->
+                                            <a href="#deleteConfirmModal" class="btn-icon delete" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xóa">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -355,9 +454,7 @@
                                     <td><strong>#S003</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Tuổi trẻ vừa đi vừa học.png"
-                                                alt="Tuổi Trẻ Vừa Đi Vừa Học" class="book-thumb"
-                                                onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <img src="../images/books/Tuổi trẻ vừa đi vừa học.png" alt="Tuổi Trẻ Vừa Đi Vừa Học" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
                                                 <div class="book-title">Tuổi Trẻ Vừa Đi Vừa Học</div>
                                                 <div class="book-author">Nguyễn Nguyệt Anh</div>
@@ -369,10 +466,25 @@
                                     <td><strong>30</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                                            <button class="btn-icon edit" onclick="fillBookForm('#S003', 'Tuổi Trẻ Vừa Đi Vừa Học', 'Nguyễn Nguyệt Anh', 'Kỹ năng', 92000, 30)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                            <!-- Xem -->
+                                            <a href="xem-sach.html" class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xem chi tiết">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <!-- Sửa -->
+                                            <a href="sua-sach.html" class="btn-icon edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Chỉnh sửa">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Ẩn (Ping-Pong) -->
+                                            <label for="hide-ping" class="btn-icon lbl-ping" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <label for="hide-pong" class="btn-icon lbl-pong" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <!-- Xóa (Gọi bảng hỏi Modal) -->
+                                            <a href="#deleteConfirmModal" class="btn-icon delete" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xóa">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -380,9 +492,7 @@
                                     <td><strong>#S004</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Tuổi trẻ đáng giá bao nhiêu.png"
-                                                alt="Tuổi Trẻ Đáng Giá Bao Nhiêu" class="book-thumb"
-                                                onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <img src="../images/books/Tuổi trẻ đáng giá bao nhiêu.png" alt="Tuổi Trẻ Đáng Giá Bao Nhiêu" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
                                                 <div class="book-title">Tuổi Trẻ Đáng Giá Bao Nhiêu</div>
                                                 <div class="book-author">Rosie Nguyễn</div>
@@ -394,10 +504,25 @@
                                     <td><strong class="text-warning">8</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                                            <button class="btn-icon edit" onclick="fillBookForm('#S004', 'Tuổi Trẻ Đáng Giá Bao Nhiêu', 'Rosie Nguyễn', 'Kỹ năng', 115000, 8)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                            <!-- Xem -->
+                                            <a href="xem-sach.html" class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xem chi tiết">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <!-- Sửa -->
+                                            <a href="sua-sach.html" class="btn-icon edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Chỉnh sửa">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Ẩn (Ping-Pong) -->
+                                            <label for="hide-ping" class="btn-icon lbl-ping" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <label for="hide-pong" class="btn-icon lbl-pong" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <!-- Xóa (Gọi bảng hỏi Modal) -->
+                                            <a href="#deleteConfirmModal" class="btn-icon delete" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xóa">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -405,9 +530,7 @@
                                     <td><strong>#S005</strong></td>
                                     <td>
                                         <div class="book-cell">
-                                            <img src="../images/books/Đắc nhân tâm.png"
-                                                alt="Đắc Nhân Tâm" class="book-thumb"
-                                                onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
+                                            <img src="../images/books/Đắc nhân tâm.png" alt="Đắc Nhân Tâm" class="book-thumb" onerror="this.src='https://via.placeholder.com/42x56?text=Book'">
                                             <div>
                                                 <div class="book-title">Đắc Nhân Tâm</div>
                                                 <div class="book-author">Dale Carnegie</div>
@@ -419,10 +542,25 @@
                                     <td><strong>15</strong> cuốn</td>
                                     <td>
                                         <div class="action-group">
-                                            <button class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0;" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
-                                            <button class="btn-icon edit" onclick="fillBookForm('#S005', 'Đắc Nhân Tâm', 'Dale Carnegie', 'Kỹ năng', 86000, 15)" title="Chỉnh sửa"><i class="fa-solid fa-pen-to-square"></i></button>
-                                            <button class="btn-icon" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1;" title="Ẩn/Hiện sách"><i class="fa-solid fa-eye-slash"></i></button>
-                                            <button class="btn-icon delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                                            <!-- Xem -->
+                                            <a href="xem-sach.html" class="btn-icon" style="color: #0f5132; background-color: #e8f5e9; border-color: #bbf7d0; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xem chi tiết">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <!-- Sửa -->
+                                            <a href="sua-sach.html" class="btn-icon edit" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Chỉnh sửa">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <!-- Ẩn (Ping-Pong) -->
+                                            <label for="hide-ping" class="btn-icon lbl-ping" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <label for="hide-pong" class="btn-icon lbl-pong" style="color: #64748b; background-color: #f1f5f9; border-color: #cbd5e1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" title="Ẩn/Hiện sách">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </label>
+                                            <!-- Xóa (Gọi bảng hỏi Modal) -->
+                                            <a href="#deleteConfirmModal" class="btn-icon delete" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" title="Xóa">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -432,13 +570,11 @@
 
                     <div class="pagination-footer">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a href="#" onclick="return false;"><i
-                                        class="fa-solid fa-chevron-left"></i></a></li>
-                            <li class="page-item active"><a href="#" onclick="return false;">1</a></li>
-                            <li class="page-item"><a href="#" onclick="return false;">2</a></li>
-                            <li class="page-item"><a href="#" onclick="return false;">3</a></li>
-                            <li class="page-item"><a href="#" onclick="return false;"><i
-                                        class="fa-solid fa-chevron-right"></i></a></li>
+                            <li class="page-item disabled"><a href="admin-sach.html"><i class="fa-solid fa-chevron-left"></i></a></li>
+                            <li class="page-item active"><a href="admin-sach.html">1</a></li>
+                            <li class="page-item"><a href="admin-sach.html">2</a></li>
+                            <li class="page-item"><a href="admin-sach.html">3</a></li>
+                            <li class="page-item"><a href="admin-sach.html"><i class="fa-solid fa-chevron-right"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -492,86 +628,67 @@
         </div>
     </div>
 
-        <!-- MODAL ĐỔI MẬT KHẨU -->
+    <!-- MODAL XÁC NHẬN XÓA SÁCH (THỎA MÃN YÊU CẦU GV) -->
+    <div class="admin-modal-overlay" id="deleteConfirmModal">
+        <div class="admin-modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: #dc2626;"></i> Xác Nhận Xóa Sách</h3>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 12px; font-size: 15px; color: var(--text-primary);">
+                    Bạn có chắc chắn muốn xóa đầu sách này khỏi hệ thống không?
+                </p>
+                <div style="background-color: #f8fafc; padding: 12px; border-left: 4px solid #f59e0b; border-radius: 4px;">
+                    <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin: 0;">
+                        <i class="fa-solid fa-circle-info" style="color: #f59e0b;"></i> 
+                        <strong>Lưu ý:</strong> Nếu sách này đã phát sinh đơn hàng, hệ thống sẽ tự động chuyển sang trạng thái <strong>"Ẩn"</strong> để bảo toàn lịch sử giao dịch. Sách chưa bán sẽ bị xóa vĩnh viễn.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel" style="text-decoration: none;">Hủy Bỏ</a>
+                <!-- Bấm đồng ý sẽ gọi popup Xóa thành công (Xanh lá đổi đỏ) -->
+                <a href="#delete-success" class="btn-submit" style="background-color: #dc2626; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-trash"></i> Đồng Ý Xóa
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ĐỔI MẬT KHẨU -->
     <div class="admin-modal-overlay" id="changePasswordModal">
-
         <div class="admin-modal-card modal-medium">
-
             <div class="modal-header">
                 <h3>
                     <i class="fa-solid fa-key" style="color: #2563eb;"></i>
                     Đổi Mật Khẩu
                 </h3>
-
                 <a href="#" class="modal-close-btn">&times;</a>
             </div>
-
             <form action="#" method="get">
-
                 <div class="modal-body">
-
                     <div class="form-group full-width">
                         <label for="oldPassword">Mật khẩu hiện tại</label>
                         <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại">
                     </div>
-
                     <div class="form-group full-width">
                         <label for="newPassword">Mật khẩu mới</label>
                         <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới">
                     </div>
-
                     <div class="form-group full-width">
                         <label for="confirmPassword">Xác nhận mật khẩu mới</label>
                         <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới">
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
-        <a href="#" class="btn-cancel">Hủy bỏ</a>
-
-        <!-- SỬA BUTTON THÀNH THẺ <a> ĐỂ GỌI TARGET -->
-        <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-            <i class="fa-solid fa-check"></i> Xác nhận
-        </a>
+                    <a href="#" class="btn-cancel">Hủy bỏ</a>
+                    <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                        <i class="fa-solid fa-check"></i> Xác nhận
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-
-
-    <!-- Script xử lý chung & lọc sách nhanh -->
-    <!-- <script src="../../JS/admin-dashboard.js"></script>
-    <script>
-        // Bấm nút Sửa trên bảng sẽ tự động điền thông tin sách lên Form để cập nhật
-        function fillBookForm(id, name, author, category, price, stock) {
-            document.getElementById('bookIdInput').value = id;
-            document.getElementById('bookNameInput').value = name;
-            document.getElementById('bookAuthorInput').value = author;
-            document.getElementById('bookCategoryInput').value = category;
-            document.getElementById('bookPriceInput').value = price;
-            document.getElementById('bookStockInput').value = stock;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Lọc bảng sách theo từ khóa và thể loại
-        function filterBooks() {
-            const searchText = document.getElementById('searchBookInput').value.toLowerCase();
-            const selectedCat = document.getElementById('filterCategorySelect').value;
-            const rows = document.querySelectorAll('#bookTable tbody tr');
-
-            rows.forEach(row => {
-                const code = row.cells[0].innerText.toLowerCase();
-                const info = row.cells[1].innerText.toLowerCase();
-                const category = row.querySelector('.category-badge').innerText.trim();
-
-                const matchSearch = code.includes(searchText) || info.includes(searchText);
-                const matchCat = (selectedCat === 'all') || (category === selectedCat);
-
-                row.style.display = (matchSearch && matchCat) ? '' : 'none';
-            });
-        }
-
-        document.getElementById('searchBookInput').addEventListener('input', filterBooks);
-        document.getElementById('filterCategorySelect').addEventListener('change', filterBooks);
-    </script> -->
 </body>
-
 </html>
