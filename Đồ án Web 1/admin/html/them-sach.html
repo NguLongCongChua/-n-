@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sách Mới - Hệ Thống Quản Lý Nhà Sách</title>
+    <!-- Phông chữ Google Font Inter & Icon FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- BỔ SUNG LINK CSS CỦA USER VÀO ĐỂ ĂN LAYOUT 3 CỘT -->
+    <link rel="stylesheet" href="../css/style-chung.css">
+    
+    <link rel="stylesheet" href="../css/style-admin-chung.css">
+    <link rel="stylesheet" href="../css/admin-book.css">
+    
+    <style>
+        /* Tinh chỉnh cho trang Thêm Sách */
+        .preview-container {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            background-color: #f8fafc;
+            min-height: 400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .preview-container:hover {
+            border-color: var(--primary);
+            background-color: #eff6ff;
+        }
+        .preview-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+            z-index: 2;
+        }
+        .preview-text {
+            color: var(--text-muted);
+            z-index: 1;
+        }
+        .preview-text i {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        /* Ẩn các khối dư thừa từ CSS User lỡ chèn vào Admin */
+        .header, .footer, .breadcrumb {
+            display: none !important;
+        }
+        /* Style cho ô nhập liệu nằm gọn trong layout 3 cột */
+        .admin-ip {
+            width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); 
+            border-radius: var(--radius-sm); outline: none; font-size: 14px; font-family: inherit;
+        }
+        .admin-ip:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        
+        /* CỘT GIỮA: Danh sách dọc giống User */
+        .product-meta-list {
+            list-style: none; padding: 0; margin-bottom: 20px;
+        }
+        .product-meta-list li {
+            display: flex; align-items: center; margin-bottom: 15px;
+        }
+        .product-meta-list li strong {
+            width: 130px; flex-shrink: 0; color: #333; font-size: 14.5px;
+        }
+        
+        /* BỐC ĐÚNG CSS 3 CỘT TỪ STYLE-CHUNG.CSS CỦA USER BỎ VÀO ĐÂY */
+        .product-detail-container {
+            display: flex;
+            gap: 35px;
+            align-items: flex-start;
+        }
+        .product-detail-left { 
+            width: 32%; 
+        }
+        .product-detail-middle { 
+            width: 40%; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .product-detail-right.buy-box {
+            width: 28%;
+            background-color: #fafbfc;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+        @media (max-width: 992px) {
+            .product-detail-container { flex-direction: column; }
+            .product-detail-left, .product-detail-middle, .product-detail-right.buy-box { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Popup đổi mật khẩu (Kế thừa) -->
+    <div id="show-pass-toast" class="toast-target"></div>
+    <div class="toast-msg toast-password">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Đổi mật khẩu thành công</strong>
+            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
+
+    <div class="admin-container">
+        <!-- ĐÃ XÓA CỘT TRÁI (ASIDE) CHỈ CÒN CỘT PHẢI MAIN CONTENT -->
+
+        <main class="admin-main-content">
+            <!-- Header Thanh Công Cụ -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Thêm Sách Mới</h1>
+                    <p>Nhập thông tin sản phẩm mới vào kho sách.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="admin-sach.html" class="btn-cancel" style="padding: 10px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </header>
+
+            <section class="dashboard-sections">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-plus icon-primary"></i> Nhập Thông Tin Sách</h2>
+                    </div>
+                    <div class="form-container">
+                        <form class="form-sach" action="admin-sach.html#add-success">
+                            
+                            <!-- BỐ CỤC 3 CỘT CHUẨN USER -->
+                            <div class="product-detail-container" style="padding: 0; box-shadow: none; border: none; margin-top: 0;">
+                                
+                                <!-- CỘT 1: ẢNH PREVIEW -->
+                                <div class="product-detail-left">
+                                    <label class="preview-container" for="bookCover">
+                                        <div class="preview-text" id="previewText">
+                                            <i class="fa-regular fa-image"></i>
+                                            <p>Nhấp để tải ảnh bìa lên</p>
+                                            <small>(PNG, JPG)</small>
+                                        </div>
+                                        <img src="" alt="Preview" class="preview-image" id="imagePreview">
+                                        <input type="file" id="bookCover" accept="image/*" hidden onchange="previewImage(event)">
+                                    </label>
+                                </div>
+
+                                <!-- CỘT 2: CÁC TRƯỜNG NHẬP LIỆU (ĐỨNG DỌC GIỐNG BÊN USER) -->
+                                <div class="product-detail-middle">
+                                    <h1 class="product-detail-title">
+                                        <input type="text" class="admin-ip" style="font-size: 20px; font-weight: bold; border-width: 2px;" placeholder="Nhập tiêu đề sách (VD: Đắc Nhân Tâm)...">
+                                    </h1>
+                                    
+                                    <div class="product-rating" style="margin-bottom: 20px;">
+                                        
+                                    </div>
+
+                                    <ul class="product-meta-list">
+                                        <li>
+                                            <strong>Mã sách:</strong> 
+                                            <!-- Ô Mã sách: Bôi xám, Khóa không cho nhập, Điền sẵn giá trị -->
+                                            <input type="text" class="admin-ip" value="#S006" readonly style="background-color: #f1f5f9; color: #94a3b8; font-weight: 600; cursor: not-allowed; border-style: dashed;">
+                                        </li>
+                                        <li>
+                                            <strong>Tác giả:</strong> 
+                                            <input type="text" class="admin-ip" placeholder="Nhập tên tác giả...">
+                                        </li>
+                                        <li>
+                                            <strong>Nhà xuất bản:</strong> 
+                                            <input type="text" class="admin-ip" placeholder="Ví dụ: NXB Trẻ">
+                                        </li>
+                                        <li>
+                                            <strong>Thể loại:</strong> 
+                                            <select class="admin-ip">
+                                                <option value="" disabled selected>Chọn thể loại</option>
+                                                <option value="Kỹ năng">Kỹ năng</option>
+                                                <option value="Văn học">Văn học</option>
+                                                <option value="Kinh tế">Kinh tế</option>
+                                                <option value="Tâm lý">Tâm lý</option>
+                                                <option value="Thiếu nhi">Thiếu nhi</option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            <strong>Số trang:</strong> 
+                                            <input type="number" class="admin-ip" placeholder="Ví dụ: 300">
+                                        </li>
+                                        <li>
+                                            <strong>Hình thức:</strong> 
+                                            <select class="admin-ip">
+                                                <option value="Bìa mềm">Bìa mềm</option>
+                                                <option value="Bìa cứng">Bìa cứng</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+
+                                    <div class="short-desc" style="background-color: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                                        <strong style="display: block; margin-bottom: 8px;">Tóm tắt nội dung:</strong>
+                                        <textarea rows="5" class="admin-ip" style="resize: vertical;" placeholder="Nhập tóm tắt nội dung sách..."></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- CỘT 3: KHUNG GIÁ VÀ CHỐT LƯU -->
+                                <div class="product-detail-right buy-box" style="background-color: var(--bg-body); border-color: var(--border-color);">
+                                    
+                                    <div style="margin-bottom: 20px; text-align: center;">
+                                        <span style="color: var(--text-secondary); font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px;">Giá bán (VNĐ)</span>
+                                        <!-- Ô Nhập Giá (Đổi sang type text để chứa dấu phẩy, dùng hàm formatPrice) -->
+                                        <input type="text" class="admin-ip" oninput="formatPrice(this)" style="font-size: 24px; font-weight: bold; color: var(--danger); text-align: center;" placeholder="0">
+                                    </div>
+                                    
+                                    <div class="stock-status" style="margin-bottom: 25px;">
+                                        Tình trạng: <span style="color: #0f5132; font-weight: bold;">Còn hàng (Sẵn sàng giao)</span>
+                                    </div>
+
+                                    <div class="qty-selector-group" style="margin-bottom: 30px;">
+                                        <span>Số lượng nhập kho:</span>
+                                        <input type="number" class="admin-ip" value="50" style="width: 80px; text-align: center; font-weight: bold; font-size: 16px;">
+                                    </div>
+
+                                    <div class="action-buttons vertical-buttons" style="margin-top: auto; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+                                        <button type="submit" class="btn-submit" style="width: 100%; padding: 14px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                            <i class="fa-solid fa-check"></i> Lưu Sách Mới
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script Xử lý -->
+    <script>
+        // 1. Script preview ảnh bìa sách
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    const text = document.getElementById('previewText');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    text.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 2. Script Tự động thêm dấu phẩy hàng nghìn cho Giá bán
+        function formatPrice(input) {
+            // Lọc bỏ tất cả các ký tự không phải là số (kể cả dấu phẩy cũ)
+            let value = input.value.replace(/\D/g, '');
+            
+            // Format lại thành số có dấu phẩy nếu giá trị không rỗng
+            if (value !== '') {
+                value = parseInt(value, 10).toLocaleString('en-US');
+            }
+            
+            // Gắn lại vào ô input
+            input.value = value;
+        }
+    </script>
+</body>
+
+</html>
