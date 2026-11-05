@@ -16,10 +16,25 @@
 </head>
 <body>
 
+        <!-- Điểm neo để ẩn thông báo chào mừng khi chuyển trang -->
+    <div id="hide-welcome" style="display: none;"></div>
     <!-- 3 CHECKBOX ẨN ĐIỀU KHIỂN POPUP THUẦN HTML/CSS (ĐỨNG NGUYÊN VỊ TRÍ, KHÔNG BỊ NHẢY LÊN ĐẦU TRANG) -->
     <input type="checkbox" id="modalAdminInfoToggle" class="modal-toggle-checkbox">
     <input type="checkbox" id="modalOrderDetailToggle" class="modal-toggle-checkbox">
     <input type="checkbox" id="modalCustOrdersToggle" class="modal-toggle-checkbox">
+
+        <!-- ==============================================
+         2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
+    =============================================== -->
+    <div id="show-pass-toast" class="toast-target"></div>
+    <div class="toast-msg toast-password">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Đổi mật khẩu thành công</strong>
+            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
 
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar) -->
@@ -40,7 +55,7 @@
                 <div class="menu-label">Menu Chính</div>
                 <ul class="sidebar-menu">
                     <li>
-                        <a href="admin-dashboard.html">
+                        <a href="admin-dashboard.html#hide-welcome">
                             <i class="fa-solid fa-chart-pie"></i>
                             <span>Tổng quan</span>
                         </a>
@@ -484,82 +499,6 @@
     </div>
 
     <!-- =========================================================
-         POPUP 1: THÔNG TIN TÀI KHOẢN (CHUẨN 100% THEO HÌNH ẢNH 1)
-    ========================================================= -->
-    <div class="pure-modal-overlay" id="adminInfoModal">
-        <label for="modalAdminInfoToggle" class="pure-modal-backdrop"></label>
-        <div class="pure-modal-box modal-box-small">
-            <div class="pure-modal-header">
-                <div class="modal-title-wrap">
-                    <i class="fa-solid fa-user-gear icon-modal-blue"></i>
-                    <h3>Thông Tin Tài Khoản</h3>
-                </div>
-                <a href="#" class="modal-close-btn">&times;</a>
-            </div>
-
-            <div class="pure-modal-body">
-                <div class="pure-profile-header">
-                    <div class="pure-avatar-circle">
-                        <i class="fa-solid fa-user-gear"></i>
-                    </div>
-                    <div class="pure-profile-text">
-                        <h4>ADMIN</h4>
-                        <span class="pure-badge-role">ADMIN 1</span>
-                    </div>
-                </div>
-
-                <div class="info-items-container">
-                    <div class="info-item-row">
-                        <div class="info-item-label">
-                            <i class="fa-solid fa-id-card"></i>
-                            <span>ID:</span>
-                        </div>
-                        <div class="info-item-value">AD1</div>
-                    </div>
-
-                    <div class="info-item-row">
-                        <div class="info-item-label">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Name:</span>
-                        </div>
-                        <div class="info-item-value">ADMIN</div>
-                    </div>
-
-                    <div class="info-item-row">
-                        <div class="info-item-label">
-                            <i class="fa-solid fa-cake-candles"></i>
-                            <span>Tuổi:</span>
-                        </div>
-                        <div class="info-item-value">19</div>
-                    </div>
-
-                    <div class="info-item-row">
-                        <div class="info-item-label">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <span>Vai trò:</span>
-                        </div>
-                        <div class="info-item-value text-green-bold">ADMIN 1</div>
-                    </div>
-
-                    <div class="info-item-row info-desc-block">
-                        <div class="info-item-label">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span>Mô tả:</span>
-                        </div>
-                        <div class="info-desc-content">
-                            Admin của Shop BookStore tạo ra bởi Team Ngũ Long Công Chúa
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pure-modal-footer">
-                <label for="modalAdminInfoToggle" class="btn-gray-close">Đóng</label>
-            </div>
-        </div>
-    </div>
-
-    <!-- =========================================================
          POPUP 2: CHI TIẾT ĐƠN HÀNG #DH001 (ĐÃ CẬP NHẬT CÁC SÁCH TỪ ẢNH CỦA BẠN)
     ========================================================= -->
     <div class="pure-modal-overlay" id="orderDetailModal">
@@ -852,6 +791,96 @@
                 <label for="modalCustOrdersToggle" class="btn-gray-close">Đóng</label>
             </div>
         </div>
+    </div>
+
+<!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
+    <div class="admin-modal-overlay" id="adminInfoModal">
+        <div class="admin-modal-card modal-medium">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
+                <a href="#" class="modal-close-btn">&times;</a>
+            </div>
+            <div class="modal-body">
+                <div class="admin-profile-header">
+                    <img src="../images/avatars/Admin.png" alt="Admin Avatar" class="profile-avatar-large">
+                    <div>
+                        <h4>ADMIN</h4>
+                        <p class="role-tag">ADMIN 1</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-id-badge"></i> ID:</span>
+                        <span class="value">AD1</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-user"></i> Name:</span>
+                        <span class="value">ADMIN</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-cake-candles"></i> Tuổi:</span>
+                        <span class="value">19</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label"><i class="fa-solid fa-shield-halved"></i> Vai trò:</span>
+                        <span class="value text-success">ADMIN 1</span>
+                    </div>
+                    <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <span class="label"><i class="fa-solid fa-circle-info"></i> Mô tả:</span>
+                        <span class="value"
+                            style="font-weight: normal; color: var(--text-secondary); text-align: left;">Admin của Shop
+                            BookStore tạo ra bởi Team Ngũ Long Công Chúa</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel">Đóng</a>
+            </div>
+        </div>
+    </div>
+
+           <!-- MODAL ĐỔI MẬT KHẨU -->
+    <div class="admin-modal-overlay" id="changePasswordModal">
+
+        <div class="admin-modal-card modal-medium">
+
+            <div class="modal-header">
+                <h3>
+                    <i class="fa-solid fa-key" style="color: #2563eb;"></i>
+                    Đổi Mật Khẩu
+                </h3>
+
+                <a href="#" class="modal-close-btn">&times;</a>
+            </div>
+
+            <form action="#" method="get">
+
+                <div class="modal-body">
+
+                    <div class="form-group full-width">
+                        <label for="oldPassword">Mật khẩu hiện tại</label>
+                        <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="newPassword">Mật khẩu mới</label>
+                        <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+        <a href="#" class="btn-cancel">Hủy bỏ</a>
+
+        <!-- SỬA BUTTON THÀNH THẺ <a> ĐỂ GỌI TARGET -->
+        <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+            <i class="fa-solid fa-check"></i> Xác nhận
+        </a>
     </div>
 
 </body>
