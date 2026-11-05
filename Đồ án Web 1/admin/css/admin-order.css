@@ -565,6 +565,28 @@ body {
     border-color: var(--primary);
 }
 
+/* Nút "+ Thêm đơn mới" ở header lọc */
+.btn-header-add {
+    background-color: #10b981;
+    color: #ffffff !important;
+    border: 1px solid #059669;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-header-add:hover {
+    background-color: #059669;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    transform: translateY(-1px);
+}
+
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -689,7 +711,7 @@ body {
 }
 
 /* =========================================================
-   7. NHÃN TRẠNG THÁI & NÚT THAO TÁC CƠ BẢN
+   7. NHÃN TRẠNG THÁI & NÚT THAO TÁC TRONG BẢNG ĐƠN HÀNG
 ========================================================= */
 .badge {
     padding: 5px 12px;
@@ -728,6 +750,7 @@ body {
     user-select: none;
 }
 
+/* Nút Chi tiết đơn */
 .btn-detail {
     background-color: #f1f5f9;
     color: var(--text-secondary);
@@ -740,8 +763,48 @@ body {
     border-color: var(--primary);
 }
 
+/* Dấu cộng: Thêm đơn hàng */
+.btn-order.btn-action-add {
+    background-color: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    transition: all 0.25s ease;
+}
+
+.btn-order.btn-action-add:hover {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+    transform: translateY(-2px);
+}
+
+.btn-order.btn-action-add:hover i {
+    color: #ffffff !important;
+}
+
+/* Thùng rác: Xóa đơn hàng */
+.btn-order.btn-action-delete {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    transition: all 0.25s ease;
+}
+
+.btn-order.btn-action-delete:hover {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35) !important;
+    transform: translateY(-2px);
+}
+
+.btn-order.btn-action-delete:hover i {
+    color: #ffffff !important;
+}
+
 /* =========================================================
-   8. BẢNG TOP 5: NÚT XEM ĐƠN, DẤU CỘNG (THÊM) & THÙNG RÁC (XÓA)
+   8. BẢNG TOP 5 KHÁCH HÀNG (CHỈ NÚT XEM CHI TIẾT ĐƠN)
 ========================================================= */
 .user-cell {
     display: flex;
@@ -792,7 +855,6 @@ body {
 .rank-3 { background-color: #ffedd5; color: #c2410c; }
 .rank-normal { background-color: #f8fafc; color: var(--text-secondary); border: 1px solid var(--border-color); }
 
-/* 1. Nút Xem Đơn */
 .btn-order.btn-view-customer-orders,
 .btn-view-customer-orders {
     background-color: #eff6ff;
@@ -812,52 +874,6 @@ body {
 
 .btn-order.btn-view-customer-orders:hover i,
 .btn-view-customer-orders:hover i {
-    color: #ffffff !important;
-}
-
-/* 2. Dấu Cộng: Thêm */
-.btn-order.btn-action-add,
-.btn-action-add {
-    background-color: #ecfdf5;
-    color: #059669;
-    border: 1px solid #a7f3d0;
-    transition: all 0.25s ease;
-}
-
-.btn-order.btn-action-add:hover,
-.btn-action-add:hover {
-    background-color: #10b981 !important;
-    color: #ffffff !important;
-    border-color: #10b981 !important;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
-    transform: translateY(-2px);
-}
-
-.btn-order.btn-action-add:hover i,
-.btn-action-add:hover i {
-    color: #ffffff !important;
-}
-
-/* 3. Thùng Rác: Xóa */
-.btn-order.btn-action-delete,
-.btn-action-delete {
-    background-color: #fef2f2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
-    transition: all 0.25s ease;
-}
-
-.btn-order.btn-action-delete:hover,
-.btn-action-delete:hover {
-    background-color: #ef4444 !important;
-    color: #ffffff !important;
-    border-color: #ef4444 !important;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35) !important;
-    transform: translateY(-2px);
-}
-
-.btn-order.btn-action-delete:hover i,
-.btn-action-delete:hover i {
     color: #ffffff !important;
 }
 
@@ -890,8 +906,8 @@ body {
 #modalAdminInfoToggle:checked ~ #adminInfoModal,
 #modalOrderDetailToggle:checked ~ #orderDetailModal,
 #modalCustOrdersToggle:checked ~ #customerOrdersModal,
-#modalAddCustToggle:checked ~ #addCustModal,
-#modalDeleteCustToggle:checked ~ #deleteCustModal {
+#modalAddOrderToggle:checked ~ #addOrderModal,
+#modalDeleteOrderToggle:checked ~ #deleteOrderModal {
     display: flex !important;
 }
 
@@ -975,7 +991,7 @@ body {
 }
 
 /* =========================================================
-   CHI TIẾT ĐƠN HÀNG & MODAL SÁCH
+   CHI TIẾT ĐƠN HÀNG #DH001
 ========================================================= */
 .order-quick-summary {
     display: flex;
@@ -1274,7 +1290,7 @@ body {
 }
 
 /* =========================================================
-   POPUP THÊM & POPUP XÁC NHẬN XÓA (MỚI)
+   POPUP TẠO ĐƠN & POPUP XÁC NHẬN XÓA ĐƠN HÀNG
 ========================================================= */
 .confirm-content-box {
     display: flex;
@@ -1309,7 +1325,7 @@ body {
     line-height: 1.4;
 }
 
-/* Form trong popup Thêm đơn */
+/* Form tạo đơn */
 .custom-modal-form {
     display: flex;
     flex-direction: column;
@@ -1361,12 +1377,6 @@ body {
 .form-control-input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-control-input[readonly] {
-    background-color: #f8fafc;
-    color: #64748b;
-    cursor: not-allowed;
 }
 
 /* Các nút Footer Modal */
