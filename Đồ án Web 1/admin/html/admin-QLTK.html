@@ -18,6 +18,93 @@
 
 <body>
 
+    <!-- ==============================================
+         PING-PONG HACKS CỦA ADMIN-QLTK (KHÔNG ẢNH HƯỞNG CẤU TRÚC CŨ)
+    =============================================== -->
+    <input type="radio" name="addauto_trick" id="addauto-ping" hidden>
+    <input type="radio" name="addauto_trick" id="addauto-pong" hidden>
+    <input type="radio" name="addauto_trick" id="close-addauto" hidden>
+
+    <input type="radio" name="lock_trick" id="lock-ping" hidden>
+    <input type="radio" name="lock_trick" id="lock-pong" hidden>
+    <input type="radio" name="lock_trick" id="close-lock" hidden>
+
+    <!-- TOAST THÊM TỰ ĐỘNG (XANH LÁ) -->
+    <div class="toast-msg toast-addauto-ui t-addauto-ping" style="border-left: 5px solid #10b981;">
+        <div class="toast-icon" style="background-color: #d1fae5; color: #10b981;">✔</div>
+        <div class="toast-content"><strong>Thành công!</strong><p>Đã tạo tài khoản ngẫu nhiên.</p></div>
+        <label for="close-addauto" class="toast-close">✕</label>
+    </div>
+    <div class="toast-msg toast-addauto-ui t-addauto-pong" style="border-left: 5px solid #10b981;">
+        <div class="toast-icon" style="background-color: #d1fae5; color: #10b981;">✔</div>
+        <div class="toast-content"><strong>Thành công!</strong><p>Đã tạo tài khoản ngẫu nhiên.</p></div>
+        <label for="close-addauto" class="toast-close">✕</label>
+    </div>
+
+    <!-- TOAST KHÓA TÀI KHOẢN (CAM) -->
+    <div class="toast-msg toast-lock-ui t-lock-ping" style="border-left: 5px solid #f59e0b;">
+        <div class="toast-icon" style="background-color: #fef3c7; color: #f59e0b;">✔</div>
+        <div class="toast-content"><strong style="color: #b45309;">Hoàn tất!</strong><p>Trạng thái khóa tài khoản đã cập nhật.</p></div>
+        <label for="close-lock" class="toast-close">✕</label>
+    </div>
+    <div class="toast-msg toast-lock-ui t-lock-pong" style="border-left: 5px solid #f59e0b;">
+        <div class="toast-icon" style="background-color: #fef3c7; color: #f59e0b;">✔</div>
+        <div class="toast-content"><strong style="color: #b45309;">Hoàn tất!</strong><p>Trạng thái khóa tài khoản đã cập nhật.</p></div>
+        <label for="close-lock" class="toast-close">✕</label>
+    </div>
+
+    <style>
+        .toast-addauto-ui, .toast-lock-ui {
+            position: fixed !important; top: 24px !important; right: 24px !important;
+            z-index: 999999 !important; display: flex; opacity: 0; pointer-events: none;
+            background: #fff; padding: 14px 18px; border-radius: 10px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); align-items: center; gap: 14px; 
+            transform: translateX(120%); min-width: 330px;
+        }
+        .toast-addauto-ui .toast-icon, .toast-lock-ui .toast-icon {
+            width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0;
+        }
+        .toast-addauto-ui .toast-content strong, .toast-lock-ui .toast-content strong { font-size: 14px; font-weight: 700; display: block; line-height: 1.3;}
+        .toast-addauto-ui .toast-content p, .toast-lock-ui .toast-content p { font-size: 12px; color: #475569; margin: 3px 0 0 0; line-height: 1.4;}
+        .toast-addauto-ui .toast-close, .toast-lock-ui .toast-close { text-decoration: none; color: #94a3b8; font-size: 18px; cursor: pointer; margin-left: 10px; transition: 0.2s;}
+
+        @keyframes popSlideIn {
+            0% { opacity: 0; transform: translateX(120%); }
+            10% { opacity: 1; transform: translateX(0); }
+            80% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(120%); pointer-events: none; }
+        }
+
+        #addauto-ping:checked ~ .t-addauto-ping, #addauto-pong:checked ~ .t-addauto-pong,
+        #lock-ping:checked ~ .t-lock-ping, #lock-pong:checked ~ .t-lock-pong {
+            display: flex !important; animation: popSlideIn 3.5s ease forwards !important;
+        }
+
+        #close-addauto:checked ~ .t-addauto-ping, #close-addauto:checked ~ .t-addauto-pong,
+        #close-lock:checked ~ .t-lock-ping, #close-lock:checked ~ .t-lock-pong {
+            display: none !important; animation: none !important;
+        }
+
+        .lbl-pong { display: none !important; }
+        #addauto-ping:checked ~ .admin-container .auth-wrapper-addauto .lbl-ping { display: none !important; }
+        #addauto-ping:checked ~ .admin-container .auth-wrapper-addauto .lbl-pong { display: inline-flex !important; }
+        #addauto-pong:checked ~ .admin-container .auth-wrapper-addauto .lbl-pong { display: none !important; }
+        #addauto-pong:checked ~ .admin-container .auth-wrapper-addauto .lbl-ping { display: inline-flex !important; }
+
+        #lock-ping:checked ~ .admin-container .auth-wrapper-lock .lbl-ping { display: none !important; }
+        #lock-ping:checked ~ .admin-container .auth-wrapper-lock .lbl-pong { display: inline-flex !important; }
+        #lock-pong:checked ~ .admin-container .auth-wrapper-lock .lbl-pong { display: none !important; }
+        #lock-pong:checked ~ .admin-container .auth-wrapper-lock .lbl-ping { display: inline-flex !important; }
+
+        /* Bổ sung CSS đảm bảo các Toast bật qua Modal (#) hiển thị chuẩn và tự ẩn khi mở modal khác */
+        #addUser:target ~ .toast-add-success,
+        #saveUser:target ~ .toast-save-success,
+        #delete-success:target ~ .toast-delete-success {
+            display: flex !important;
+            animation: popSlideIn 3.5s ease forwards !important;
+        }
+    </style>
+
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar giữ nguyên cấu trúc) -->
         <aside class="admin-sidebar">
@@ -138,26 +225,29 @@
                 </div>
 
                 <div class="action-buttons">
-                    <a href="#addManualModal" class="btn-add-manual">
+                    <a href="#addManualModal" class="btn-add-manual" style="text-decoration: none;">
                         <i class="fa-solid fa-user-plus"></i>
                         Thêm thủ công
                     </a>
-                    <a href="#addUser" class="btn-add-manual">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        Thêm tự động
-                    </a>
-                    <!-- THÔNG BÁO THÊM KHÁCH HÀNG -->
+
+                    <!-- FIX PING PONG THÊM TỰ ĐỘNG -->
+                    <div class="auth-wrapper-addauto" style="display: contents;">
+                        <label for="addauto-ping" class="btn-add-manual lbl-ping" style="cursor: pointer;"><i class="fa-solid fa-wand-magic-sparkles"></i> Thêm tự động</label>
+                        <label for="addauto-pong" class="btn-add-manual lbl-pong" style="cursor: pointer;"><i class="fa-solid fa-wand-magic-sparkles"></i> Thêm tự động</label>
+                    </div>
+
+                    <!-- THÔNG BÁO THÊM KHÁCH HÀNG (GIỮ NGUYÊN) -->
                     <div id="addUser" class="toast-target"></div>
 
-                    <div class="toast-msg toast-add-success">
-                        <div class="toast-icon">✔</div>
+                    <div class="toast-msg toast-add-success" style="position: fixed; top: 24px; right: 24px; z-index: 999999; background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); border-left: 5px solid #10b981; align-items: center; gap: 14px; opacity: 0; pointer-events: none;">
+                        <div class="toast-icon" style="width: 36px; height: 36px; border-radius: 50%; background-color: #d1fae5; color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0;">✔</div>
                     
-                        <div class="toast-content">
-                            <strong>Thêm khách hàng thành công!</strong>
-                            <p>Thông tin khách hàng đã được thêm thành công.</p>
+                        <div class="toast-content" style="flex: 1;">
+                            <strong style="font-size: 14px; font-weight: 700; color: #064e3b; display: block; line-height: 1.3;">Thêm khách hàng thành công!</strong>
+                            <p style="font-size: 12px; color: #475569; margin: 3px 0 0 0; line-height: 1.4;">Thông tin khách hàng đã được thêm thành công.</p>
                         </div>
                     
-                        <a href="#" class="toast-close" title="Đóng">✕</a>
+                        <a href="#" class="toast-close" title="Đóng" style="text-decoration: none; color: #94a3b8; font-size: 18px; cursor: pointer; margin-left: 10px;">✕</a>
                     </div>
                 </div>
             </section>
@@ -183,11 +273,11 @@
                                 <th>Vai trò</th>
                                 <th>Ngày Tạo</th>
                                 <th>Trạng Thái</th>
-                                <th style="text-align: center;">Thao Tác</th>
+                                <th style="text-align: center; min-width: 180px;">Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
-                            <!-- Dữ liệu 10 tài khoản mẫu tạo theo thời gian từ sớm nhất đến trễ nhất -->
+                            <!-- User 1 -->
                             <tr>
                                 <td><strong>#QL003</strong></td>
                                 <td>
@@ -204,24 +294,21 @@
                                 <td>01/01/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
+                                    <!-- THÁO VỎ BUTTON ĐỂ BẤM VIỀN ĐƯỢC -->
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
                                     
-                                    <button class="btn-icon btn-review" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    
+                                    <!-- FIX PING PONG KHÓA -->
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
 
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 2 -->
                             <tr>
                                 <td><strong>#NV011</strong></td>
                                 <td>
@@ -238,22 +325,16 @@
                                 <td>15/02/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 3 -->
                             <tr>
                                 <td><strong>#NV010</strong></td>
                                 <td>
@@ -270,22 +351,16 @@
                                 <td>10/04/2023</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 4 -->
                             <tr>
                                 <td><strong>#US315</strong></td>
                                 <td>
@@ -302,22 +377,16 @@
                                 <td>02/06/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 5 -->
                             <tr>
                                 <td><strong>#NV009</strong></td>
                                 <td>
@@ -334,22 +403,16 @@
                                 <td>18/08/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 6 -->
                             <tr>
                                 <td><strong>#US316</strong></td>
                                 <td>
@@ -366,22 +429,16 @@
                                 <td>05/11/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 7 -->
                             <tr>
                                 <td><strong>#US317</strong></td>
                                 <td>
@@ -398,22 +455,16 @@
                                 <td>20/01/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 8 -->
                             <tr>
                                 <td><strong>#US318</strong></td>
                                 <td>
@@ -430,22 +481,16 @@
                                 <td>14/04/2024</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 9 -->
                             <tr>
                                 <td><strong>#US319</strong></td>
                                 <td>
@@ -462,22 +507,16 @@
                                 <td>01/08/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
+                            <!-- User 10 -->
                             <tr>
                                 <td><strong>#US320</strong></td>
                                 <td>
@@ -494,27 +533,20 @@
                                 <td>15/10/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Xem">
-                                        <a href="#reviewDetail" class="btn-review"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-edit" title="Sửa">
-                                        <a href="#editUser" class="btn-edit"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                        </button>
-                                    <button class="btn-icon btn-lock" title="Khóa/Mở khóa">
-                                        <a href="admin-QLTK.html" class="btn-lock"><i
-                                            class="fa-solid fa-lock"></i></a></button>
-                                    <button class="btn-icon btn-delete" title="Xóa">
-                                        <a href="#deleteConfirmModal" class="btn-delete"><i
-                                            class="fa-solid fa-trash"></i></a></button>
+                                    <a href="#reviewDetail" class="btn-icon btn-review" title="Xem" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#editUser" class="btn-icon btn-edit" title="Sửa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <div class="auth-wrapper-lock" style="display: contents;">
+                                        <label for="lock-ping" class="btn-icon btn-lock lbl-ping" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                        <label for="lock-pong" class="btn-icon btn-lock lbl-pong" title="Khóa/Mở khóa" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i class="fa-solid fa-lock"></i></label>
+                                    </div>
+                                    <a href="#deleteConfirmModal" class="btn-icon btn-delete" title="Xóa" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Phân Trang Tượng Trưng (3 trang, không nhảy tab) -->
+                <!-- Phân Trang Tượng Trưng -->
                 <div class="pagination-footer">
                     <span class="pagination-info">Hiển thị 10 / 30 người dùng</span>
                     <ul class="pagination">
@@ -531,453 +563,200 @@
         </main>
     </div>
 
-
     <!-- MODAL THÊM KHÁCH HÀNG THỦ CÔNG -->
     <div class="admin-modal-overlay" id="addManualModal">
-
         <div class="admin-modal-card modal-medium">
-
             <div class="modal-header">
                 <h3>
                     <i class="fa-solid fa-user-plus" style="color: #2563eb;"></i>
                     Thêm Khách Hàng Thủ Công
                 </h3>
-
-                <!-- NÚT ĐÓNG -->
-                <a href="#" class="modal-close-btn">&times;</a>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
             </div>
-
             <form action="#" method="get">
-
                 <div class="modal-body form-grid">
-
                     <div class="form-group">
                         <label for="userId">Mã ID Khách Hàng <span class="required">*</span></label>
                         <input type="text" id="userId" placeholder="Ví dụ: US011">
                     </div>
-
                     <div class="form-group">
                         <label for="Name">Họ và Tên <span class="required">*</span></label>
                         <input type="text" id="Name" placeholder="Nhập họ và tên...">
                     </div>
-
-                      <div class="form-group">
+                    <div class="form-group">
                         <label for="userName">Tài Khoản <span class="required">*</span></label>
                         <input type="text" id="userName" placeholder="vd:ngulongcongchua123">
                     </div>
-
                     <div class="form-group">
                         <label for="password">Mật khẩu <span class="required">*</span></label>
                         <input type="text" id="password" placeholder="●●●●●●">
                     </div>
-
                     <div class="form-group">
                         <label for="role">Vai trò <span class="required">*</span></label>
                         <input type="text" id="role" placeholder="vd: Khách hàng">
                     </div>
-
                     <div class="form-group">
                         <label for="userDob">Ngày Tháng Năm Sinh <span class="required">*</span></label>
                         <input type="date" id="userDob">
                     </div>
-
                     <div class="form-group">
                         <label for="userPhone">Số Điện Thoại <span class="required">*</span></label>
                         <input type="tel" id="userPhone" placeholder="Ví dụ: 0901234567">
                     </div>
-
                     <div class="form-group full-width">
                         <label for="userEmail">Địa Chỉ Email <span class="required">*</span></label>
                         <input type="email" id="userEmail" placeholder="nguyenvana@gmail.com">
                     </div>
-
                     <div class="form-group full-width">
                         <label for="userAddress">Địa Chỉ Liên Lạc <span class="required">*</span></label>
                         <input type="text" id="userAddress" placeholder="Nhập địa chỉ...">
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
-
-                    <!-- NÚT HỦY -->
-                    <a href="#" class="btn-cancel">Hủy Bỏ</a>
-
-                    <a href="#addUser" class="btn-submit">
+                    <a href="#" class="btn-cancel" style="text-decoration: none;">Hủy Bỏ</a>
+                    <a href="#addUser" class="btn-submit" style="text-decoration: none;">
                         <i class="fa-solid fa-check"></i>
                         Thêm Khách Hàng
                     </a>
-
                 </div>
-
             </form>
         </div>
     </div>
-<!-- THÔNG BÁO THÊM KHÁCH HÀNG -->
-<div id="addUser" class="toast-target"></div>
 
-<div class="toast-msg toast-add-success">
-    <div class="toast-icon">✔</div>
-
-    <div class="toast-content">
-        <strong>Thêm khách hàng thành công!</strong>
-        <p>Thông tin khách hàng đã được thêm thành công.</p>
-    </div>
-
-    <a href="#" class="toast-close" title="Đóng">✕</a>
-</div>
-    
-
-       <!-- MODAL ĐỔI MẬT KHẨU -->
-    <div class="admin-modal-overlay" id="changePasswordModal">
-
+    <!-- MODAL XEM THÔNG TIN USER -->
+    <div class="admin-modal-overlay" id="reviewDetail">
         <div class="admin-modal-card modal-medium">
-
             <div class="modal-header">
-                <h3>
-                    <i class="fa-solid fa-key" style="color: #2563eb;"></i>
-                    Đổi Mật Khẩu
-                </h3>
-
-                <a href="#" class="modal-close-btn">&times;</a>
+                <h3><i class="fa-solid fa-user" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
             </div>
-
-            <form action="#" method="get">
-
-                <div class="modal-body">
-
-                    <div class="form-group full-width">
-                        <label for="oldPassword">Mật khẩu hiện tại</label>
-                        <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="newPassword">Mật khẩu mới</label>
-                        <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="confirmPassword">Xác nhận mật khẩu mới</label>
-                        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới">
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-        <a href="#" class="btn-cancel">Hủy bỏ</a>
-
-        <!-- SỬA BUTTON THÀNH THẺ <a> ĐỂ GỌI TARGET -->
-        <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-            <i class="fa-solid fa-check"></i> Xác nhận
-        </a>
+            <div class="modal-body form-grid">
+                <div class="form-group"><label>Mã tài khoản</label><span class="detail-value">#QL003</span></div>
+                <div class="form-group"><label>Họ và tên</label><span class="detail-value">Nguyễn Văn An</span></div>
+                <div class="form-group"><label>Tên đăng nhập</label><span class="detail-value">ngulongcongchua123</span></div>
+                <div class="form-group"><label>Mật khẩu</label><span class="detail-value">••••••••</span></div>
+                <div class="form-group"><label>Ngày sinh</label><span class="detail-value">15/01/1995</span></div>
+                <div class="form-group"><label>Số điện thoại</label><span class="detail-value">0901234567</span></div>
+                <div class="form-group full-width"><label>Email</label><span class="detail-value">nguyenvana@gmail.com</span></div>
+                <div class="form-group"><label>Vai trò</label><span class="detail-value role-user">Quản lý</span></div>
+                <div class="form-group"><label>Ngày tạo tài khoản</label><span class="detail-value">15/10/2026</span></div>
+                <div class="form-group full-width"><label>Địa chỉ liên lạc</label><span class="detail-value">Quận 1, TP. Hồ Chí Minh</span></div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel" style="text-decoration: none;">Đóng</a>
+            </div>
+        </div>
     </div>
 
+    <!-- MODAL CHỈNH SỬA THÔNG TIN KHÁCH HÀNG -->
+    <div class="admin-modal-overlay" id="editUser">
+        <div class="admin-modal-card modal-medium">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-plus" style="color: #2563eb;"></i> Chỉnh Sửa Thông Tin</h3>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
+            </div>
+            <form action="#" method="get">
+                <div class="modal-body form-grid">
+                    <div class="form-group"><label for="userId">Mã ID Khách Hàng</label><input type="text" id="userId" value="#QL003" readonly></div>
+                    <div class="form-group"><label for="Name">Họ và Tên</label><input type="text" id="Name" value="Nguyễn Văn An"></div>
+                    <div class="form-group"><label for="userName">Tài Khoản</label><input type="text" id="userName" value="ngulongcongchua123"></div>
+                    <div class="form-group"><label for="password">Mật khẩu</label><input type="password" id="password" value="123456"></div>
+                    <div class="form-group"><label for="role">Vai trò</label><input type="text" id="role" value="Quản lý"></div>
+                    <div class="form-group"><label for="userDob">Ngày Tháng Năm Sinh</label><input type="date" id="userDob" value="15/01/1995"></div>
+                    <div class="form-group"><label for="userPhone">Số Điện Thoại</label><input type="tel" id="userPhone" value="0901234567"></div>
+                    <div class="form-group full-width"><label for="userEmail">Địa Chỉ Email</label><input type="email" id="userEmail" value="nguyenvanan@gmail.com"></div>
+                    <div class="form-group full-width"><label for="userAddress">Địa Chỉ Liên Lạc</label><input type="text" id="userAddress" value="Quận 1,TP. Hồ Chí Minh"></div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn-cancel" style="text-decoration: none;">Hủy Bỏ</a>
+                    <a href="#saveUser" class="btn-submit" style="text-decoration: none;"><i class="fa-solid fa-check"></i> Lưu Khách Hàng</a>
+                </div>
             </form>
         </div>
     </div>
-     <!-- ==============================================
-         2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
-    =============================================== -->
-    <div id="show-pass-toast" class="toast-target"></div>
-    <div class="toast-msg toast-password">
-        <div class="toast-icon">✔</div>
-        <div class="toast-content">
-            <strong>Đổi mật khẩu thành công</strong>
-            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
+
+    <!-- THÔNG BÁO LƯU KHÁCH HÀNG (GIỮ NGUYÊN) -->
+    <div id="saveUser" class="toast-target"></div>
+    <div class="toast-msg toast-save-success" style="position: fixed; top: 24px; right: 24px; z-index: 999999; background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); border-left: 5px solid #10b981; align-items: center; gap: 14px; opacity: 0; pointer-events: none;">
+        <div class="toast-icon" style="width: 36px; height: 36px; border-radius: 50%; background-color: #d1fae5; color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0;">✔</div>
+        <div class="toast-content" style="flex: 1;">
+            <strong style="font-size: 14px; font-weight: 700; color: #064e3b; display: block; line-height: 1.3;">Lưu khách hàng thành công!</strong>
+            <p style="font-size: 12px; color: #475569; margin: 3px 0 0 0; line-height: 1.4;">Thông tin khách hàng đã được cập nhật thành công.</p>
         </div>
-        <a href="#" class="toast-close" title="Đóng">✕</a>
+        <a href="#" class="toast-close" title="Đóng" style="text-decoration: none; color: #94a3b8; font-size: 18px; cursor: pointer; margin-left: 10px;">✕</a>
     </div>
-<!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
-    <div class="admin-modal-overlay" id="adminInfoModal">
-        <div class="admin-modal-card modal-medium">
+
+    <!-- MODAL XÁC NHẬN XÓA TÀI KHOẢN -->
+    <div class="admin-modal-overlay" id="deleteConfirmModal">
+        <div class="admin-modal-card">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-user-gear" style="color: #2563eb;"></i> Thông Tin Tài Khoản</h3>
-                <a href="#" class="modal-close-btn">&times;</a>
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: #dc2626;"></i> Xác Nhận Xóa Tài Khoản</h3>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
             </div>
             <div class="modal-body">
-                <div class="admin-profile-header">
-                    <img src="../images/avatars/Admin.png" alt="Admin Avatar" class="profile-avatar-large">
-                    <div>
-                        <h4>ADMIN</h4>
-                        <p class="role-tag">ADMIN 1</p>
-                    </div>
-                </div>
-                <div class="profile-details">
-                    <div class="detail-item">
-                        <span class="label"><i class="fa-solid fa-id-badge"></i> ID:</span>
-                        <span class="value">AD1</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label"><i class="fa-solid fa-user"></i> Name:</span>
-                        <span class="value">ADMIN</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label"><i class="fa-solid fa-cake-candles"></i> Tuổi:</span>
-                        <span class="value">19</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label"><i class="fa-solid fa-shield-halved"></i> Vai trò:</span>
-                        <span class="value text-success">ADMIN 1</span>
-                    </div>
-                    <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-                        <span class="label"><i class="fa-solid fa-circle-info"></i> Mô tả:</span>
-                        <span class="value"
-                            style="font-weight: normal; color: var(--text-secondary); text-align: left;">Admin của Shop
-                            BookStore tạo ra bởi Team Ngũ Long Công Chúa</span>
-                    </div>
+                <p style="margin-bottom: 12px; font-size: 15px; color: var(--text-primary);">Bạn có chắc chắn muốn xóa tài khoản khách hàng này khỏi hệ thống không?</p>
+                <div style="background-color: #f8fafc; padding: 12px; border-left: 4px solid #f59e0b; border-radius: 4px;">
+                    <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin: 0;">
+                        <i class="fa-solid fa-circle-info" style="color: #f59e0b;"></i>
+                        <strong>Lưu ý:</strong> Sau khi xóa, tài khoản sẽ không thể đăng nhập vào hệ thống. Nếu tài khoản đã phát sinh đơn hàng, hệ thống sẽ chuyển sang trạng thái <strong>"Đã khóa"</strong> để bảo toàn lịch sử giao dịch. Tài khoản chưa phát sinh giao dịch sẽ bị xóa khỏi hệ thống.
+                    </p>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn-cancel">Đóng</a>
+                <a href="#" class="btn-cancel" style="text-decoration: none;">Hủy Bỏ</a>
+                <a href="#delete-success" class="btn-submit" style="background-color: #dc2626; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-trash"></i> Đồng Ý Xóa
+                </a>
             </div>
         </div>
     </div>
 
-<!-- MODAL XEM THÔNG TIN USER -->
-<div class="admin-modal-overlay" id="reviewDetail">
-
-    <div class="admin-modal-card modal-medium">
-
-        <!-- HEADER -->
-        <div class="modal-header">
-            <h3>
-                <i class="fa-solid fa-user" style="color: #2563eb;"></i>
-                Thông Tin Tài Khoản
-            </h3>
-
-            <a href="#" class="modal-close-btn">&times;</a>
+    <!-- THÔNG BÁO XÓA TÀI KHOẢN THÀNH CÔNG (GIỮ NGUYÊN) -->
+    <div id="delete-success" class="toast-target"></div>
+    <div class="toast-msg toast-delete-success" style="position: fixed; top: 24px; right: 24px; z-index: 999999; background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); border-left: 5px solid #ef4444; align-items: center; gap: 14px; opacity: 0; pointer-events: none;">
+        <div class="toast-icon" style="width: 36px; height: 36px; border-radius: 50%; background-color: #fee2e2; color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0;">✔</div>
+        <div class="toast-content" style="flex: 1;">
+            <strong style="font-size: 14px; font-weight: 700; color: #991b1b; display: block; line-height: 1.3;">Xóa tài khoản thành công!</strong>
+            <p style="font-size: 12px; color: #475569; margin: 3px 0 0 0; line-height: 1.4;">Tài khoản khách hàng đã được xóa khỏi hệ thống.</p>
         </div>
-
-        <!-- BODY -->
-        <div class="modal-body form-grid">
-
-            <div class="form-group">
-                <label>Mã tài khoản</label>
-                <span class="detail-value">#QL003</span>
-            </div>
-
-            <div class="form-group">
-                <label>Họ và tên</label>
-                <span class="detail-value">Nguyễn Văn An</span>
-            </div>
-
-            <div class="form-group">
-                <label>Tên đăng nhập</label>
-                <span class="detail-value">ngulongcongchua123</span>
-            </div>
-
-            <div class="form-group">
-                <label>Mật khẩu</label>
-                <span class="detail-value">••••••••</span>
-            </div>
-
-            <div class="form-group">
-                <label>Ngày sinh</label>
-                <span class="detail-value">15/01/1995</span>
-            </div>
-
-            <div class="form-group">
-                <label>Số điện thoại</label>
-                <span class="detail-value">0901234567</span>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Email</label>
-                <span class="detail-value">nguyenvana@gmail.com</span>
-            </div>
-
-            <div class="form-group">
-                <label>Vai trò</label>
-                <span class="detail-value role-user">Quản lý</span>
-            </div>
-
-            <div class="form-group">
-                <label>Ngày tạo tài khoản</label>
-                <span class="detail-value">15/10/2026</span>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Địa chỉ liên lạc</label>
-                <span class="detail-value">Quận 1, TP. Hồ Chí Minh</span>
-            </div>
-
-        </div>
-
-        <!-- FOOTER -->
-        <div class="modal-footer">
-            <a href="#" class="btn-cancel">Đóng</a>
-        </div>
-
+        <a href="#" class="toast-close" title="Đóng" style="text-decoration: none; color: #94a3b8; font-size: 18px; cursor: pointer; margin-left: 10px;">✕</a>
     </div>
-</div>
-<!-- MODAL CHỈNH SỬA THÔNG TIN KHÁCH HÀNG -->
-    <div class="admin-modal-overlay" id="editUser">
 
+    <!-- ==============================================
+         MODAL ĐỔI MẬT KHẨU
+    =============================================== -->
+    <div class="admin-modal-overlay" id="changePasswordModal">
         <div class="admin-modal-card modal-medium">
-
             <div class="modal-header">
-                <h3>
-                    <i class="fa-solid fa-user-plus" style="color: #2563eb;"></i>
-                    Chỉnh Sửa Thông Tin
-                </h3>
-
-                <!-- NÚT ĐÓNG -->
-                <a href="#" class="modal-close-btn">&times;</a>
+                <h3><i class="fa-solid fa-key" style="color: #2563eb;"></i> Đổi Mật Khẩu</h3>
+                <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
             </div>
-
             <form action="#" method="get">
-
-                <div class="modal-body form-grid">
-
-                    <div class="form-group">
-                        <label for="userId">Mã ID Khách Hàng</label>
-                        <input type="text" id="userId" value="#QL003" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Name">Họ và Tên</label>
-                        <input type="text" id="Name" value="Nguyễn Văn An">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userName">Tài Khoản</label>
-                        <input type="text" id="userName" value="ngulongcongchua123">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" id="password" value="123456">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Vai trò</label>
-                        <input type="text" id="role" value="Quản lý">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userDob">Ngày Tháng Năm Sinh</label>
-                        <input type="date" id="userDob" value="15/01/1995">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userPhone">Số Điện Thoại</label>
-                        <input type="tel" id="userPhone" value="0901234567">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="userEmail">Địa Chỉ Email</label>
-                        <input type="email" id="userEmail" value="nguyenvanan@gmail.com">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="userAddress">Địa Chỉ Liên Lạc</label>
-                        <input type="text" id="userAddress" value="	Quận 1,TP. Hồ Chí Minh">
-                    </div>
-
+                <div class="modal-body">
+                    <div class="form-group full-width"><label for="oldPassword">Mật khẩu hiện tại</label><input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại"></div>
+                    <div class="form-group full-width"><label for="newPassword">Mật khẩu mới</label><input type="password" id="newPassword" placeholder="Nhập mật khẩu mới"></div>
+                    <div class="form-group full-width"><label for="confirmPassword">Xác nhận mật khẩu mới</label><input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới"></div>
                 </div>
-
                 <div class="modal-footer">
-
-                    <!-- NÚT HỦY -->
-                    <a href="#" class="btn-cancel">Hủy Bỏ</a>
-
-                    <a href="#saveUser" class="btn-submit">
-                        <i class="fa-solid fa-check"></i>
-                        Lưu Khách Hàng
+                    <a href="#" class="btn-cancel" style="text-decoration: none;">Hủy bỏ</a>
+                    <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                        <i class="fa-solid fa-check"></i> Xác nhận
                     </a>
-
                 </div>
-
             </form>
         </div>
     </div>
-    <!-- THÔNG BÁO LƯU KHÁCH HÀNG -->
-    <div id="saveUser" class="toast-target"></div>
 
-    <div class="toast-msg toast-save-success">
-        <div class="toast-icon">✔</div>
-
-        <div class="toast-content">
-            <strong>Lưu khách hàng thành công!</strong>
-            <p>Thông tin khách hàng đã được cập nhật thành công.</p>
+    <!-- THÔNG BÁO ĐỔI MẬT KHẨU -->
+    <div id="show-pass-toast" class="toast-target"></div>
+    <div class="toast-msg toast-password" style="position: fixed; top: 24px; right: 24px; z-index: 999999; background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); border-left: 5px solid #10b981; align-items: center; gap: 14px; opacity: 0; pointer-events: none;">
+        <div class="toast-icon" style="width: 36px; height: 36px; border-radius: 50%; background-color: #d1fae5; color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0;">✔</div>
+        <div class="toast-content" style="flex: 1;">
+            <strong style="font-size: 14px; font-weight: 700; color: #064e3b; display: block; line-height: 1.3;">Đổi mật khẩu thành công</strong>
+            <p style="font-size: 12px; color: #475569; margin: 3px 0 0 0; line-height: 1.4;">Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
         </div>
-
-        <a href="#" class="toast-close" title="Đóng">✕</a>
+        <a href="#" class="toast-close" title="Đóng" style="text-decoration: none; color: #94a3b8; font-size: 18px; cursor: pointer; margin-left: 10px;">✕</a>
     </div>
-<!-- MODAL XÁC NHẬN XÓA TÀI KHOẢN -->
-<div class="admin-modal-overlay" id="deleteConfirmModal">
-
-    <div class="admin-modal-card">
-
-        <div class="modal-header">
-            <h3>
-                <i class="fa-solid fa-triangle-exclamation" style="color: #dc2626;"></i>
-                Xác Nhận Xóa Tài Khoản
-            </h3>
-
-            <a href="#" class="modal-close-btn" style="text-decoration: none;">&times;</a>
-        </div>
-
-        <div class="modal-body">
-
-            <p style="margin-bottom: 12px; font-size: 15px; color: var(--text-primary);">
-                Bạn có chắc chắn muốn xóa tài khoản khách hàng này khỏi hệ thống không?
-            </p>
-
-            <div style="background-color: #f8fafc; padding: 12px; border-left: 4px solid #f59e0b; border-radius: 4px;">
-
-                <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin: 0;">
-                    <i class="fa-solid fa-circle-info" style="color: #f59e0b;"></i>
-
-                    <strong>Lưu ý:</strong>
-                    Sau khi xóa, tài khoản sẽ không thể đăng nhập vào hệ thống.
-                    Nếu tài khoản đã phát sinh đơn hàng, hệ thống sẽ chuyển sang trạng thái
-                    <strong>"Đã khóa"</strong> để bảo toàn lịch sử giao dịch.
-                    Tài khoản chưa phát sinh giao dịch sẽ bị xóa khỏi hệ thống.
-                </p>
-
-            </div>
-        </div>
-
-        <div class="modal-footer">
-
-            <a href="#" class="btn-cancel" style="text-decoration: none;">
-                Hủy Bỏ
-            </a>
-
-            <a href="#delete-success" class="btn-submit"
-                style="background-color: #dc2626; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-
-                <i class="fa-solid fa-trash"></i>
-                Đồng Ý Xóa
-
-            </a>
-
-        </div>
-
-    </div>
-</div>
-        <!-- THÔNG BÁO XÓA TÀI KHOẢN THÀNH CÔNG -->
-        <div id="delete-success" class="toast-target"></div>
-
-        <div class="toast-msg toast-delete-success">
-            <div class="toast-icon">✔</div>
-        
-            <div class="toast-content">
-                <strong>Xóa tài khoản thành công!</strong>
-                <p>Tài khoản khách hàng đã được xóa khỏi hệ thống.</p>
-            </div>
-        
-            <a href="#" class="toast-close" title="Đóng">✕</a>
-        </div>
-
-    <!-- Container Toast Notification (Thông báo góc phải màn hình) -->
-    <div id="toastContainer" class="toast-container"></div>
-
-    <!-- Script Javascript (nếu yêu cầu) -->
-    <!-- <script src="../../JS/admin-QLTK.js"></script>
-    <script src="../../JS/admin-dashboard.js"></script>
-     -->
 </body>
 
 </html>
