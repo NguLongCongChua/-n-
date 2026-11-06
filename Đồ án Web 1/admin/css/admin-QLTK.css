@@ -215,6 +215,7 @@
     font-size: 11px;
     font-weight: 600;
     display: inline-block;
+    text-align: center;
 }
 
 .status-active {
@@ -745,12 +746,37 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Hiện thông báo khi bấm lưu */
+//* Ẩn thông báo mặc định */
+.toast-add-success,
+.toast-save-success {
+    display: none;
+}
+
+/* Thông báo thêm khách hàng */
+#addUser:target ~ .toast-add-success {
+    display: flex;
+    animation: slideIn 0.2s ease forwards,
+               fadeOut 0.4s ease 1s forwards;
+}
+
+/* Thông báo lưu khách hàng */
 #saveUser:target ~ .toast-save-success {
     display: flex;
     animation: slideIn 0.2s ease forwards,
                fadeOut 0.4s ease 1s forwards;
 }
+
+.toast-delete-success {
+    display: none;
+}
+
+/* Hiển thị khi nhấn Đồng Ý Xóa */
+#delete-success:target ~ .toast-delete-success {
+    display: flex;
+    animation: slideIn 0.2s ease forwards,
+               fadeOut 0.4s ease 1s forwards;
+}
+
 
 
 
