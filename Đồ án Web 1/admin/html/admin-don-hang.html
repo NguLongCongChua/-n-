@@ -166,16 +166,29 @@
         <a href="#" class="toast-close" title="Đóng">✕</a>
     </div>
 
-    <!-- 2. Toast Thêm đơn hàng thành công -->
-    <div id="show-add-toast" class="toast-target"></div>
-    <div class="toast-msg toast-add toast-add-order toast-add-success">
-        <div class="toast-icon">✔</div>
-        <div class="toast-content">
-            <strong>Thêm đơn hàng thành công!</strong>
-            <p>Đơn hàng mới đã được thêm vào hệ thống.</p>
-        </div>
-        <a href="#" class="toast-close" title="Đóng">✕</a>
+    <!-- TOAST THÊM ĐƠN HÀNG - PING -->
+<div id="add-toast-ping" class="toast-target"></div>
+
+<div class="toast-msg toast-add-order toast-add-ping">
+    <div class="toast-icon">✔</div>
+    <div class="toast-content">
+        <strong>Thêm đơn hàng thành công!</strong>
+        <p>Đơn hàng mới đã được thêm vào hệ thống.</p>
     </div>
+    <a href="#" class="toast-close" title="Đóng">✕</a>
+</div>
+
+<!-- TOAST THÊM ĐƠN HÀNG - PONG -->
+<div id="add-toast-pong" class="toast-target"></div>
+
+<div class="toast-msg toast-add-order toast-add-pong">
+    <div class="toast-icon">✔</div>
+    <div class="toast-content">
+        <strong>Thêm đơn hàng thành công!</strong>
+        <p>Đơn hàng mới đã được thêm vào hệ thống.</p>
+    </div>
+    <a href="#" class="toast-close" title="Đóng">✕</a>
+</div>
 
     <!-- 3. Toast Lưu & Hoàn thành đơn hàng -->
     <div id="show-save-toast" class="toast-target"></div>
@@ -430,9 +443,9 @@
                                     <td>
                                         <div class="action-buttons">
                                             <!-- Nút Xem chi tiết đơn này -->
-                                            <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
+                                            <a href="#orderDetailModal" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
-                                            </label>
+                                            </a>
                                             <!-- Dấu cộng để thêm đơn -->
                                             <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
@@ -458,9 +471,9 @@
                                     <td><span class="badge badge-approved">Đã duyệt</span></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
+                                            <a href="#orderDetailModal" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
-                                            </label>
+                                            </a>
                                             <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
                                             </a>
@@ -484,9 +497,9 @@
                                     <td><span class="badge badge-confirmed">Đã xác nhận</span></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
+                                            <a href="#orderDetailModal" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
-                                            </label>
+                                            </a>
                                             <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
                                             </a>
@@ -510,9 +523,9 @@
                                     <td><span class="badge badge-success">Đã giao</span></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
+                                            <a href="#orderDetailModal" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
-                                            </label>
+                                            </a>
                                             <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
                                             </a>
@@ -696,14 +709,14 @@
          POPUP 1: CHI TIẾT ĐƠN HÀNG #DH001
     ========================================================= -->
     <div class="pure-modal-overlay" id="orderDetailModal">
-        <label for="modalOrderDetailToggle" class="pure-modal-backdrop"></label>
+        <a href="#danh-sach-don-hang" class="pure-modal-backdrop"></a>
         <div class="pure-modal-box modal-box-medium">
             <div class="pure-modal-header">
                 <div class="modal-title-wrap">
                     <i class="fa-solid fa-file-invoice-dollar icon-modal-blue"></i>
                     <h3>Chi Tiết Đơn Hàng #DH001</h3>
                 </div>
-                <label for="modalOrderDetailToggle" class="pure-modal-close-x" title="Đóng">&times;</label>
+                <a href="#danh-sach-don-hang" class="pure-modal-close-x" title="Đóng">&times;</a>
             </div>
 
             <div class="pure-modal-body">
@@ -805,11 +818,12 @@
             </div>
 
             <div class="pure-modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <label for="modalOrderDetailToggle" class="btn-gray-close">Đóng</label>
+                <a href="#danh-sach-don-hang" class="btn-gray-close">Đóng</a>
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <!-- BẤM "LƯU & HOÀN THÀNH": HIỆN TOAST GÓC PHẢI -->
-                    <a href="#show-save-toast" class="btn-submit btn-success-bg" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;">
-                        <i class="fa-solid fa-check-double"></i> Lưu hoàn thành đơn
+                    <!-- NÚT LƯU ĐƠN HÀNG -->
+                    <a href="#show-save-toast" class="btn-submit btn-success-bg">
+                        <i class="fa-solid fa-check-double"></i> Lưu đơn hàng
                     </a>
                     <!-- Nút mở trang chi tiết riêng biệt -->
                     <a href="admin-chi-tiet-don-hang.html" class="btn-primary-confirm" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
@@ -1000,7 +1014,7 @@
             <!-- BẤM "LƯU ĐƠN HÀNG": TỰ ĐÓNG POPUP VÀ HIỆN TOAST GÓC PHẢI -->
             <div class="modal-footer">
                 <a href="#" class="btn-cancel">Hủy bỏ</a>
-                <a href="#show-add-toast" class="btn-submit btn-success-bg">
+                <a href="#add-toast-ping" class="btn-submit btn-success-bg">
                     <i class="fa-solid fa-check"></i> Lưu đơn hàng
                 </a>
             </div>
@@ -1127,3 +1141,4 @@
 
 </body>
 </html>
+
