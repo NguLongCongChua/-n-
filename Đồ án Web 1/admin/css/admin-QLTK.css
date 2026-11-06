@@ -626,7 +626,6 @@
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
 }
-```css
 /* ==========================================
    MODAL XEM CHI TIẾT TÀI KHOẢN
 ========================================== */
@@ -723,9 +722,6 @@
 /* =========================================
    THÔNG BÁO LƯU KHÁCH HÀNG THÀNH CÔNG
 ========================================= */
-/* =========================================
-   THÔNG BÁO LƯU KHÁCH HÀNG THÀNH CÔNG
-========================================= */
 
 .toast-msg.toast-save-success {
     display: none;
@@ -746,7 +742,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-//* Ẩn thông báo mặc định */
+/* Ẩn thông báo mặc định */
 .toast-add-success,
 .toast-save-success {
     display: none;
