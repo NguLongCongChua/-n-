@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -13,28 +13,189 @@
     <!-- Liên kết file CSS theo cấu trúc mới -->
     <link rel="stylesheet" href="../css/style-admin-chung.css">
     <link rel="stylesheet" href="../css/admin-order.css">
+
+    <!-- CSS BẢO ĐẢM TOAST NOTIFICATION GÓC TRÊN BÊN PHẢI HOẠT ĐỘNG 100% -->
+    <style>
+        /* Toast container mặc định ẩn */
+        .toast-msg {
+            display: none;
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 999999 !important;
+            align-items: center;
+            gap: 14px;
+            min-width: 330px;
+            max-width: 420px;
+            padding: 14px 18px;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #10b981;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .toast-msg.toast-delete,
+        .toast-msg.toast-delete-order,
+        .toast-msg.toast-delete-success {
+            border-left-color: #ef4444;
+        }
+
+        /* Kích hoạt hiển thị khi target khớp */
+        #show-pass-toast:target ~ .toast-password,
+        #show-add-toast:target ~ .toast-add,
+        #show-add-toast:target ~ .toast-add-order,
+        #show-add-toast:target ~ .toast-add-success,
+        #show-save-toast:target ~ .toast-save,
+        #show-save-toast:target ~ .toast-save-order,
+        #show-save-toast:target ~ .toast-save-success,
+        #show-delete-toast:target ~ .toast-delete,
+        #show-delete-toast:target ~ .toast-delete-order,
+        #show-delete-toast:target ~ .toast-delete-success,
+        #delete-success:target ~ .toast-delete,
+        #delete-success:target ~ .toast-delete-order,
+        #delete-success:target ~ .toast-delete-success {
+            display: flex !important;
+            animation: toastSlideInOut 3.5s ease forwards !important;
+        }
+
+        @keyframes toastSlideInOut {
+            0% {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(120%);
+                visibility: hidden;
+                pointer-events: none;
+            }
+        }
+
+        .toast-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #d1fae5;
+            color: #059669;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .toast-msg.toast-delete .toast-icon,
+        .toast-msg.toast-delete-order .toast-icon,
+        .toast-msg.toast-delete-success .toast-icon {
+            background-color: #fee2e2;
+            color: #ef4444;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-content strong {
+            font-size: 14px;
+            font-weight: 700;
+            color: #064e3b;
+            display: block;
+            line-height: 1.3;
+        }
+
+        .toast-msg.toast-delete .toast-content strong,
+        .toast-msg.toast-delete-order .toast-content strong,
+        .toast-msg.toast-delete-success .toast-content strong {
+            color: #991b1b;
+        }
+
+        .toast-content p {
+            font-size: 12px;
+            color: #475569;
+            margin: 3px 0 0 0;
+            line-height: 1.4;
+        }
+
+        .toast-close {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.2s ease;
+            user-select: none;
+        }
+
+        .toast-close:hover {
+            color: #0f172a;
+        }
+    </style>
 </head>
 <body>
 
     <!-- Điểm neo để ẩn thông báo chào mừng khi chuyển trang -->
     <div id="hide-welcome" style="display: none;"></div>
 
-    <!-- CÁC CHECKBOX ẨN ĐIỀU KHIỂN POPUP THUẦN HTML/CSS (KHÔNG DÙNG JS, KHÔNG BỊ NHẢY TRANG) -->
+    <!-- 3 CHECKBOX ẨN ĐIỀU KHIỂN POPUP THUẦN HTML/CSS (ĐỨNG NGUYÊN VỊ TRÍ, KHÔNG BỊ NHẢY LÊN ĐẦU TRANG) -->
     <input type="checkbox" id="modalAdminInfoToggle" class="modal-toggle-checkbox">
     <input type="checkbox" id="modalOrderDetailToggle" class="modal-toggle-checkbox">
     <input type="checkbox" id="modalCustOrdersToggle" class="modal-toggle-checkbox">
-    <input type="checkbox" id="modalAddOrderToggle" class="modal-toggle-checkbox">
-    <input type="checkbox" id="modalDeleteOrderToggle" class="modal-toggle-checkbox">
 
-    <!-- ==============================================
-         THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
-    =============================================== -->
+    <!-- =========================================================
+         CÁC TOAST NOTIFICATION GÓC TRÊN BÊN PHẢI (CHUẨN ẢNH)
+    ========================================================= -->
+    <!-- 1. Toast Đổi mật khẩu thành công -->
     <div id="show-pass-toast" class="toast-target"></div>
     <div class="toast-msg toast-password">
         <div class="toast-icon">✔</div>
         <div class="toast-content">
-            <strong>Đổi mật khẩu thành công</strong>
-            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
+            <strong>Đổi mật khẩu thành công!</strong>
+            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai.</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
+
+    <!-- 2. Toast Thêm đơn hàng thành công -->
+    <div id="show-add-toast" class="toast-target"></div>
+    <div class="toast-msg toast-add toast-add-order toast-add-success">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Thêm đơn hàng thành công!</strong>
+            <p>Đơn hàng mới đã được thêm vào hệ thống.</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
+
+    <!-- 3. Toast Lưu & Hoàn thành đơn hàng -->
+    <div id="show-save-toast" class="toast-target"></div>
+    <div class="toast-msg toast-save toast-save-order toast-save-success">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Lưu đơn hàng thành công!</strong>
+            <p>Thông tin đơn hàng đã được cập nhật hoàn tất.</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
+
+    <!-- 4. Toast Xóa đơn hàng thành công -->
+    <div id="show-delete-toast" class="toast-target"></div>
+    <div id="delete-success" class="toast-target"></div>
+    <div class="toast-msg toast-delete toast-delete-order toast-delete-success">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Xóa đơn hàng thành công!</strong>
+            <p>Đơn đặt hàng đã được xóa khỏi hệ thống.</p>
         </div>
         <a href="#" class="toast-close" title="Đóng">✕</a>
     </div>
@@ -76,7 +237,7 @@
                         </a>
                     </li>
                     <li>
-                        <!-- Đang ở trang đơn hàng nên active ở đây -->
+                        <!-- Đang ở trang đơn hàng nên active -->
                         <a href="admin-don-hang.html" class="active">
                             <i class="fa-solid fa-receipt"></i>
                             <span>Quản lý Đơn hàng</span>
@@ -92,54 +253,35 @@
                 </ul>
             </div>
 
-             <!-- Profile Admin ở góc dưới có Dropdown Menu -->
-
+            <!-- Profile Admin ở đáy Sidebar -->
             <div class="sidebar-user admin-user-dropdown">
-
-                <!-- Checkbox điều khiển dropdown -->
                 <input type="checkbox" id="admin-menu-toggle" hidden>
-
-                <!-- Avatar và thông tin Admin -->
                 <label for="admin-menu-toggle" class="admin-user-trigger">
-
                     <div class="user-avatar">
                         <img src="../images/avatars/Admin.png" alt="Admin">
                     </div>
-
                     <div class="user-info">
                         <h4>Admin</h4>
                         <p>Quản trị viên chính</p>
                     </div>
-
                     <i class="fa-solid fa-chevron-down admin-dropdown-arrow"></i>
-
                 </label>
-
-                <!-- Menu dropdown -->
                 <div class="admin-dropdown-menu">
-
                     <a href="#adminInfoModal">
                         <i class="fa-solid fa-user-gear"></i>
                         <span>Thông tin tài khoản</span>
                     </a>
-
-
                     <a href="#changePasswordModal">
                         <i class="fa-solid fa-key"></i>
-                        Đổi mật khẩu
-
+                        <span>Đổi mật khẩu</span>
                     </a>
-
                     <hr>
-
                     <a href="index.html" class="logout-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Đăng xuất</span>
                     </a>
-
                 </div>
             </div>
-
         </aside>
 
         <!-- CỘT PHẢI: Vùng nội dung chính -->
@@ -162,7 +304,7 @@
                 </div>
             </header>
 
-            <!-- PHẦN 1: 4 Thẻ Thống Kê Nhanh -->
+            <!-- PHẦN 1: 4 Thẻ Thống Kê Nhanh (Class chuẩn 100% theo CSS gốc) -->
             <section class="stats-box-container">
                 <div class="stat-box">
                     <div class="stat-header">
@@ -222,7 +364,7 @@
             </section>
 
             <!-- =========================================================
-                 PHẦN 2: BẢNG QUẢN LÝ ĐƠN ĐẶT HÀNG (ĐÃ THÊM THÙNG RÁC VÀ DẤU CỘNG)
+                 PHẦN 2: BẢNG QUẢN LÝ ĐƠN ĐẶT HÀNG
             ========================================================= -->
             <section class="dashboard-sections" id="danh-sach-don-hang">
                 <div class="dashboard-card">
@@ -253,10 +395,10 @@
                                 <option value="Đã hủy">Đã hủy</option>
                             </select>
 
-                            <!-- Nút Dấu cộng lớn: Thêm đơn hàng mới -->
-                            <label for="modalAddOrderToggle" class="btn-order btn-header-add" title="Tạo đơn hàng mới">
+                            <!-- Nút Thêm đơn hàng mới mở popup -->
+                            <a href="#addOrderModal" class="btn-order btn-header-add" title="Tạo đơn hàng mới">
                                 <i class="fa-solid fa-plus"></i> Thêm đơn mới
-                            </label>
+                            </a>
                         </div>
                     </div>
 
@@ -287,18 +429,18 @@
                                     <td><span class="badge badge-warning">Chờ duyệt</span></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <!-- Nút "Chi tiết" -->
+                                            <!-- Nút Xem chi tiết đơn này -->
                                             <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
                                             </label>
                                             <!-- Dấu cộng để thêm đơn -->
-                                            <label for="modalAddOrderToggle" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
+                                            <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
-                                            </label>
+                                            </a>
                                             <!-- Thùng rác để xóa đơn -->
-                                            <label for="modalDeleteOrderToggle" class="btn-order btn-action-delete" title="Xóa/Hủy đơn hàng">
+                                            <a href="#deleteOrderModal" class="btn-order btn-action-delete" title="Xóa đơn hàng này">
                                                 <i class="fa-solid fa-trash-can"></i> Xóa
-                                            </label>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -319,12 +461,12 @@
                                             <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
                                             </label>
-                                            <label for="modalAddOrderToggle" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
+                                            <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
-                                            </label>
-                                            <label for="modalDeleteOrderToggle" class="btn-order btn-action-delete" title="Xóa/Hủy đơn hàng">
+                                            </a>
+                                            <a href="#deleteOrderModal" class="btn-order btn-action-delete" title="Xóa đơn hàng này">
                                                 <i class="fa-solid fa-trash-can"></i> Xóa
-                                            </label>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -345,12 +487,12 @@
                                             <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
                                             </label>
-                                            <label for="modalAddOrderToggle" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
+                                            <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
-                                            </label>
-                                            <label for="modalDeleteOrderToggle" class="btn-order btn-action-delete" title="Xóa/Hủy đơn hàng">
+                                            </a>
+                                            <a href="#deleteOrderModal" class="btn-order btn-action-delete" title="Xóa đơn hàng này">
                                                 <i class="fa-solid fa-trash-can"></i> Xóa
-                                            </label>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -371,12 +513,12 @@
                                             <label for="modalOrderDetailToggle" class="btn-order btn-detail" title="Xem chi tiết đơn này">
                                                 <i class="fa-solid fa-eye"></i> Chi tiết
                                             </label>
-                                            <label for="modalAddOrderToggle" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
+                                            <a href="#addOrderModal" class="btn-order btn-action-add" title="Thêm đơn hàng mới">
                                                 <i class="fa-solid fa-plus"></i> Thêm
-                                            </label>
-                                            <label for="modalDeleteOrderToggle" class="btn-order btn-action-delete" title="Xóa/Hủy đơn hàng">
+                                            </a>
+                                            <a href="#deleteOrderModal" class="btn-order btn-action-delete" title="Xóa đơn hàng này">
                                                 <i class="fa-solid fa-trash-can"></i> Xóa
-                                            </label>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -399,7 +541,7 @@
             </section>
 
             <!-- =========================================================
-                 PHẦN 3: THỐNG KÊ TOP 5 KHÁCH HÀNG (ĐÃ XÓA DẤU CỘNG & THÙNG RÁC, CHỈ CÒN XEM ĐƠN)
+                 PHẦN 3: THỐNG KÊ TOP 5 KHÁCH HÀNG (GIỮ NGUYÊN)
             ========================================================= -->
             <section class="dashboard-sections section-spacing" id="thong-ke-top-khach-hang">
                 <div class="dashboard-card">
@@ -606,7 +748,6 @@
                     </div>
                 </div>
 
-                <!-- Bảng danh sách sách -->
                 <div class="order-info-section">
                     <h4 class="section-sub-title"><i class="fa-solid fa-book-bookmark"></i> Danh Sách Sách Trong Đơn</h4>
                     <div class="table-wrapper">
@@ -663,14 +804,25 @@
                 </div>
             </div>
 
-            <div class="pure-modal-footer">
+            <div class="pure-modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <label for="modalOrderDetailToggle" class="btn-gray-close">Đóng</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <!-- BẤM "LƯU & HOÀN THÀNH": HIỆN TOAST GÓC PHẢI -->
+                    <a href="#show-save-toast" class="btn-submit btn-success-bg" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+                        <i class="fa-solid fa-check-double"></i> Lưu hoàn thành đơn
+                    </a>
+                    <!-- Nút mở trang chi tiết riêng biệt -->
+                    <a href="admin-chi-tiet-don-hang.html" class="btn-primary-confirm" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở trang chi tiết đầy đủ
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- =========================================================
          POPUP 2: DANH SÁCH CÁC ĐƠN HÀNG CỦA KHÁCH HÀNG
+         (TỪNG Ô ĐƠN LÀ THẺ BẤM VÀO SẼ SANG TRANG ADMIN-CHI-TIET)
     ========================================================= -->
     <div class="pure-modal-overlay" id="customerOrdersModal">
         <label for="modalCustOrdersToggle" class="pure-modal-backdrop"></label>
@@ -678,7 +830,7 @@
             <div class="pure-modal-header">
                 <div class="modal-title-wrap">
                     <i class="fa-solid fa-receipt icon-modal-blue"></i>
-                    <h3>Chi Tiết Các Đơn Hàng & Sách CỦA Khách Hàng</h3>
+                    <h3>Chi Tiết Các Đơn Hàng & Sách Của Khách Hàng</h3>
                 </div>
                 <label for="modalCustOrdersToggle" class="pure-modal-close-x" title="Đóng">&times;</label>
             </div>
@@ -700,12 +852,14 @@
                 </div>
 
                 <div class="pure-orders-scroll-list">
-                    <div class="order-detail-card">
+                    <!-- Ô đơn hàng #DH001: Bấm vào chuyển sang trang admin-chi-tiet-don-hang.html -->
+                    <a href="admin-chi-tiet-don-hang.html" class="order-detail-card" title="Bấm vào để xem trang chi tiết đơn hàng #DH001">
                         <div class="order-card-header">
                             <span class="order-code"><i class="fa-solid fa-box-archive"></i> Đơn hàng: <strong>#DH001</strong></span>
                             <span class="order-date"><i class="fa-regular fa-clock"></i> 29/10/2026</span>
                             <span class="badge badge-warning">Chờ duyệt</span>
                             <span class="order-total-price">165,000 đ</span>
+                            <span class="order-card-arrow">Chi tiết <i class="fa-solid fa-chevron-right"></i></span>
                         </div>
                         <div class="order-card-books">
                             <div class="book-item">
@@ -719,14 +873,16 @@
                                 <span class="book-price">86,000 đ</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="order-detail-card">
+                    <!-- Ô đơn hàng #DH015: Bấm vào chuyển sang trang admin-chi-tiet-don-hang.html -->
+                    <a href="admin-chi-tiet-don-hang.html" class="order-detail-card" title="Bấm vào để xem trang chi tiết đơn hàng #DH015">
                         <div class="order-card-header">
                             <span class="order-code"><i class="fa-solid fa-box-archive"></i> Đơn hàng: <strong>#DH015</strong></span>
                             <span class="order-date"><i class="fa-regular fa-clock"></i> 15/10/2026</span>
                             <span class="badge badge-success">Đã giao</span>
                             <span class="order-total-price">194,000 đ</span>
+                            <span class="order-card-arrow">Chi tiết <i class="fa-solid fa-chevron-right"></i></span>
                         </div>
                         <div class="order-card-books">
                             <div class="book-item">
@@ -740,14 +896,16 @@
                                 <span class="book-price">79,000 đ</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="order-detail-card">
+                    <!-- Ô đơn hàng #DH028: Bấm vào chuyển sang trang admin-chi-tiet-don-hang.html -->
+                    <a href="admin-chi-tiet-don-hang.html" class="order-detail-card" title="Bấm vào để xem trang chi tiết đơn hàng #DH028">
                         <div class="order-card-header">
                             <span class="order-code"><i class="fa-solid fa-box-archive"></i> Đơn hàng: <strong>#DH028</strong></span>
                             <span class="order-date"><i class="fa-regular fa-clock"></i> 02/10/2026</span>
                             <span class="badge badge-success">Đã giao</span>
                             <span class="order-total-price">226,000 đ</span>
+                            <span class="order-card-arrow">Chi tiết <i class="fa-solid fa-chevron-right"></i></span>
                         </div>
                         <div class="order-card-books">
                             <div class="book-item">
@@ -761,7 +919,7 @@
                                 <span class="book-price">98,000 đ</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -772,20 +930,16 @@
     </div>
 
     <!-- =========================================================
-         POPUP 3: TẠO ĐƠN HÀNG MỚI (MỞ TỪ DẤU CỘNG Ở DANH SÁCH ĐƠN)
+         POPUP 3: TẠO ĐƠN HÀNG MỚI (BẤM LƯU HIỆN TOAST)
     ========================================================= -->
-    <div class="pure-modal-overlay" id="addOrderModal">
-        <label for="modalAddOrderToggle" class="pure-modal-backdrop"></label>
-        <div class="pure-modal-box modal-box-medium">
-            <div class="pure-modal-header">
-                <div class="modal-title-wrap">
-                    <i class="fa-solid fa-cart-plus icon-modal-green"></i>
-                    <h3>Tạo Đơn Đặt Hàng Mới</h3>
-                </div>
-                <label for="modalAddOrderToggle" class="pure-modal-close-x" title="Đóng">&times;</label>
+    <div class="admin-modal-overlay" id="addOrderModal">
+        <div class="admin-modal-card modal-medium">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-cart-plus" style="color: #10b981;"></i> Tạo Đơn Đặt Hàng Mới</h3>
+                <a href="#" class="modal-close-btn">&times;</a>
             </div>
 
-            <div class="pure-modal-body">
+            <div class="modal-body">
                 <form action="#" method="get" class="custom-modal-form">
                     <div class="form-row-2col">
                         <div class="form-group-item">
@@ -843,30 +997,27 @@
                 </form>
             </div>
 
-            <div class="pure-modal-footer">
-                <label for="modalAddOrderToggle" class="btn-gray-close">Hủy bỏ</label>
-                <label for="modalAddOrderToggle" class="btn-success-confirm">
+            <!-- BẤM "LƯU ĐƠN HÀNG": TỰ ĐÓNG POPUP VÀ HIỆN TOAST GÓC PHẢI -->
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel">Hủy bỏ</a>
+                <a href="#show-add-toast" class="btn-submit btn-success-bg">
                     <i class="fa-solid fa-check"></i> Lưu đơn hàng
-                </label>
+                </a>
             </div>
         </div>
     </div>
 
     <!-- =========================================================
-         POPUP 4: XÁC NHẬN XÓA ĐƠN HÀNG (MỞ TỪ THÙNG RÁC Ở DANH SÁCH ĐƠN)
+         POPUP 4: XÁC NHẬN XÓA ĐƠN HÀNG (BẤM XÓA HIỆN TOAST)
     ========================================================= -->
-    <div class="pure-modal-overlay" id="deleteOrderModal">
-        <label for="modalDeleteOrderToggle" class="pure-modal-backdrop"></label>
-        <div class="pure-modal-box modal-box-confirm">
-            <div class="pure-modal-header">
-                <div class="modal-title-wrap">
-                    <i class="fa-solid fa-triangle-exclamation icon-modal-red"></i>
-                    <h3>Xác Nhận Xóa Đơn Hàng</h3>
-                </div>
-                <label for="modalDeleteOrderToggle" class="pure-modal-close-x" title="Đóng">&times;</label>
+    <div class="admin-modal-overlay" id="deleteOrderModal">
+        <div class="admin-modal-card modal-box-confirm">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: #ef4444;"></i> Xác Nhận Xóa Đơn Hàng</h3>
+                <a href="#" class="modal-close-btn">&times;</a>
             </div>
 
-            <div class="pure-modal-body">
+            <div class="modal-body">
                 <div class="confirm-content-box">
                     <div class="confirm-icon-box danger">
                         <i class="fa-solid fa-trash-can"></i>
@@ -878,17 +1029,18 @@
                 </div>
             </div>
 
-            <div class="pure-modal-footer">
-                <label for="modalDeleteOrderToggle" class="btn-gray-close">Hủy bỏ</label>
-                <label for="modalDeleteOrderToggle" class="btn-danger-confirm">
+            <!-- BẤM "XÁC NHẬN XÓA": TỰ ĐÓNG POPUP VÀ HIỆN TOAST GÓC PHẢI -->
+            <div class="modal-footer">
+                <a href="#" class="btn-cancel">Hủy bỏ</a>
+                <a href="#show-delete-toast" class="btn-submit btn-danger-bg">
                     <i class="fa-solid fa-trash-can"></i> Xác nhận xóa
-                </label>
+                </a>
             </div>
         </div>
     </div>
 
     <!-- =========================================================
-         MODAL THÔNG TIN TÀI KHOẢN (GỌI QUA :target)
+         MODAL THÔNG TIN TÀI KHOẢN
     ========================================================= -->
     <div class="admin-modal-overlay" id="adminInfoModal">
         <div class="admin-modal-card modal-medium">
@@ -936,7 +1088,7 @@
     </div>
 
     <!-- =========================================================
-         MODAL ĐỔI MẬT KHẨU (GỌI QUA :target - ĐÃ ĐÓNG ĐỦ THẺ)
+         MODAL ĐỔI MẬT KHẨU
     ========================================================= -->
     <div class="admin-modal-overlay" id="changePasswordModal">
         <div class="admin-modal-card modal-medium">
@@ -974,8 +1126,4 @@
     </div>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> b30dcdf397c699986be4f3606702e8328e593536
