@@ -625,3 +625,134 @@
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
 }
+```css
+/* ==========================================
+   MODAL XEM CHI TIẾT TÀI KHOẢN
+========================================== */
+
+/* Kích thước modal */
+#reviewDetail .admin-modal-card.modal-medium {
+    width: 90%;
+    max-width: 680px !important;
+}
+
+/* Bố cục thông tin 2 cột */
+#reviewDetail .modal-body.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
+    padding: 28px 24px;
+}
+
+/* Từng trường thông tin */
+#reviewDetail .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* Tên thuộc tính */
+#reviewDetail .form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* Giá trị thông tin */
+#reviewDetail .detail-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* Trường chiếm toàn bộ chiều rộng */
+#reviewDetail .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Làm nổi bật vai trò */
+#reviewDetail .role-user {
+    color: #2563eb;
+}
+
+/* Footer */
+#reviewDetail .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Nút đóng */
+#reviewDetail .btn-cancel {
+    padding: 9px 18px;
+    background-color: #e2e8f0;
+    color: #334155;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+#reviewDetail .btn-cancel:hover {
+    background-color: #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #reviewDetail .admin-modal-card.modal-medium {
+        max-width: 95% !important;
+    }
+
+    #reviewDetail .modal-body.form-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 20px;
+    }
+
+    #reviewDetail .form-group.full-width {
+        grid-column: auto;
+    }
+}
+/* =========================================
+   THÔNG BÁO LƯU KHÁCH HÀNG THÀNH CÔNG
+========================================= */
+/* =========================================
+   THÔNG BÁO LƯU KHÁCH HÀNG THÀNH CÔNG
+========================================= */
+
+.toast-msg.toast-save-success {
+    display: none;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+
+    align-items: center;
+    gap: 12px;
+
+    min-width: 320px;
+    padding: 16px 20px;
+
+    background: #ffffff;
+    border-left: 5px solid #10b981;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Hiện thông báo khi bấm lưu */
+#saveUser:target ~ .toast-save-success {
+    display: flex;
+    animation: slideIn 0.2s ease forwards,
+               fadeOut 0.4s ease 1s forwards;
+}
+
+
+
+
+

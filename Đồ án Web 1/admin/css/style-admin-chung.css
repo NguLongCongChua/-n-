@@ -1080,3 +1080,60 @@ body.page-reloading {
            display: none !important; 
            animation: none !important; 
        }
+       @keyframes toastShow {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* Ẩn thông báo đổi mật khẩu mặc định */
+.toast-msg.toast-password {
+    display: none;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+
+    align-items: center;
+    gap: 12px;
+
+    min-width: 320px;
+    padding: 16px 20px;
+
+    background: #ffffff;
+    border-left: 5px solid #10b981;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Hiển thị khi nhấn xác nhận */
+#show-pass-toast:target ~ .toast-password {
+    display: flex;
+        animation: slideIn 0.2s ease forwards,
+               fadeOut 0.4s ease 1s forwards;
+}
+/* Hiệu ứng xuất hiện và biến mất */
+@keyframes slideIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        transform: translateX(120%);
+        opacity: 0;
+        visibility: hidden;
+    }
+}

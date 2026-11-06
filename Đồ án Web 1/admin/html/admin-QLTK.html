@@ -18,18 +18,6 @@
 
 <body>
 
-    <!-- ==============================================
-         2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
-    =============================================== -->
-    <div id="show-pass-toast" class="toast-target"></div>
-    <div class="toast-msg toast-password">
-        <div class="toast-icon">✔</div>
-        <div class="toast-content">
-            <strong>Đổi mật khẩu thành công</strong>
-            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
-        </div>
-        <a href="#" class="toast-close" title="Đóng">✕</a>
-    </div>
     <div class="admin-container">
         <!-- CỘT TRÁI: Thanh điều hướng dọc (Sidebar giữ nguyên cấu trúc) -->
         <aside class="admin-sidebar">
@@ -154,7 +142,7 @@
                         <i class="fa-solid fa-user-plus"></i>
                         Thêm thủ công
                     </a>
-                    <a href="admin-QLTK.html" class="btn-add-manual">
+                    <a href="#saveUser" class="btn-add-manual">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                         Thêm tự động
                     </a>
@@ -204,7 +192,7 @@
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
                                     
-                                    <button class="btn-icon" title="Sửa">
+                                    <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -232,7 +220,7 @@
                                 <td>15/02/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -260,7 +248,7 @@
                                 <td>10/04/2023</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -288,7 +276,7 @@
                                 <td>02/06/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -316,7 +304,7 @@
                                 <td>18/08/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -344,7 +332,7 @@
                                 <td>05/11/2023</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -372,7 +360,7 @@
                                 <td>20/01/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -400,7 +388,7 @@
                                 <td>14/04/2024</td>
                                 <td><span class="badge-status status-locked">Đã khóa</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -428,7 +416,7 @@
                                 <td>01/08/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -456,7 +444,7 @@
                                 <td>15/10/2024</td>
                                 <td><span class="badge-status status-active">Hoạt động</span></td>
                                 <td class="action-cell">
-                                     <button class="btn-icon" title="Sửa">
+                                     <button class="btn-icon" title="Xem">
                                         <a href="#reviewDetail" class="btn-review"><i
                                             class="fa-solid fa-eye"></i></a>
                                         </button>
@@ -524,9 +512,14 @@
                         <input type="text" id="userName" placeholder="vd:ngulongcongchua123">
                     </div>
 
-                      <div class="form-group">
+                    <div class="form-group">
                         <label for="password">Mật khẩu <span class="required">*</span></label>
                         <input type="text" id="password" placeholder="●●●●●●">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Vai trò <span class="required">*</span></label>
+                        <input type="text" id="role" placeholder="vd: Khách hàng">
                     </div>
 
                     <div class="form-group">
@@ -556,7 +549,7 @@
                     <!-- NÚT HỦY -->
                     <a href="#" class="btn-cancel">Hủy Bỏ</a>
 
-                    <a href="admin-QLTK.html" class="btn-submit">
+                    <a href="#saveUser" class="btn-submit">
                         <i class="fa-solid fa-check"></i>
                         Lưu Khách Hàng
                     </a>
@@ -566,9 +559,22 @@
             </form>
         </div>
     </div>
+<!-- Thông báo lưu khách hàng thành công -->
+<div id="saveUser" class="toast-target"></div>
 
+<div class="toast-msg toast-save-success">
+    <div class="toast-icon">✔</div>
 
-        <!-- MODAL ĐỔI MẬT KHẨU -->
+    <div class="toast-content">
+        <strong>Lưu khách hàng thành công!</strong>
+        <p>Thông tin khách hàng đã được lưu thành công.</p>
+    </div>
+
+    <a href="#" class="toast-close" title="Đóng">✕</a>
+</div>
+    
+
+       <!-- MODAL ĐỔI MẬT KHẨU -->
     <div class="admin-modal-overlay" id="changePasswordModal">
 
         <div class="admin-modal-card modal-medium">
@@ -610,10 +616,23 @@
         <a href="#show-pass-toast" class="btn-submit" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
             <i class="fa-solid fa-check"></i> Xác nhận
         </a>
-                </div>
+    </div>
+
             </form>
-        </div> 
-    </div> 
+        </div>
+    </div>
+     <!-- ==============================================
+         2. THÔNG BÁO ĐỔI MẬT KHẨU (Chỉ hiện khi bấm Xác nhận)
+    =============================================== -->
+    <div id="show-pass-toast" class="toast-target"></div>
+    <div class="toast-msg toast-password">
+        <div class="toast-icon">✔</div>
+        <div class="toast-content">
+            <strong>Đổi mật khẩu thành công</strong>
+            <p>Đừng tiết lộ mật khẩu mới cho bất kì ai!</p>
+        </div>
+        <a href="#" class="toast-close" title="Đóng">✕</a>
+    </div>
 <!-- CỬA SỔ NỔI (MODAL) THÔNG TIN TÀI KHOẢN -->
     <div class="admin-modal-overlay" id="adminInfoModal">
         <div class="admin-modal-card modal-medium">
@@ -660,7 +679,83 @@
         </div>
     </div>
 
+<!-- MODAL XEM THÔNG TIN USER -->
+<div class="admin-modal-overlay" id="reviewDetail">
 
+    <div class="admin-modal-card modal-medium">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h3>
+                <i class="fa-solid fa-user" style="color: #2563eb;"></i>
+                Thông Tin Tài Khoản
+            </h3>
+
+            <a href="#" class="modal-close-btn">&times;</a>
+        </div>
+
+        <!-- BODY -->
+        <div class="modal-body form-grid">
+
+            <div class="form-group">
+                <label>Mã tài khoản</label>
+                <span class="detail-value">#QL003</span>
+            </div>
+
+            <div class="form-group">
+                <label>Họ và tên</label>
+                <span class="detail-value">Nguyễn Văn An</span>
+            </div>
+
+            <div class="form-group">
+                <label>Tên đăng nhập</label>
+                <span class="detail-value">ngulongcongchua123</span>
+            </div>
+
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <span class="detail-value">••••••••</span>
+            </div>
+
+            <div class="form-group">
+                <label>Ngày sinh</label>
+                <span class="detail-value">15/01/1995</span>
+            </div>
+
+            <div class="form-group">
+                <label>Số điện thoại</label>
+                <span class="detail-value">0901234567</span>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Email</label>
+                <span class="detail-value">nguyenvana@gmail.com</span>
+            </div>
+
+            <div class="form-group">
+                <label>Vai trò</label>
+                <span class="detail-value role-user">Quản lý</span>
+            </div>
+
+            <div class="form-group">
+                <label>Ngày tạo tài khoản</label>
+                <span class="detail-value">15/10/2026</span>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Địa chỉ liên lạc</label>
+                <span class="detail-value">Quận 1, TP. Hồ Chí Minh</span>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="modal-footer">
+            <a href="#" class="btn-cancel">Đóng</a>
+        </div>
+
+    </div>
+</div>
     <!-- Container Toast Notification (Thông báo góc phải màn hình) -->
     <div id="toastContainer" class="toast-container"></div>
 
