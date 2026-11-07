@@ -2515,3 +2515,77 @@ body > footer {
 body > main {
     flex: 1; /* Đẩy footer xuống đáy */
 }
+/* =========================================
+   CSS CHO DROPDOWN MENU SẢN PHẨM
+========================================= */
+/* Style chung cho Nav Menu để chứa Dropdown */
+.nav-menu li {
+    position: relative; /* Cần thiết để chứa menu thả xuống */
+}
+
+/* Định dạng Menu thả xuống của Sản Phẩm */
+.product-dropdown {
+    position: absolute;
+    top: 100%; /* Đẩy menu xuống dưới Header */
+    left: 0;
+    min-width: 260px; /* Độ rộng của menu theo chuẩn hình ảnh */
+    background-color: transparent; /* Nền trong suốt để shadow không bị vuông góc */
+    list-style: none;
+    padding-top: 15px; /* Tạo khoảng trống giữa Nav và Menu để hover không bị đứt */
+    
+    /* Mặc định Ẩn, làm hiệu ứng trượt nhẹ */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* Kích hoạt Menu thả xuống khi Hover vào <li> Sản Phẩm */
+.nav-menu li:hover .product-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Định dạng các Item bên trong Menu thả xuống */
+.product-dropdown li {
+    display: block;
+    margin-bottom: 5px; /* Khoảng cách giữa các nút */
+}
+.product-dropdown li:last-child {
+    margin-bottom: 0;
+}
+
+/* Style cho từng link (Nút bấm xám/trắng) */
+.product-dropdown a {
+    display: block;
+    padding: 12px 20px;
+    background-color: #f8f9fa; /* Màu nền xám nhạt như hình */
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px; /* Bo góc nhẹ */
+    transition: all 0.2s ease;
+}
+
+/* Hover vào thì đổi nền đậm một tí */
+.product-dropdown a:hover {
+    background-color: #e9ecef;
+    color: #0f5132;
+}
+
+/* Thẻ "Tất cả thể loại" (Header xanh lá đậm) */
+.product-dropdown .dropdown-header a {
+    background-color: #1a4f36; /* Xanh lá đậm chuẩn ảnh */
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 14px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tạo bóng để nổi bật */
+}
+.product-dropdown .dropdown-header a:hover {
+    background-color: #143d2a;
+    color: white;
+}
