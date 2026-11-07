@@ -223,10 +223,12 @@
 
             <!-- Thanh Công Cụ: Tìm kiếm theo ID & Nút Thêm -->
             <section class="toolbar-card">
-                <div class="search-id-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchIdInput" placeholder="Tìm kiếm theo ID (ví dụ: US001)...">
-                </div>
+                <form class="search-box" action="admin-QLTK.html" method="GET" style="margin: 0; position: relative; width: 250px;">
+                        <button type="submit" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; outline: none; z-index: 10;">
+                            <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted); font-size: 14px;"></i>
+                        </button>
+                        <input type="text" placeholder="Tìm kiếm theo ID (ví dụ: US001)" style="width: 100%; padding: 8px 12px 8px 36px; border-radius: 6px; border: 1px solid var(--border-color); background-color: var(--bg-surface); font-size: 13px; outline: none;">
+                    </form>
 
                 <div class="action-buttons">
                     <a href="#addManualModal" class="btn-add-manual" style="text-decoration: none;">
