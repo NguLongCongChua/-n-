@@ -1,8 +1,8 @@
-📂 admin          # Chứa toàn bộ file html,css,images của web Admin
+📂 admin          # Chứa toàn bộ file html của web Admin
 
-📂 css            # Chứa các file css của User
+📂 css            # Chứa các file css của cả Admin và User
 
-📂 images         # Chứa toàn bộ hình ảnh, banner, icon của User
+📂 images         # Chứa toàn bộ hình ảnh, banner, icon của cả Admin và User
 
 📂 js             # Chứa các file js của cả Admin và User
 
