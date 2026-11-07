@@ -134,7 +134,7 @@ body {
 }
 
 .sidebar-menu a.active {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    background: linear-gradient(90deg, #2ae643, #24d197);
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
@@ -1013,7 +1013,7 @@ body.page-reloading {
 }
 
 .sidebar-menu a.active {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    background: linear-gradient(90deg, #0eb933, #b4d636);
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
@@ -1055,9 +1055,9 @@ body.page-reloading {
 }
 
 .page-item.active a {
-    background-color: var(--primary);
+    background-color: green;
     color: #ffffff;
-    border-color: var(--primary);
+    border-color: greenyellow;
 }
 
 .page-item.disabled a {
