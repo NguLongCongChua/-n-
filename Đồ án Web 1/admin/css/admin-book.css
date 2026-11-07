@@ -121,12 +121,6 @@ body {
     transform: translateX(2px);
 }
 
-.sidebar-menu a.active {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
-    color: #ffffff;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
 
 .sidebar-menu hr {
     border: 0;
